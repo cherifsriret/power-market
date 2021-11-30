@@ -127,7 +127,7 @@
             <i class="fas fa-comments"></i>
             <span>Reviews</span></a>
     </li>
-    
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -202,11 +202,23 @@
           <i class="fas fa-table"></i>
           <span>Coupon</span></a>
     </li>
+    <!-- Admins -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admins.index')}}">
+            <i class="fas fa-users"></i>
+            <span>Admins</span></a>
+    </li>
      <!-- Users -->
      <li class="nav-item">
         <a class="nav-link" href="{{route('users.index')}}">
             <i class="fas fa-users"></i>
             <span>Users</span></a>
+    </li>
+      <!-- Roles -->
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('roles.index')}}">
+            <i class="fas fa-users"></i>
+            <span>Roles</span></a>
     </li>
      <!-- General settings -->
      <li class="nav-item">

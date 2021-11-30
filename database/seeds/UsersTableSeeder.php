@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 class UsersTableSeeder extends Seeder
@@ -11,23 +12,24 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $data=array(
-            array(
-                'name'=>'Admin',
-                'email'=>'admin@gmail.com',
-                'password'=>Hash::make('1111'),
-                'role'=>'admin',
-                'status'=>'active'
-            ),
-            array(
-                'name'=>'User',
-                'email'=>'user@gmail.com',
-                'password'=>Hash::make('1111'),
-                'role'=>'user',
-                'status'=>'active'
-            ),
-        );
 
-        DB::table('users')->insert($data);
+        //super admin
+        $user = new User();
+        $user->name = "Super Admin";
+        $user->email =  'admin@gmail.com';
+        $user->status =  'active';
+        $user->password =  \Illuminate\Support\Facades\Hash::make('Admin123*');
+         $user->role =  'admin';
+         $user->assignRole('super_admin');
+        $user->save();
+
+         //super admin
+         $user = new User();
+         $user->name = "Simple User";
+         $user->email =  'user@gmail.com';
+         $user->status =  'active';
+         $user->role =  'user';
+         $user->password =  \Illuminate\Support\Facades\Hash::make('User123*');
+         $user->save();
     }
 }

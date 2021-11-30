@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 use App\User;
-class UsersController extends Controller
+use Illuminate\Http\Request;
+
+class AdminsController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users=User::where('role','user')->orderBy('id','ASC')->paginate(10);
-        return view('backend.users.index')->with('users',$users);
+        $users=User::where('role','admin')->orderBy('id','ASC')->paginate(10);
+        return view('backend.admins.index')->with('users',$users);
     }
 
     /**
@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('backend.users.create');
+        return view('backend.admins.create');
     }
 
     /**
@@ -45,16 +45,17 @@ class UsersController extends Controller
             'photo'=>'nullable|string',
         ]);
         $data=$request->all();
+        $data['role']='admin';
         $data['password']=Hash::make($request->password);
-        $data['role']='user';
         $status=User::create($data);
+        // dd($status);
         if($status){
             request()->session()->flash('success','Successfully added user');
         }
         else{
             request()->session()->flash('error','Error occurred while adding user');
         }
-        return redirect()->route('users.index');
+        return redirect()->route('admins.index');
 
     }
 
@@ -78,7 +79,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user=User::findOrFail($id);
-        return view('backend.users.edit')->with('user',$user);
+        return view('backend.admins.edit')->with('user',$user);
     }
 
     /**
@@ -98,8 +99,8 @@ class UsersController extends Controller
             'status'=>'required|in:active,inactive',
             'photo'=>'nullable|string',
         ]);
-        $data['role']='user';
         $data=$request->all();
+        $data['role']='admin';
         $status=$user->fill($data)->save();
         if($status){
             request()->session()->flash('success','Successfully updated');
@@ -107,7 +108,7 @@ class UsersController extends Controller
         else{
             request()->session()->flash('error','Error occured while updating');
         }
-        return redirect()->route('users.index');
+        return redirect()->route('admins.index');
 
     }
 
@@ -122,11 +123,11 @@ class UsersController extends Controller
         $delete=User::findorFail($id);
         $status=$delete->delete();
         if($status){
-            request()->session()->flash('success','User Successfully deleted');
+            request()->session()->flash('success','Admin Successfully deleted');
         }
         else{
-            request()->session()->flash('error','There is an error while deleting users');
+            request()->session()->flash('error','There is an error while deleting admins');
         }
-        return redirect()->route('users.index');
+        return redirect()->route('admins.index');
     }
 }

@@ -26,7 +26,7 @@ Route::get('user/logout','FrontendController@logout')->name('user.logout');
 Route::get('user/register','FrontendController@register')->name('register.form');
 Route::post('user/register','FrontendController@registerSubmit')->name('register.submit');
 // Reset password
-Route::post('password-reset', 'FrontendController@showResetForm')->name('password.reset');
+  Route::get('password-reset', 'FrontendController@showResetForm')->name('user.password.reset');
 // Socialite
 Route::get('login/{provider}/', 'Auth\LoginController@redirect')->name('login.redirect');
 Route::get('login/{provider}/callback/', 'Auth\LoginController@Callback')->name('login.callback');
@@ -49,14 +49,10 @@ Route::post('/add-to-cart','CartController@singleAddToCart')->name('single-add-t
 Route::get('cart-delete/{id}','CartController@cartDelete')->name('cart-delete');
 Route::post('cart-update','CartController@cartUpdate')->name('cart.update');
 
-Route::get('/cart',function(){
-    return view('frontend.pages.cart');
-})->name('cart');
+ Route::get('/cart','CartController@cart')->name('cart');
 Route::get('/checkout','CartController@checkout')->name('checkout')->middleware('user');
 // Wishlist
-Route::get('/wishlist',function(){
-    return view('frontend.pages.wishlist');
-})->name('wishlist');
+Route::get('/wishlist','FrontendController@wishlist')->name('wishlist');
 Route::get('/wishlist/{slug}','WishlistController@wishlist')->name('add-to-wishlist')->middleware('user');
 Route::get('wishlist-delete/{id}','WishlistController@wishlistDelete')->name('wishlist-delete');
 Route::post('cart/order','OrderController@store')->name('cart.order');
@@ -82,7 +78,7 @@ Route::post('/subscribe','FrontendController@subscribe')->name('subscribe');
 
 // Product Review
 Route::resource('/review','ProductReviewController');
-Route::post('product/{slug}/review','ProductReviewController@store')->name('review.store');
+Route::post('product/{slug}/review','ProductReviewController@store')->name('product.review.store');
 
 // Post Comment
 Route::post('post/{slug}/comment','PostCommentController@store')->name('post-comment.store');
@@ -100,11 +96,13 @@ Route::get('payment/success', 'PayPalController@success')->name('payment.success
 
 Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('/','AdminController@index')->name('admin');
-    Route::get('/file-manager',function(){
-        return view('backend.layouts.file-manager');
-    })->name('file-manager');
+    Route::get('/file-manager','AdminController@fileManager')->name('file-manager');
     // user route
     Route::resource('users','UsersController');
+    // admin route
+    Route::resource('admins','AdminsController');
+    // role route
+    Route::resource('roles','RoleController');
     // Banner
     Route::resource('banner','BannerController');
     // Brand
@@ -144,7 +142,7 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::delete('/notification/{id}','NotificationController@delete')->name('notification.delete');
     // Password Change
     Route::get('change-password', 'AdminController@changePassword')->name('change.password.form');
-    Route::post('change-password', 'AdminController@changPasswordStore')->name('change.password');
+    // Route::post('change-password', 'AdminController@changPasswordStore')->name('change.password');
 });
 
 
@@ -184,6 +182,6 @@ Route::group(['prefix'=>'/user','middleware'=>['user']],function(){
 
 });
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
