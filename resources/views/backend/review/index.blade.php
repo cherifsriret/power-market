@@ -40,8 +40,8 @@
               </tr>
           </tfoot>
           <tbody>
-            @foreach($reviews as $review)  
-              @php 
+            @foreach($reviews as $review)
+              @php
               $title=DB::table('products')->select('title')->where('id',$review->product_id)->get();
               @endphp
                 <tr>
@@ -54,7 +54,7 @@
                           @for($i=1; $i<=5;$i++)
                           @if($review->rate >=$i)
                             <li style="float:left;color:#F7941D;"><i class="fa fa-star"></i></li>
-                          @else 
+                          @else
                             <li style="float:left;color:#F7941D;"><i class="far fa-star"></i></li>
                           @endif
                         @endfor
@@ -69,14 +69,18 @@
                         @endif
                     </td>
                     <td>
+                        @can("update_reviews")
                         <a href="{{route('review.edit',$review->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        @endcan
+                        @can("delete_reviews")
                         <form method="POST" action="{{route('review.destroy',[$review->id])}}">
-                          @csrf 
-                          @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$review->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </form>
+                            @csrf
+                            @method('delete')
+                                <button class="btn btn-danger btn-sm dltBtn" data-id={{$review->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                          </form>
+                        @endcan
                     </td>
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
@@ -109,7 +113,7 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
+
       $('#order-dataTable').DataTable( {
             "columnDefs":[
                 {
@@ -122,7 +126,7 @@
         // Sweet alert
 
         function deleteData(id){
-            
+
         }
   </script>
   <script>

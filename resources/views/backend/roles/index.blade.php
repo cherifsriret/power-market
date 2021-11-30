@@ -10,7 +10,9 @@
      </div>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary float-left">Roles List</h6>
-      <a href="{{route('roles.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Role</a>
+      @can('create_roles')
+        <a href="{{route('roles.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Role</a>
+      @endcan
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -38,12 +40,16 @@
                     <td>{{$role["name"]}}</td>
                     <td>{{$role["usersCount"]}}</td>
                     <td>
+                        @can("update_roles")
                         <a href="{{route('roles.edit',$role['id'])}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="{{route('roles.destroy',[$role['id']])}}">
-                      @csrf
-                      @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$role['id']}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </form>
+                        @endcan
+                        @can("delete_roles")
+                        <form method="POST" action="{{route('roles.destroy',[$role['id']])}}">
+                            @csrf
+                            @method('delete')
+                                <button class="btn btn-danger btn-sm dltBtn" data-id={{$role['id']}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                              </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
