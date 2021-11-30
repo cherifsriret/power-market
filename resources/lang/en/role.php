@@ -1,0 +1,33 @@
+<?php
+return [
+    'roles' => 'Roles',
+    'role' => 'role',
+    'role_name' => 'Role Name',
+    'create_role' => 'Create new role',
+    'update_role' => 'Edit role',
+    'create_success' => 'The role was added successfully.',
+    'update_success' => 'The role has been changed successfully.',
+    'title_roles' => 'Role management',
+    'list_roles'=>"List Roles",
+    'usersAssignedCount' => 'Number of affected users',
+    'delete_role' => 'Delete a role',
+    'message_confirm_delete' => 'You are about to delete this role, are you sure you want to continue?',
+    'delete_success' => 'The role was deleted successfully.',
+    'delete_fail' => 'The role was not deleted',
+    'title_roles_deleted' => 'Deleted Roles',
+    'restore_role' => 'Restore a role',
+    'message_confirm_restore' => 'You are about to restore this role, are you sure you want to continue?',
+    'restore_success' => 'The role was restored successfully.',
+    'restore_fail' => 'The role has not been restored',
+    'uid' => 'Role ID',
+    'permission'=>[
+        'all'=>"All",
+        'read'=>"Show",
+        'create'=>"Create",
+        'edit'=>"Edit",
+        'delete'=>"Delete",
+        'export'=>"Export",
+        'restore'=>"Restore",
+        'trash'=>"Trash",
+    ]
+];

@@ -73,11 +73,9 @@ class User extends Authenticatable
                     "address" => $user->address,
                     "phone" => $user->phone,
                     "email" => $user->email,
-                    "uid" => $user->uuid,
-                    "role" => $user->roles->pluck("display_name")->toArray(),
+                    "id" => $user->id,
+                    "role" => $user->role,
                     "roles" => $user->roles()->select(['locked', 'uuid'])->get()->makeHidden('pivot'),
-                    "has_installation" => $user->has_instalation,
-                    "has_troubleshooting" => $user->has_troubleshooting,
                 ];
             }
         }

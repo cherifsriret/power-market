@@ -14,7 +14,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        $users=User::where('role','admin')->orderBy('id','ASC')->paginate(10);
+        $users=User::where('role','admin')->with('roles')->orderBy('id','ASC')->paginate(10);
         return view('backend.admins.index')->with('users',$users);
     }
 
