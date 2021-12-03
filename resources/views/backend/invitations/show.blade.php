@@ -5,7 +5,8 @@
 <div class="card m-2">
     <h5 class="card-header">{{__('invitation.show_invitation')}}</h5>
     <div class="card-body" id="receipt-invitation">
-        <div class="row mb-5">
+        <h3 class="text-center mb-5">{{__('invitation.invitation')}}</h3>
+        <div class="row">
             <div class="col-12 text-center">
                 <div class="symbol symbol-50 symbol-lg-120">
                     {!!QrCode::color(0, 0, 0)->size(120)->generate($invitation->code)!!}

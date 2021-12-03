@@ -1,6 +1,6 @@
 <?php
 return [
-'invitation'=>'الدعوات',
+'invitation'=>'دعوة',
 'invitations'=>'الدعوات',
 'visitor_name'=>'اسم الزائر',
 'enter_visitor_name'=>'دخل اسم الزائر',
