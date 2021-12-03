@@ -1,7 +1,7 @@
 <?php
 return [
 'reset'=>'إلغاء',
-'submit'=>'أضافة',
+'submit'=>'حفظ',
 'created_at'=>'تاريخ الاضافة',
 'actions'=>'أجراءات',
 's_n'=>'رقم',

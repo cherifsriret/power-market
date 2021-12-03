@@ -3,6 +3,11 @@
 @section('main-content')
 
 <div class="card m-2">
+    <div class="row">
+        <div class="col-md-12">
+           @include('backend.layouts.notification')
+        </div>
+    </div>
     <h5 class="card-header">{{__('invitation.update_invitation')}}</h5>
     <div class="card-body">
       <form method="post"  action="{{route('invitations.update',$invitation->id)}}">
@@ -80,7 +85,7 @@
                     <select name="visit_type" class="form-control">
                         <option >{{__('invitation.select_type')}}</option>
                         <option value="single" {{(($invitation->visit_type=='single') ? 'selected' : '')}}>{{__('invitation.single_visit')}}</option>
-                        <option value="multiple"{{(($invitation->visit_type=='single') ? 'selected' : '')}}>{{__('invitation.multiple_visit')}}</option>
+                        <option value="multiple"{{(($invitation->visit_type=='multiple') ? 'selected' : '')}}>{{__('invitation.multiple_visit')}}</option>
                     </select>
                   @error('visit_type')
                   <span class="text-danger">{{$message}}</span>

@@ -3,6 +3,11 @@
 @section('main-content')
 
 <div class="card m-2">
+    <div class="row">
+        <div class="col-md-12">
+           @include('backend.layouts.notification')
+        </div>
+    </div>
     <h5 class="card-header">{{__('invitation.add_invitation')}}</h5>
     <div class="card-body">
       <form method="post" action="{{route('invitations.store')}}">
