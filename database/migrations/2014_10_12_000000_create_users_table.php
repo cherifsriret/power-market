@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique()->nullable();
+            $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('photo')->nullable();
@@ -24,6 +25,13 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
+            $table->string('governorate')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region')->nullable();
+            $table->string('building')->nullable();
+            $table->string('stage')->nullable();
+            $table->string('apartment_number')->nullable();
+            $table->enum('user_type',['tenant','owner','owners_association_president'])->default('tenant');
             $table->rememberToken()->nullable();
             $table->timestamps();
         });

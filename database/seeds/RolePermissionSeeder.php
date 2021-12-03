@@ -207,6 +207,22 @@ class RolePermissionSeeder extends Seeder
         $super_admin->givePermissionTo($permission_update);
         $super_admin->givePermissionTo($permission_delete);
 
+        //Invitations
+        $permission_all = Permission::create(['name' => '*_invitations', 'display_name' => 'Invitations']);
+        $permission_read = Permission::create(['name' => 'read_invitations', 'display_name' => 'All invitations']);
+        $permission_our = Permission::create(['name' => 'our_invitations', 'display_name' => 'Our invitations']);
+        $permission_create = Permission::create(['name' => 'create_invitations', 'display_name' => 'New invitation']);
+        $permission_update = Permission::create(['name' => 'update_invitations', 'display_name' => 'Edit invitation']);
+        $permission_delete = Permission::create(['name' => 'delete_invitations', 'display_name' => 'Delete invitation']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_our);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+
+
+
 
     }
 }

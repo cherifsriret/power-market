@@ -143,6 +143,30 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     // Password Change
     Route::get('change-password', 'AdminController@changePassword')->name('change.password.form');
     // Route::post('change-password', 'AdminController@changPasswordStore')->name('change.password');
+
+    //invitations
+    Route::group(["prefix" => "invitations"], function () {
+        Route::group(['middleware' => ['permission:read_invitations']], function () {
+            Route::get('/', [App\Http\Controllers\InvitationController::class, 'index'])->name('invitations.read');
+
+        });
+        Route::group(['middleware' => ['permission:our_invitations']], function () {
+            Route::get('/our_invitations', [App\Http\Controllers\InvitationController::class, 'our_invitation'])->name('invitations.read.our');
+            Route::get('/{invitation}/show', [App\Http\Controllers\InvitationController::class, 'show'])->name('invitations.show');
+        });
+        Route::group(['middleware' => ['permission:create_invitations']], function () {
+            Route::get('/create', [App\Http\Controllers\InvitationController::class, 'create'])->name('invitations.create');
+            Route::post('/store', [App\Http\Controllers\InvitationController::class, 'store'])->name('invitations.store');
+        });
+        Route::group(['middleware' => ['permission:update_invitations']], function () {
+            Route::get('/{invitation}/edit', [App\Http\Controllers\InvitationController::class, 'edit'])->name('invitations.edit');
+            Route::patch('/{invitation}', [App\Http\Controllers\InvitationController::class, 'update'])->name('invitations.update');
+        });
+        Route::group(['middleware' => ['permission:delete_invitations']], function () {
+            Route::delete('delete/{invitation}', [App\Http\Controllers\InvitationController::class, 'destroy'])->name('invitations.destroy');
+        });
+    });
+
 });
 
 

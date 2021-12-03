@@ -18,6 +18,38 @@
         <span>Dashboard</span></a>
     </li>
 
+    @canany(['our_invitations','read_invitations'])
+    <hr class="sidebar-divider">
+     <!-- Heading -->
+     <div class="sidebar-heading">
+        {{__('invitation.invitations')}}
+    </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    {{-- Invitation --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#invitationCollapse" aria-expanded="true" aria-controls="invitationCollapse">
+          <i class="fas fa-table"></i>
+          <span>{{__('invitation.invitations')}}</span>
+        </a>
+        <div id="invitationCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">{{__('invitation.invitation_options')}}:</h6>
+            @can("read_invitations")
+                <a class="collapse-item" href="{{route('invitations.read')}}">{{__('invitation.all_invitations')}}</a>
+            @endcan
+            @can("our_invitations")
+                <a class="collapse-item" href="{{route('invitations.read.our')}}">{{__('invitation.our_invitations')}}</a>
+            @endcan
+            @can("create_invitations")
+                <a class="collapse-item" href="{{route('invitations.create')}}">{{__('invitation.add_invitation')}}</a>
+            @endcan
+
+          </div>
+        </div>
+    </li>
+    @endcan
+
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 
