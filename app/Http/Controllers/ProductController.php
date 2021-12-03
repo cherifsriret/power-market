@@ -77,9 +77,8 @@ class ProductController extends Controller
         else{
             $data['size']='';
         }
-        // return $size;
-        // return $data;
         $status=Product::create($data);
+
         if($status){
             request()->session()->flash('success','Product Successfully added');
         }
@@ -176,7 +175,7 @@ class ProductController extends Controller
     {
         $product=Product::findOrFail($id);
         $status=$product->delete();
-        
+
         if($status){
             request()->session()->flash('success','Product successfully deleted');
         }

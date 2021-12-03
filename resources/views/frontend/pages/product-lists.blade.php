@@ -11,7 +11,7 @@
 					<div class="col-12">
 						<div class="bread-inner">
 							<ul class="bread-list">
-								<li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
+								<li><a href="{{route('home')}}">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
 								<li class="active"><a href="javascript:void(0);">Shop List</a></li>
 							</ul>
 						</div>
@@ -195,7 +195,7 @@
 															</a>
 															<div class="button-head">
 																<div class="product-action">
-																	<a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" class="wishlist" data-id="{{$product->id}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+																	<a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" class="wishlist" data-id="{{$product->id}}"><i class=" ti-heart "></i><span>{{trans('frontend.add_to_wishlist')}}</span></a>
 																</div>
 															</div>
 														</div>
@@ -340,7 +340,7 @@
 														<!--/ End Input Order -->
 													</div>
 													<div class="add-to-cart">
-														<button type="submit" class="btn">Add to cart</button>
+														<button type="submit" class="btn">{{trans('frontend.add_to_cart')}}</button>
 														<a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i class="ti-heart"></i></a>
 													</div>
 												</form>

@@ -8,7 +8,7 @@
 				<div class="col-12">
 					<div class="bread-inner">
 						<ul class="bread-list">
-							<li><a href="{{('home')}}">Home<i class="ti-arrow-right"></i></a></li>
+							<li><a href="{{('home')}}">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
 							<li class="active"><a href="javascript:void(0);">Wishlist</a></li>
 						</ul>
 					</div>
@@ -30,7 +30,7 @@
 								<th>PRODUCT</th>
 								<th>NAME</th>
 								<th class="text-center">TOTAL</th>
-								<th class="text-center">ADD TO CART</th>
+								<th class="text-center">{{trans('frontend.add_to_cart')}}</th>
 								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
 							</tr>
 						</thead>
@@ -46,8 +46,8 @@
 											<p class="product-name"><a href="{{route('product-detail',$wishlist->product['slug'])}}">{{$wishlist->product['title']}}</a></p>
 											<p class="product-des">{!!($wishlist['summary']) !!}</p>
 										</td>
-										<td class="total-amount" data-title="Total"><span>${{$wishlist['amount']}}</span></td>
-										<td><a href="{{route('add-to-cart',$wishlist->product['slug'])}}" class='btn text-white'>Add To Cart</a></td>
+										<td class="total-amount" data-title="{{trans('frontend.total')}}"><span>${{$wishlist['amount']}}</span></td>
+										<td><a href="{{route('add-to-cart',$wishlist->product['slug'])}}" class='btn text-white'>{{trans('frontend.add_to_cart')}}</a></td>
 										<td class="action" data-title="Remove"><a href="{{route('wishlist-delete',$wishlist->id)}}"><i class="ti-trash remove-icon"></i></a></td>
 									</tr>
 								@endforeach
@@ -78,8 +78,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-rocket"></i>
-						<h4>Free shiping</h4>
-						<p>Orders over $100</p>
+						<h4>{{trans('frontend.free_shiping')}}</h4>
+						<p>{{trans('frontend.order_over_100')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -87,8 +87,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-reload"></i>
-						<h4>Free Return</h4>
-						<p>Within 30 days returns</p>
+						<h4>{{trans('frontend.free_return')}}</h4>
+						<p>{{trans('frontend.within_30_days')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -96,8 +96,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-lock"></i>
-						<h4>Sucure Payment</h4>
-						<p>100% secure payment</p>
+						<h4>{{trans('frontend.sucure_payment')}}</h4>
+						<p>{{trans('frontend.100_secure_payment')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -106,7 +106,7 @@
 					<div class="single-service">
 						<i class="ti-tag"></i>
 						<h4>Best Peice</h4>
-						<p>Guaranteed price</p>
+						<p>{{trans('frontend.guaranteed_price')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -210,7 +210,7 @@
 										<!--/ End Input Order -->
 									</div>
 									<div class="add-to-cart">
-										<a href="#" class="btn">Add to cart</a>
+										<a href="#" class="btn">{{trans('frontend.add_to_cart')}}</a>
 										<a href="#" class="btn min"><i class="ti-heart"></i></a>
 										<a href="#" class="btn min"><i class="fa fa-compress"></i></a>
 									</div>

@@ -68,42 +68,6 @@
                             </li>
                         @endguest
                     </ul>
-                                  <!--begin:: Languages -->
-							<div class="kt-header__topbar-item kt-header__topbar-item--langs">
-								<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
-									<span class="kt-header__topbar-icon">
-                                        @php $locale = session()->get('lang'); @endphp
-                                        @switch($locale)
-                                        @case('fr')
-                                        <img class="" src="{{asset('assets/media/flags/195-france.svg')}}" alt="" />
-                                        @break
-                                        @case('ar')
-                                        <img class="" src="{{asset('assets/media/flags/144-algeria.svg')}}" alt="" />
-                                        @break
-                                        @default
-                                        <img class="" src="{{asset('assets/media/flags/144-algeria.svg')}}" alt="" />
-                                        @endswitch
-									</span>
-								</div>
-								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround">
-									<ul class="kt-nav kt-margin-t-10 kt-margin-b-10">
-										<li class="kt-nav__item kt-nav__item--active">
-											<a href="{{route('setlang','fr')}}" class="kt-nav__link">
-												<span class="kt-nav__link-icon"><img src="{{asset('assets/media/flags/195-france.svg')}}" alt="" /></span>
-                                            <span class="kt-nav__link-text">{{__('global.french')}}</span>
-											</a>
-										</li>
-										<li class="kt-nav__item">
-                                        <a href="{{route('setlang','ar')}}" class="kt-nav__link">
-												<span class="kt-nav__link-icon"><img src="{{asset('assets/media/flags/144-algeria.svg')}}" alt="" /></span>
-												<span class="kt-nav__link-text">{{__('global.arabic')}}</span>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-
-							<!--end:: Languages -->
                 </div>
             </div>
         </nav>

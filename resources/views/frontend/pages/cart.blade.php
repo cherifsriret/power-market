@@ -8,8 +8,8 @@
 				<div class="col-12">
 					<div class="bread-inner">
 						<ul class="bread-list">
-							<li><a href="{{('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="">Cart</a></li>
+							<li><a href="{{('home')}}">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
+							<li class="active"><a href="">{{trans('frontend.cart')}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -67,7 +67,7 @@
 												</div>
 												<!--/ End Input Order -->
 											</td>
-											<td class="total-amount cart_single_price" data-title="Total"><span class="money">${{$cart['amount']}}</span></td>
+											<td class="total-amount cart_single_price" data-title="{{trans('frontend.total')}}"><span class="money">${{$cart['amount']}}</span></td>
 
 											<td class="action" data-title="Remove"><a href="{{route('cart-delete',$cart->id)}}"><i class="ti-trash remove-icon"></i></a></td>
 										</tr>
@@ -111,39 +111,13 @@
 											<button class="btn">Apply</button>
 										</form>
 									</div>
-									{{-- <div class="checkbox">`
-										@php
-											$shipping=DB::table('shippings')->where('status','active')->limit(1)->get();
-										@endphp
-										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox" onchange="showMe('shipping');"> Shipping</label>
-									</div> --}}
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">Cart Subtotal<span>${{number_format(Helper::totalCartPrice(),2)}}</span></li>
-										{{-- <div id="shipping" style="display:none;">
-											<li class="shipping">
-												Shipping {{session('shipping_price')}}
-												@if(count(Helper::shipping())>0 && Helper::cartCount()>0)
-													<div class="form-select">
-														<select name="shipping" class="nice-select">
-															<option value="">Select</option>
-															@foreach(Helper::shipping() as $shipping)
-															<option value="{{$shipping->id}}" class="shippingOption" data-price="{{$shipping->price}}">{{$shipping->type}}: ${{$shipping->price}}</option>
-															@endforeach
-														</select>
-													</div>
-												@else
-													<div class="form-select">
-														<span>Free</span>
-													</div>
-												@endif
-											</li>
-										</div>
-										 --}}
-										 {{-- {{dd(Session::get('coupon')['value'])}} --}}
+										<li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">{{trans('frontend.cart_subtotal')}}<span>${{number_format(Helper::totalCartPrice(),2)}}</span></li>
+
 										@if(session()->has('coupon'))
 										<li class="coupon_price" data-price="{{Session::get('coupon')['value']}}">You Save<span>${{number_format(Session::get('coupon')['value'],2)}}</span></li>
 										@endif
@@ -182,8 +156,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-rocket"></i>
-						<h4>Free shiping</h4>
-						<p>Orders over $100</p>
+						<h4>{{trans('frontend.free_shiping')}}</h4>
+						<p>{{trans('frontend.order_over_100')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -191,8 +165,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-reload"></i>
-						<h4>Free Return</h4>
-						<p>Within 30 days returns</p>
+						<h4>{{trans('frontend.free_return')}}</h4>
+						<p>{{trans('frontend.within_30_days')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -200,8 +174,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-lock"></i>
-						<h4>Sucure Payment</h4>
-						<p>100% secure payment</p>
+						<h4>{{trans('frontend.sucure_payment')}}</h4>
+						<p>{{trans('frontend.100_secure_payment')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -210,7 +184,7 @@
 					<div class="single-service">
 						<i class="ti-tag"></i>
 						<h4>Best Peice</h4>
-						<p>Guaranteed price</p>
+						<p>{{trans('frontend.guaranteed_price')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -316,7 +290,7 @@
 										<!--/ End Input Order -->
 									</div>
 									<div class="add-to-cart">
-										<a href="#" class="btn">Add to cart</a>
+										<a href="#" class="btn">{{trans('frontend.add_to_cart')}}</a>
 										<a href="#" class="btn min"><i class="ti-heart"></i></a>
 										<a href="#" class="btn min"><i class="fa fa-compress"></i></a>
 									</div>

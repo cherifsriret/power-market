@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{route('home')}}">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0);">Order Track</a></li>
                         </ul>
                     </div>
@@ -30,7 +30,7 @@
                     <input type="text" class="form-control p-2"  name="order_number" placeholder="Enter your order number">
                 </div>
                 <div class="col-md-8 form-group">
-                    <button type="submit" value="submit" class="btn submit_btn">Track Order</button>
+                    <button type="submit" value="submit" class="btn submit_btn">{{trans('frontend.track_order')}}</button>
                 </div>
             </form>
         </div>

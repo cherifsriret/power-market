@@ -11,8 +11,8 @@
 				<div class="col-12">
 					<div class="bread-inner">
 						<ul class="bread-list">
-							<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="blog-single.html">About Us</a></li>
+							<li><a href="index1.html">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
+							<li class="active"><a href="blog-single.html">{{trans('frontend.about_us')}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -34,7 +34,7 @@
 							<p>@foreach($settings as $data) {{$data->description}} @endforeach</p>
 							<div class="button">
 								<a href="{{route('blog')}}" class="btn">Our Blog</a>
-								<a href="{{route('contact')}}" class="btn primary">Contact Us</a>
+								<a href="{{route('contact')}}" class="btn primary">{{trans('frontend.contact_us')}}</a>
 							</div>
 						</div>
 					</div>
@@ -60,8 +60,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-rocket"></i>
-						<h4>Free shiping</h4>
-						<p>Orders over $100</p>
+						<h4>{{trans('frontend.free_shiping')}}</h4>
+						<p>{{trans('frontend.order_over_100')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -69,8 +69,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-reload"></i>
-						<h4>Free Return</h4>
-						<p>Within 30 days returns</p>
+						<h4>{{trans('frontend.free_return')}}</h4>
+						<p>{{trans('frontend.within_30_days')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -78,8 +78,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-lock"></i>
-						<h4>Sucure Payment</h4>
-						<p>100% secure payment</p>
+						<h4>{{trans('frontend.sucure_payment')}}</h4>
+						<p>{{trans('frontend.100_secure_payment')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -88,7 +88,7 @@
 					<div class="single-service">
 						<i class="ti-tag"></i>
 						<h4>Best Peice</h4>
-						<p>Guaranteed price</p>
+						<p>{{trans('frontend.guaranteed_price')}}</p>
 					</div>
 					<!-- End Single Service -->
 				</div>

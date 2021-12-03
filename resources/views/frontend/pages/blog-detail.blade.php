@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{route('home')}}">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0);">Blog Single Sidebar</a></li>
                         </ul>
                     </div>
@@ -104,7 +104,7 @@
 
                             @else
                             <p class="text-center p-5">
-                                You need to <a href="{{route('login.form')}}" style="color:rgb(54, 54, 204)">Login</a> OR <a style="color:blue" href="{{route('register.form')}}">Register</a> for comment.
+                                You need to <a href="{{route('login.form')}}" style="color:rgb(54, 54, 204)">{{trans('frontend.login')}}</a> OR <a style="color:blue" href="{{route('register.form')}}">{{trans('frontend.register')}}</a> for comment.
 
                             </p>
 
@@ -189,7 +189,7 @@
                         <!--/ End Single Widget -->
                         <!-- Single Widget -->
                         <div class="single-widget newsletter">
-                            <h3 class="title">Newslatter</h3>
+                            <h3 class="title">{{trans('frontend.newsletter')}}</h3>
                             <div class="letter-inner">
                                 <h4>Subscribe & get news <br> latest updates.</h4>
                                 <form action="{{route('subscribe')}}" method="POST">

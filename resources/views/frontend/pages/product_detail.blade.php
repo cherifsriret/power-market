@@ -24,7 +24,7 @@
 					<div class="col-12">
 						<div class="bread-inner">
 							<ul class="bread-list">
-								<li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
+								<li><a href="{{route('home')}}">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
 								<li class="active"><a href="">Shop Details</a></li>
 							</ul>
 						</div>
@@ -139,7 +139,7 @@
 													<!--/ End Input Order -->
 													</div>
 													<div class="add-to-cart mt-4">
-														<button type="submit" class="btn">Add to cart</button>
+														<button type="submit" class="btn">{{trans('frontend.add_to_cart')}}</button>
 														<a href="{{route('add-to-wishlist',$product_detail->slug)}}" class="btn min"><i class="ti-heart"></i></a>
 													</div>
 												</form>
@@ -234,7 +234,7 @@
 																</form>
 																@else
 																<p class="text-center p-5">
-																	You need to <a href="{{route('login.form')}}" style="color:rgb(54, 54, 204)">Login</a> OR <a style="color:blue" href="{{route('register.form')}}">Register</a>
+																	You need to <a href="{{route('login.form')}}" style="color:rgb(54, 54, 204)">{{trans('frontend.login')}}</a> OR <a style="color:blue" href="{{route('register.form')}}">{{trans('frontend.register')}}</a>
 
 																</p>
 																<!--/ End Form -->
@@ -333,11 +333,11 @@
                                         <div class="button-head">
                                             <div class="product-action">
                                                 <a data-toggle="modal" data-target="#modelExample" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>{{trans('frontend.add_to_wishlist')}}</span></a>
                                                 <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                                             </div>
                                             <div class="product-action-2">
-                                                <a title="Add to cart" href="#">Add to cart</a>
+                                                <a title="{{trans('frontend.add_to_cart')}}" href="#">{{trans('frontend.add_to_cart')}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -456,7 +456,7 @@
                                 <!--/ End Input Order -->
                             </div>
                             <div class="add-to-cart">
-                                <a href="#" class="btn">Add to cart</a>
+                                <a href="#" class="btn">{{trans('frontend.add_to_cart')}}</a>
                                 <a href="#" class="btn min"><i class="ti-heart"></i></a>
                                 <a href="#" class="btn min"><i class="fa fa-compress"></i></a>
                             </div>

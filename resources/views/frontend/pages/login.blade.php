@@ -10,8 +10,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Login</a></li>
+                            <li><a href="{{route('home')}}">{{trans('frontend.home')}}<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="javascript:void(0);">{{trans('frontend.login')}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-12">
                     <div class="login-form">
-                        <h2>Login</h2>
+                        <h2>{{trans('frontend.login')}}</h2>
                         <p>Please register in order to checkout more quickly</p>
                         <!-- Form -->
                         <form class="form" method="post" action="{{route('login.submit')}}">
@@ -52,8 +52,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group login-btn">
-                                        <button class="btn" type="submit">Login</button>
-                                        <a href="{{route('register.form')}}" class="btn">Register</a>
+                                        <button class="btn" type="submit">{{trans('frontend.login')}}</button>
+                                        <a href="{{route('register.form')}}" class="btn">{{trans('frontend.register')}}</a>
                                     </div>
                                     <div class="checkbox">
                                         <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Remember me</label>
