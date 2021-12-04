@@ -1,0 +1,13 @@
+Options -Indexes
+
+<Files .env>
+Order Allow,Deny
+Deny from all
+</Files>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(.*)$ power-market/public/$1 [L]
+</IfModule>
