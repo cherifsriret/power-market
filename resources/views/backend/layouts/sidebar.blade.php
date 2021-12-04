@@ -60,7 +60,7 @@
     {{-- Invitation --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roleCollapse" aria-expanded="true" aria-controls="invitationCollapse">
-          <i class="fas fa-users"></i>
+          <i class="fas fa-fw fa-user-shield"></i>
           <span>{{__('role.roles')}}</span>
         </a>
         <div id="roleCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">

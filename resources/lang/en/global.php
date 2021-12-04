@@ -10,5 +10,9 @@ return [
 'msg_confirm_delete'=>'Once deleted, you will not be able to recover this data!',
 'your_data_safe'=>'Your data is safe!',
 'print'=>'Print',
+'status'=>'Status',
+'enter_status'=>'Select Status',
+'status_active'=>'Active',
+'status_inactive'=>'Inactive',
 
 ];

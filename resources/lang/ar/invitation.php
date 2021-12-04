@@ -3,7 +3,7 @@ return [
 'invitation'=>'دعوة',
 'invitations'=>'الدعوات',
 'visitor_name'=>'اسم الزائر',
-'enter_visitor_name'=>'دخل اسم الزائر',
+'enter_visitor_name'=>'أدخل اسم الزائر',
 'visit_type'=>'نوع الدعوة',
 'select_type'=>'اختر نوع الدعوة',
 'single_visit'=>'زيارة واحدة',

@@ -10,6 +10,9 @@ return [
 'msg_confirm_delete'=>'! بمجرد الحذف ، لن تتمكن من استعادة هذه البيانات',
 'your_data_safe'=>'! بياناتك آمنة',
 'print'=>'طباعة',
-
+'status'=>'الحالة',
+'enter_status'=>'اختر الحالة',
+'status_active'=>'مفعل',
+'status_inactive'=>'غير مفعل',
 
 ];

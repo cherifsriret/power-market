@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+
 class UsersController extends Controller
 {
     /**
@@ -14,7 +18,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users=User::where('role','user')->orderBy('id','ASC')->paginate(10);
+        $users=User::orderBy('id','ASC')->paginate(10);
         return view('backend.users.index')->with('users',$users);
     }
 
@@ -25,7 +29,23 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('backend.users.create');
+
+        $user = Auth::user();
+        $authRoles = $user->roles->pluck("locked")->toArray();
+        $roles = Role::where(function ($query) use ($authRoles) {
+            in_array(1, $authRoles) ? $query :
+                $query->where("locked", 0);
+        })->get();
+        $userPermissions = $user->getAllPermissions()->pluck('name')->toArray();
+        $display_roles = [];
+        foreach ($roles as $role) {
+            $rolePermissions = $role->getAllPermissions()->pluck('name')->toArray();
+            $lengthPermissions = count(array_diff($rolePermissions, $userPermissions));
+            if ($lengthPermissions === 0) {
+                $display_roles[] = $role;
+            }
+        }
+        return view('backend.users.create')->with('roles',$display_roles);
     }
 
     /**
@@ -41,14 +61,51 @@ class UsersController extends Controller
             'name'=>'string|required|max:30',
             'email'=>'string|required|unique:users',
             'password'=>'string|required',
+            'governorate'=>'string|required',
+            'city'=>'string|required',
+            'region'=>'string|required',
+            'building'=>'string|required',
+            'stage'=>'string|required',
+            'apartment_number'=>'string|required',
+            'user_type'=>'required|in:tenant,owner,owners_association_president',
+            'role'=>'required',
             'status'=>'required|in:active,inactive',
-            'photo'=>'nullable|string',
+        ],[],[
+            'name'=> __('user.name'),
+            'email'=> __('user.mail'),
+            'password'=> __('user.password'),
+            'governorate'=> __('user.governorate'),
+            'city'=> __('user.city'),
+            'region'=> __('user.region'),
+            'building'=> __('user.building'),
+            'stage'=> __('user.stage'),
+            'apartment_number'=> __('user.apartment_number'),
+            'user_type'=> __('user.user_type'),
+            'status'=> __('global.status'),
         ]);
         $data=$request->all();
         $data['password']=Hash::make($request->password);
-        $data['role']='user';
+        $data['role']='admin';
         $status=User::create($data);
         if($status){
+            $user = Auth::user();
+            $userPermissions = $user->getAllPermissions()->pluck('name')->toArray();
+            $roles = $request->role;
+
+           foreach ($roles as $role) {
+                try {
+                    $role = Role::find($role);
+                } catch (\Exception $e) {
+                    request()->session()->flash('error','Error occurred while adding user- invalid role');
+                }
+                $rolePermissions = $role->getAllPermissions()->pluck('name')->toArray();
+                $lengthPermissions = count(array_diff($rolePermissions, $userPermissions));
+                if ($lengthPermissions === 0) {
+
+                    $status->assignRole($role);
+                }
+            }
+
             request()->session()->flash('success','Successfully added user');
         }
         else{
@@ -57,6 +114,7 @@ class UsersController extends Controller
         return redirect()->route('users.index');
 
     }
+
 
     /**
      * Display the specified resource.
@@ -98,7 +156,7 @@ class UsersController extends Controller
             'status'=>'required|in:active,inactive',
             'photo'=>'nullable|string',
         ]);
-        $data['role']='user';
+        $data['role']='admin';
         $data=$request->all();
         $status=$user->fill($data)->save();
         if($status){

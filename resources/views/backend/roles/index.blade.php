@@ -22,7 +22,7 @@
               <th>{{__('global.s_n')}}</th>
               <th>{{__('role.role_name')}}</th>
               <th>{{__('role.usersAssignedCount')}}</th>
-              <th>{{__('role.role_name')}}</th>
+              <th>{{__('global.actions')}}</th>
             </tr>
           </thead>
           <tfoot>
@@ -30,7 +30,7 @@
                 <th>{{__('global.s_n')}}</th>
                 <th>{{__('role.role_name')}}</th>
                 <th>{{__('role.usersAssignedCount')}}</th>
-                <th>{{__('role.role_name')}}</th>
+                <th>{{__('global.actions')}}</th>
               </tr>
           </tfoot>
           <tbody>
