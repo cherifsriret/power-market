@@ -91,7 +91,23 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $validator =Validator::make($request->all(),
+        [
+            'name'=>'string|required',
+        ],[],[
+            'visitor_name'=> __('role.role_name'),
+        ]);
+
+        if ($validator->fails()) {
+            $errors = [];
+            foreach ($validator->errors()->all() as $error) {
+                $errors[] = $error;
+            }
+            request()->session()->flash('error',implode(",", $errors));
+            return back()->withInput($request->all());
+        } else {
+
+            try {
                 $user = Auth::user();
                 $roleSlug = Str::slug($request->name, '_');
                 $newRole = Role::create(['name' => $roleSlug, 'display_name' => $request->name]);
@@ -99,18 +115,23 @@ class RoleController extends Controller
                 $arrayPermissions = array_diff_key($request->all(), array_flip((array) ["_token", "name"]));
                 $newRole->syncPermissions(array_intersect($userPermissions , array_keys($arrayPermissions)));
                 if ($newRole) {
-                    request()->session()->flash('success','Successfully added role');
+                    request()->session()->flash('success',__('role.create_success'));
                     return redirect()->route('roles.index');
                 } else {
-                    request()->session()->flash('error','Error occurred while adding role');
+                    request()->session()->flash('error',__('role.create_error'));
                     return redirect()->route('roles.index');
                 }
 
         }
         catch (\Exception $e) {
-            request()->session()->flash('error','Error occurred while adding role'.$e->getMessage());
+            request()->session()->flash('error',__('role.create_error'));
             return redirect()->route('roles.index');
         }
+
+        }
+
+
+
     }
 
 
@@ -166,12 +187,28 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+
+        $validator =Validator::make($request->all(),
+        [
+            'name'=>'string|required',
+        ],[],[
+            'visitor_name'=> __('role.role_name'),
+        ]);
+
+        if ($validator->fails()) {
+            $errors = [];
+            foreach ($validator->errors()->all() as $error) {
+                $errors[] = $error;
+            }
+            request()->session()->flash('error',implode(",", $errors));
+            return back()->withInput($request->all());
+        } else {
+            try {
                 $user = Auth::user();
                 $roleSlug = Str::slug($request->name, '_');
                 $role = Role::find($id);
                 if ($role->locked) {
-                    request()->session()->flash('error','this role is locked');
+                    request()->session()->flash('error',__('role.locked_role'));
                     return redirect()->route('roles.index');
                 }
                 $rolePermissions = $role->getAllPermissions()->pluck("name")->toArray();
@@ -179,13 +216,15 @@ class RoleController extends Controller
                 $role->update(["name" => $roleSlug, "display_name" => $request->name]);
                 $arrayPermissions = array_diff_key($request->all(), array_flip((array) ["_method", "_token", "name", "oldUid"]));
                 $role->syncPermissions(array_intersect($userPermissions , array_keys($arrayPermissions)));
-                request()->session()->flash('success','Successfully updated role');
+                request()->session()->flash('success',__('role.update_success'));
                 return redirect()->route('roles.index');
+            }
+            catch (\Exception $e) {
+                request()->session()->flash('error',__('role.update_error'));
+                return redirect()->route('roles.index');
+            }
         }
-        catch (\Exception $e) {
-            request()->session()->flash('error','Error occured while updating'.$e->getMessage());
-            return redirect()->route('roles.index');
-        }
+
     }
 
 
@@ -205,14 +244,14 @@ class RoleController extends Controller
         if ($countPermissions === 0 && (int) $role->locked === 0) {
             $status=$role->delete();
             if($status){
-                request()->session()->flash('success','Role Successfully deleted');
+                request()->session()->flash('success',__('role.delete_success'));
             }
             else{
-                request()->session()->flash('error','There is an error while deleting role');
+                request()->session()->flash('error',__('role.delete_fail'));
             }
         }
         else {
-            request()->session()->flash('error','There is an error while deleting role');
+            request()->session()->flash('error',__('role.delete_fail'));
         }
         return redirect()->route('roles.index');
 

@@ -2,15 +2,20 @@
 
 @section('main-content')
 
-<div class="card">
-    <h5 class="card-header">Edit User</h5>
+<div class="card m-2">
+    <div class="row">
+        <div class="col-md-12">
+           @include('backend.layouts.notification')
+        </div>
+    </div>
+    <h5 class="card-header">{{ __('role.update_role') }}</h5>
     <div class="card-body">
       <form method="post" action="{{route('roles.update',$role->id)}}">
         @csrf
         @method('PATCH')
         <div class="form-group">
-          <label for="inputTitle" class="col-form-label">Name</label>
-        <input id="inputTitle" type="text" name="name" placeholder="Enter name"  value="{{$role->name}}" class="form-control">
+          <label for="inputTitle" class="col-form-label">{{ __('role.role_name') }}</label>
+        <input id="inputTitle" type="text" name="name" placeholder="{{ __('role.enter_role_name') }}"   value="{{$role->name}}" class="form-control">
         @error('name')
         <span class="text-danger">{{$message}}</span>
         @enderror
@@ -37,7 +42,7 @@
 
                 @endphp
                     <tr>
-                        <th scope="row"><h5>{{ substr( $permission,1) }}</h5></th>
+                        <th scope="row"><h5>{{ __('role.modules.'.substr( $permission,1) ) }}</h5></th>
                         <td class="text-center">
                             <label class="checkbox checkbox-lg">
                                 <input  type="checkbox" name="" id="{{$permission}}Parent" class="littleParent" onclick="checkCard(`{{$permission}}`)">
@@ -92,9 +97,10 @@
             </div>
         </div>
 
-        <div class="form-group mb-3">
-           <button class="btn btn-success" type="submit">Update</button>
-        </div>
+        <div class="form-group mb-3 text-center">
+            <button type="reset" class="btn btn-warning">{{__('global.reset')}}</button>
+             <button class="btn btn-success" type="submit">{{__('global.submit')}}</button>
+          </div>
       </form>
     </div>
 </div>

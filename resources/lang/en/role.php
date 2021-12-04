@@ -3,10 +3,14 @@ return [
     'roles' => 'Roles',
     'role' => 'role',
     'role_name' => 'Role Name',
+    'enter_role_name' => 'Enter Role Name',
     'create_role' => 'Create new role',
     'update_role' => 'Edit role',
     'create_success' => 'The role was added successfully.',
+    'create_error' =>'Error occurred while adding role' ,
+    'locked_role'=>'this role is locked',
     'update_success' => 'The role has been changed successfully.',
+    'update_error'=>'Error occurred while updating role' ,
     'title_roles' => 'Role management',
     'list_roles'=>"List Roles",
     'usersAssignedCount' => 'Number of affected users',
@@ -44,5 +48,7 @@ return [
         'tags'=>'tags',
         'comments'=>'comments',
         'coupons'=>'coupons',
+        'brands'=>'Brands',
+
     ]
 ];

@@ -49,6 +49,32 @@
     </li>
     @endcan
 
+    @can('read_roles')
+    <!-- Roles -->
+    <hr class="sidebar-divider">
+     <!-- Heading -->
+     <div class="sidebar-heading">
+        {{__('role.roles')}}
+    </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    {{-- Invitation --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roleCollapse" aria-expanded="true" aria-controls="invitationCollapse">
+          <i class="fas fa-users"></i>
+          <span>{{__('role.roles')}}</span>
+        </a>
+        <div id="roleCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">{{__('role.title_roles')}}:</h6>
+            <a class="collapse-item" href="{{route('roles.index')}}">{{__('role.list_roles')}}</a>
+            @can("create_roles")
+                <a class="collapse-item" href="{{route('roles.create')}}">{{__('role.create_role')}}</a>
+            @endcan
+
+          </div>
+        </div>
+    </li>
+    @endcan
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -276,14 +302,7 @@
             <span>Users</span></a>
     </li>
     @endcan
-    @can('read_roles')
-      <!-- Roles -->
-      <li class="nav-item">
-        <a class="nav-link" href="{{route('roles.index')}}">
-            <i class="fas fa-users"></i>
-            <span>Roles</span></a>
-    </li>
-    @endcan
+
     @can('read_settings')
      <!-- General settings -->
      <li class="nav-item">

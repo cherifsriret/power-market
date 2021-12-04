@@ -4,7 +4,6 @@ return [
 'invitations'=>'Invitations',
 'visitor_name'=>'Visitor Name',
 'enter_visitor_name'=>'Enter the name of visitor',
-'invitations'=>'visitor_name',
 'select_type'=>'Select type of invitation',
 'single_visit'=>'Single',
 'multiple_visit'=>'Multiple',

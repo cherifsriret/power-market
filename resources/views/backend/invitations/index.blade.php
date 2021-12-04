@@ -130,8 +130,6 @@
                     "targets":[6,7]
                 }
             ],
-
-
             @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
                 "language": {
     "emptyTable": "ليست هناك بيانات متاحة في الجدول",
