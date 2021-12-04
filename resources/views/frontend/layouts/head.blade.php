@@ -36,7 +36,7 @@
 
 <!-- Eshop StyleSheet -->
 <link rel="stylesheet" href="{{asset('frontend/css/reset.css')}}">
-@if(str_replace('_', '-',  session()->get('lang')) === "ar" )
+@if(str_replace('_', '-',  app()->getLocale()) === "ar" )
 <link rel="stylesheet" href="{{asset('frontend/css/style.rtl.css')}}">
 @else
 <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">

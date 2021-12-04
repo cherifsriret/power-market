@@ -135,11 +135,13 @@ class RolePermissionSeeder extends Seeder
         //Orders
         $permission_all = Permission::create(['name' => '*_orders', 'display_name' => 'Orders']);
         $permission_read = Permission::create(['name' => 'read_orders', 'display_name' => 'List orders']);
+        $permission_our = Permission::create(['name' => 'our_orders', 'display_name' => 'Our orders']);
         $permission_create = Permission::create(['name' => 'create_orders', 'display_name' => 'New order']);
         $permission_update = Permission::create(['name' => 'update_orders', 'display_name' => 'Edit order']);
         $permission_delete = Permission::create(['name' => 'delete_orders', 'display_name' => 'Delete order']);
         $super_admin->givePermissionTo($permission_all);
         $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_our);
         $super_admin->givePermissionTo($permission_create);
         $super_admin->givePermissionTo($permission_update);
         $super_admin->givePermissionTo($permission_delete);
@@ -148,11 +150,13 @@ class RolePermissionSeeder extends Seeder
         //Reviews
         $permission_all = Permission::create(['name' => '*_reviews', 'display_name' => 'Reviews']);
         $permission_read = Permission::create(['name' => 'read_reviews', 'display_name' => 'List reviews']);
+        $permission_our = Permission::create(['name' => 'our_reviews', 'display_name' => 'Our reviews']);
         $permission_create = Permission::create(['name' => 'create_reviews', 'display_name' => 'New review']);
         $permission_update = Permission::create(['name' => 'update_reviews', 'display_name' => 'Edit review']);
         $permission_delete = Permission::create(['name' => 'delete_reviews', 'display_name' => 'Delete review']);
         $super_admin->givePermissionTo($permission_all);
         $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_our);
         $super_admin->givePermissionTo($permission_create);
         $super_admin->givePermissionTo($permission_update);
         $super_admin->givePermissionTo($permission_delete);
@@ -198,11 +202,13 @@ class RolePermissionSeeder extends Seeder
         //Comments
         $permission_all = Permission::create(['name' => '*_comments', 'display_name' => 'Comments']);
         $permission_read = Permission::create(['name' => 'read_comments', 'display_name' => 'List comments']);
+        $permission_our = Permission::create(['name' => 'our_comments', 'display_name' => 'Our comments']);
         $permission_create = Permission::create(['name' => 'create_comments', 'display_name' => 'New comment']);
         $permission_update = Permission::create(['name' => 'update_comments', 'display_name' => 'Edit comment']);
         $permission_delete = Permission::create(['name' => 'delete_comments', 'display_name' => 'Delete comment']);
         $super_admin->givePermissionTo($permission_all);
         $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_our);
         $super_admin->givePermissionTo($permission_create);
         $super_admin->givePermissionTo($permission_update);
         $super_admin->givePermissionTo($permission_delete);

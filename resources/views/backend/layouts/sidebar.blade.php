@@ -52,14 +52,12 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-    @can('read_banners')
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Banner
-    </div>
-    <!-- Nav Item - Pages Collapse Menu -->
-
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Shop
+        </div>
+         <!-- Banners -->
+        @can('read_banners')
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-image"></i>
@@ -76,14 +74,6 @@
       </div>
     </li>
     @endcan
-
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Shop
-        </div>
     @can('read_categories')
     <!-- Categories -->
     <li class="nav-item">
@@ -167,6 +157,14 @@
             <span>Orders</span>
         </a>
     </li>
+@endcan
+@can('read_coupons')
+ <!--Coupon -->
+<li class="nav-item">
+  <a class="nav-link" href="{{route('coupon.index')}}">
+      <i class="fas fa-table"></i>
+      <span>Coupon</span></a>
+</li>
 @endcan
 
     @can("read_reviews")
@@ -261,13 +259,7 @@
     <div class="sidebar-heading">
         General Settings
     </div>
-    @can('read_coupons')
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('coupon.index')}}">
-          <i class="fas fa-table"></i>
-          <span>Coupon</span></a>
-    </li>
-    @endcan
+
     @can('read_admins')
     <!-- Admins -->
     <li class="nav-item">

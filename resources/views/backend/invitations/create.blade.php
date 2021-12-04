@@ -105,7 +105,7 @@
 
 
 @push('styles')
-  @if(str_replace('_', '-',  session()->get('lang')) === "ar" )
+  @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
   <link href="{{asset('vendor/bootstrap-datepicker/css/bootstrap-datepicker.rtl.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css')}}" rel="stylesheet">
   @else
@@ -119,12 +119,12 @@
   <!-- Page level plugins -->
   <script src="{{asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
   <script src="{{asset('vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js')}}"></script>
-  @if(str_replace('_', '-',  session()->get('lang')) === "ar" )
+  @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
   <script src="{{asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.ar.min.js')}}"></script>
   @endif
   <script>
       $('#visit_from_date,#visit_to_date').datepicker({
-    language: "{{str_replace('_', '-',  session()->get('lang'))}}",
+    language: "{{str_replace('_', '-',  app()->getLocale())}}",
     format:"dd/mm/yyyy"
 });
 

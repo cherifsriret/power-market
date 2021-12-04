@@ -9,7 +9,7 @@
 
 
     <!-- Topbar Navbar -->
-    <ul class='{{ str_replace('_', '-',  session()->get('lang')) === "ar" ? "navbar-nav mr-auto": "navbar-nav ml-auto"}}'>
+    <ul class='{{ str_replace('_', '-',  app()->getLocale()) === "ar" ? "navbar-nav mr-auto": "navbar-nav ml-auto"}}'>
 
       {{-- Home page --}}
       <li class="nav-item dropdown no-arrow mx-1">
@@ -27,6 +27,10 @@
       <li class="nav-item dropdown no-arrow mx-1" id="messageT" data-url="{{route('messages.five')}}">
         @include('backend.message.message')
       </li>
+    <!-- Nav Item - Messages -->
+    <li class="nav-item dropdown no-arrow mx-1" id="changeLang">
+        @include('backend.layouts.language')
+    </li>
 
       <div class="topbar-divider d-none d-sm-block"></div>
 

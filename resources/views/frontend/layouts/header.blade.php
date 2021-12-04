@@ -171,7 +171,7 @@
                             <!--/ End Shopping Item -->
                         </div>
                         <div class="sinlge-bar shopping">
-                            @php $locale = session()->get('lang');
+                            @php $locale = app()->getLocale();
                                 $local_text = $locale==='ar' ? 'Arabic': 'English';
                                 $image_flag = $locale==='ar' ? 'egypt.png': 'united-states.png';
                             @endphp

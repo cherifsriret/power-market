@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-',  session()->get('lang')) }}"  dir="{{ str_replace('_', '-',  session()->get('lang')) === "ar" ? "rtl": "ltr"}}">
+<html lang="{{ str_replace('_', '-',  app()->getLocale()) }}"  dir="{{ str_replace('_', '-',  app()->getLocale()) === "ar" ? "rtl": "ltr"}}">
 <head>
 	@include('frontend.layouts.head')
 </head>

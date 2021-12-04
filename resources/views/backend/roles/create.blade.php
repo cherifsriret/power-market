@@ -23,6 +23,7 @@
                         <th scope="col">#</th>
                         <th scope="col">{{ __('role.permission.all') }}</th>
                         <th scope="col">{{ __('role.permission.read') }}</th>
+                        <th scope="col">{{ __('role.permission.mine') }}</th>
                         <th scope="col">{{ __('role.permission.create') }}</th>
                         <th scope="col">{{ __('role.permission.edit') }}</th>
                         <th scope="col">{{ __('role.permission.delete') }}</th>
@@ -51,6 +52,14 @@
                                 </label>
                             @endif
                     </td>
+                    <td>
+                        @if(count(array_filter($value,function($q)use($group){ return $q['name'] === 'our'.$group;})))
+                            <label class="checkbox checkbox-lg">
+                                <input type="checkbox" class="{{$group}} child" name="{{ 'our'.$group }}">
+                                <span></span>
+                            </label>
+                        @endif
+                </td>
                     <td>
                             @if(count(array_filter($value,function($q)use($group){ return $q['name'] === 'create'.$group;})))
                                 <label class="checkbox checkbox-lg">

@@ -14,7 +14,7 @@
 
     <!-- Custom styles for this template-->
 
-    @if(str_replace('_', '-',  session()->get('lang')) === "ar" )
+    @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
     <link href="{{asset('backend/css/sb-admin-2.rtl.css')}}" rel="stylesheet">
     @else
     <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">

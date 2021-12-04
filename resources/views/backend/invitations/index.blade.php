@@ -90,7 +90,7 @@
 
 @push('styles')
   <link href="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-  @if(str_replace('_', '-',  session()->get('lang')) === "ar" )
+  @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
   <style>
   div.dataTables_wrapper div.dataTables_filter {
     text-align: left !important;
@@ -132,7 +132,7 @@
             ],
 
 
-            @if(str_replace('_', '-',  session()->get('lang')) === "ar" )
+            @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
                 "language": {
     "emptyTable": "ليست هناك بيانات متاحة في الجدول",
     "loadingRecords": "جارٍ التحميل...",

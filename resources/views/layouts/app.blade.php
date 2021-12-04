@@ -37,7 +37,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class='{{ str_replace('_', '-',  session()->get('lang')) === "ar" ? "navbar-nav mr-auto": "navbar-nav ml-auto"}}'>
+                    <ul class='{{ str_replace('_', '-',  app()->getLocale()) === "ar" ? "navbar-nav mr-auto": "navbar-nav ml-auto"}}'>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

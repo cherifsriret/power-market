@@ -108,7 +108,7 @@ class RoleController extends Controller
 
         }
         catch (\Exception $e) {
-            request()->session()->flash('error','Error occurred while adding role');
+            request()->session()->flash('error','Error occurred while adding role'.$e->getMessage());
             return redirect()->route('roles.index');
         }
     }
