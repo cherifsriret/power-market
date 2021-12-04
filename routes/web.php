@@ -34,7 +34,7 @@ Route::get('login/{provider}/callback/', 'Auth\LoginController@Callback')->name(
 Route::get('/','FrontendController@home')->name('home');
 
 // Frontend Routes
-Route::get('/home', 'FrontendController@index');
+Route::get('/home', 'FrontendController@home');
 Route::get('/about-us','FrontendController@aboutUs')->name('about-us');
 Route::get('/contact','FrontendController@contact')->name('contact');
 Route::post('/contact/message','MessageController@store')->name('contact.store');
