@@ -167,6 +167,41 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         });
     });
 
+    //Meetings
+    Route::group(["prefix" => "meetings"], function () {
+        Route::group(['middleware' => ['permission:read_meetings']], function () {
+            Route::get('/', [App\Http\Controllers\MeetingController::class, 'index'])->name('meetings.read');
+        });
+        Route::group(['middleware' => ['permission:create_meetings']], function () {
+            Route::get('/create', [App\Http\Controllers\MeetingController::class, 'create'])->name('meetings.create');
+            Route::post('/store', [App\Http\Controllers\MeetingController::class, 'store'])->name('meetings.store');
+        });
+        Route::group(['middleware' => ['permission:update_meetings']], function () {
+            Route::get('/{meeting}/edit', [App\Http\Controllers\MeetingController::class, 'edit'])->name('meetings.edit');
+            Route::patch('/{meeting}', [App\Http\Controllers\MeetingController::class, 'update'])->name('meetings.update');
+        });
+        Route::group(['middleware' => ['permission:delete_meetings']], function () {
+            Route::delete('delete/{meeting}', [App\Http\Controllers\MeetingController::class, 'destroy'])->name('meetings.destroy');
+        });
+    });
+    //Places
+    Route::group(["prefix" => "places"], function () {
+        Route::group(['middleware' => ['permission:read_places']], function () {
+            Route::get('/', [App\Http\Controllers\PlaceController::class, 'index'])->name('places.read');
+        });
+        Route::group(['middleware' => ['permission:create_places']], function () {
+            Route::get('/create', [App\Http\Controllers\PlaceController::class, 'create'])->name('places.create');
+            Route::post('/store', [App\Http\Controllers\PlaceController::class, 'store'])->name('places.store');
+        });
+        Route::group(['middleware' => ['permission:update_places']], function () {
+            Route::get('/{meeting}/edit', [App\Http\Controllers\PlaceController::class, 'edit'])->name('places.edit');
+            Route::patch('/{meeting}', [App\Http\Controllers\PlaceController::class, 'update'])->name('places.update');
+        });
+        Route::group(['middleware' => ['permission:delete_places']], function () {
+            Route::delete('delete/{meeting}', [App\Http\Controllers\PlaceController::class, 'destroy'])->name('places.destroy');
+        });
+    });
+
 });
 
 
