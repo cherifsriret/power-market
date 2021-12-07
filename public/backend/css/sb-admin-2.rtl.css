@@ -4771,14 +4771,14 @@
   }
 
   .page-item:first-child .page-link {
-    margin-left: 0;
-    border-top-left-radius: 0.35rem;
-    border-bottom-left-radius: 0.35rem;
+    margin-right: 0;
+    border-top-right-radius: 0.35rem;
+    border-bottom-right-radius: 0.35rem;
   }
 
   .page-item:last-child .page-link {
-    border-top-right-radius: 0.35rem;
-    border-bottom-right-radius: 0.35rem;
+    border-top-left-radius: 0.35rem;
+    border-bottom-left-radius: 0.35rem;
   }
 
   .page-item.active .page-link {
