@@ -44,5 +44,6 @@ return [
         'comments'=>'التعليقات',
         'coupons'=>'كوبونات',
         'brands'=>'الشركات',
+        'meetings'=>'الاجتماعات',
     ]
 ];

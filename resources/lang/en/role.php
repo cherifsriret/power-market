@@ -49,6 +49,7 @@ return [
         'comments'=>'comments',
         'coupons'=>'coupons',
         'brands'=>'Brands',
+        'meetings'=>'Meeting',
 
     ]
 ];
