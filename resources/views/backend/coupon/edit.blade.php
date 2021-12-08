@@ -6,7 +6,7 @@
     <h5 class="card-header">Edit Coupon</h5>
     <div class="card-body">
       <form method="post" action="{{route('coupon.update',$coupon->id)}}">
-        @csrf 
+        @csrf
         @method('PATCH')
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Coupon Code <span class="text-danger">*</span></label>
@@ -15,7 +15,7 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
           </div>
-  
+
           <div class="form-group">
               <label for="type" class="col-form-label">Type <span class="text-danger">*</span></label>
               <select name="type" class="form-control">
@@ -26,7 +26,7 @@
               <span class="text-danger">{{$message}}</span>
               @enderror
           </div>
-  
+
           <div class="form-group">
               <label for="inputTitle" class="col-form-label">Value <span class="text-danger">*</span></label>
               <input id="inputTitle" type="number" name="value" placeholder="Enter Coupon value"  value="{{$coupon->value}}" class="form-control">
@@ -34,7 +34,7 @@
               <span class="text-danger">{{$message}}</span>
               @enderror
           </div>
-          
+
         <div class="form-group">
           <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
           <select name="status" class="form-control">
@@ -58,7 +58,7 @@
 <link rel="stylesheet" href="{{asset('backend/summernote/summernote.min.css')}}">
 @endpush
 @push('scripts')
-<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 <script>
     $('#lfm').filemanager('image');

@@ -6,7 +6,7 @@
     <h5 class="card-header">Edit Shipping</h5>
     <div class="card-body">
       <form method="post" action="{{route('shipping.update',$shipping->id)}}">
-        @csrf 
+        @csrf
         @method('PATCH')
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">Type <span class="text-danger">*</span></label>
@@ -14,14 +14,14 @@
         @error('title')
         <span class="text-danger">{{$message}}</span>
         @enderror
-        </div>     
+        </div>
         <div class="form-group">
           <label for="price" class="col-form-label">Price <span class="text-danger">*</span></label>
         <input id="price" type="number" name="price" placeholder="Enter price"  value="{{$shipping->price}}" class="form-control">
         @error('price')
         <span class="text-danger">{{$message}}</span>
         @enderror
-        </div>        
+        </div>
         <div class="form-group">
           <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
           <select name="status" class="form-control">
@@ -45,7 +45,7 @@
 <link rel="stylesheet" href="{{asset('backend/summernote/summernote.min.css')}}">
 @endpush
 @push('scripts')
-<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 <script>
     $('#lfm').filemanager('image');
