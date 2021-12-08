@@ -21,6 +21,7 @@ class CreateCleaningCompaniesTable extends Migration
             $table->string('responsable');
             $table->text('maps');
             $table->text('photo');
+            $table->longText('cv')->nullable();
             $table->timestamps();
         });
     }

@@ -46,13 +46,15 @@ class CleaningCompanyController extends Controller
             'responsable'=>'string|required',
             'maps'=>'string|required',
             'photo'=>'string|required',
+            'cv'=>'string|nullable',
         ],[],[
-            'name'=> __('cleaning_company.description'),
+            'name'=> __('cleaning_company.name'),
             'address'=> __('cleaning_company.address'),
             'phone'=> __('cleaning_company.phone'),
             'responsable'=> __('cleaning_company.responsable'),
             'maps'=> __('cleaning_company.maps'),
             'photo'=> __('cleaning_company.photo'),
+            'cv'=> __('cleaning_company.cv'),
         ]);
 
         if ($validator->fails()) {

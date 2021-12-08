@@ -107,6 +107,15 @@
                   @enderror
                   </div>
             </div>
+            <div class="col-sm-12 col-md-12">
+            <div class="form-group">
+                <label for="inputTitle" class="col-form-label">{{__('maintenance_company.cv')}}</label>
+                <textarea class="form-control" id="cv" name="cv">{{$maintenance_company->cv}}</textarea>
+                @error('cv')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
+                </div>
+            </div>
         </div>
         <div class="form-group mb-3 text-center">
           <button type="reset" class="btn btn-warning">{{__('global.reset')}}</button>
@@ -120,15 +129,21 @@
 
 
 @push('styles')
+<link rel="stylesheet" href="{{asset('backend/summernote/summernote.min.css')}}">
 
 @endpush
 
 @push('scripts')
 <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+<script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 
 <script>
      var route_prefix = "{{ url('/filemanager') }}";
     $('#lfm').filemanager('image', {prefix: route_prefix});
-
+    $('#cv').summernote({
+        placeholder: "{{__('maintenance_company.enter_cv')}}",
+          tabsize: 2,
+          height: 150
+      });
   </script>
 @endpush
