@@ -126,7 +126,8 @@
 <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 
 <script>
- $('#lfm').filemanager('image');
+     var route_prefix = "{{ url('/filemanager') }}";
+    $('#lfm').filemanager('image', {prefix: route_prefix});
 
   </script>
 @endpush

@@ -21,7 +21,7 @@
             <div class="card border-left-primary shadow">
                 <div class="card-header m-auto">
                     @if($maintenance_company->photo)
-                        <img src="{{$maintenance_company->photo}}" alt="{{$maintenance_company->photo}}" height="200">
+                        <img src="{{$maintenance_company->photo}}" alt="{{$maintenance_company->photo}}" height="auto">
                     @else
                         <img src="https://via.placeholder.com/600x370" alt="#">
                     @endif

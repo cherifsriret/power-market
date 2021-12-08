@@ -61,7 +61,8 @@
 <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 <script>
-    $('#lfm').filemanager('image');
+       var route_prefix = "{{ url('/filemanager') }}";
+    $('#lfm').filemanager('image', {prefix: route_prefix});
 
     $(document).ready(function() {
     $('#description').summernote({

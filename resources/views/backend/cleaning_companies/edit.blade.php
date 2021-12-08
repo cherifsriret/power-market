@@ -129,7 +129,6 @@
 <script>
     var route_prefix = "{{ url('/filemanager') }}";
     $('#lfm').filemanager('image', {prefix: route_prefix});
-    // $('#lfm').filemanager('image');
 
   </script>
 @endpush
