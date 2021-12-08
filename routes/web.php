@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -219,6 +220,25 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         });
         Route::group(['middleware' => ['permission:delete_maintenance_companies']], function () {
             Route::delete('delete/{meeting}', [App\Http\Controllers\MaintenanceCompanyController::class, 'destroy'])->name('maintenance_companies.destroy');
+        });
+    });
+
+
+    //Emergency Number
+    Route::group(["prefix" => "emergency_numbers"], function () {
+        Route::group(['middleware' => ['permission:read_emergency_numbers']], function () {
+            Route::get('/', [App\Http\Controllers\EmergencyNumberController::class, 'index'])->name('emergency_numbers.read');
+        });
+        Route::group(['middleware' => ['permission:create_emergency_numbers']], function () {
+            Route::get('/create', [App\Http\Controllers\EmergencyNumberController::class, 'create'])->name('emergency_numbers.create');
+            Route::post('/store', [App\Http\Controllers\EmergencyNumberController::class, 'store'])->name('emergency_numbers.store');
+        });
+        Route::group(['middleware' => ['permission:update_emergency_numbers']], function () {
+            Route::get('/{emergency_number}/edit', [App\Http\Controllers\EmergencyNumberController::class, 'edit'])->name('emergency_numbers.edit');
+            Route::patch('/{emergency_number}', [App\Http\Controllers\EmergencyNumberController::class, 'update'])->name('emergency_numbers.update');
+        });
+        Route::group(['middleware' => ['permission:delete_emergency_numbers']], function () {
+            Route::delete('delete/{emergency_number}', [App\Http\Controllers\EmergencyNumberController::class, 'destroy'])->name('emergency_numbers.destroy');
         });
     });
 

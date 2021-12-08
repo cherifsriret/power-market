@@ -9,43 +9,38 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">{{__('meeting.list_meetings')}}</h6>
-      @can("create_meetings")
-        <a href="{{route('meetings.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus mx-2"></i>{{__('meeting.add_meeting')}}</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">{{__('emergency_number.list_emergency_numbers')}}</h6>
+      @can("create_emergency_numbers")
+        <a href="{{route('emergency_numbers.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus mx-2"></i>{{__('emergency_number.add_emergency_number')}}</a>
       @endcan
     </div>
     <div class="card-body">
         <div class="row">
-        @foreach($meetings as $meeting)
-        <div class="col-md-6  col-sm-12 mb-4">
+        @foreach($emergencyNumbers as $emergency_number)
+        <div class="col-md-4  col-sm-12 mb-4">
             <div class="card border-left-primary shadow">
                 <div class="card-header">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{__('meeting.meeting_date')}}</div>
-                                <div>
-                                    {{$meeting->meeting_date}}
-                                </div>
-                        </div>
-                        <div class="col-auto">
-                            <div>
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{__('meeting.meeting_time')}}</div>
-                                <div>
-                                    {{$meeting->meeting_time}}
-                                </div>
-                            </div>
-
-                        </div>
+                    <div class="text-center  color-white">
+                        {{$emergency_number->id}}
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{__('meeting.description')}}</div>
-                            <div class="mb-0">{!!($meeting->description)!!}</div>
+                                {{__('emergency_number.name')}} </div>
+                        </div>
+                        <div class="col-auto">
+                            {{$emergency_number->name}}
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {{__('emergency_number.phone')}} </div>
+                        </div>
+                        <div class="col-auto">
+                            {{$emergency_number->phone}}
                         </div>
                     </div>
                 </div>
@@ -53,18 +48,18 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{__('global.created_at')}} : {{(($meeting->created_at)? $meeting->created_at->diffForHumans() : '')}}</div>
+                                {{__('global.created_at')}} : {{(($emergency_number->created_at)? $emergency_number->created_at->diffForHumans() : '')}}</div>
                         </div>
                         <div class="col-auto">
                             <div style="display: inline-flex;">
-                                @can("update_meetings")
-                                <a href="{{route('meetings.edit',$meeting->id)}}" class="btn btn-warning btn-sm float-left mx-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                                @can("update_emergency_numbers")
+                                <a href="{{route('emergency_numbers.edit',$emergency_number->id)}}" class="btn btn-warning btn-sm float-left mx-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                                 @endcan
-                                @can("delete_meetings")
-                                <form method="POST" action="{{route('meetings.destroy',[$meeting->id])}}">
+                                @can("delete_emergency_numbers")
+                                <form method="POST" action="{{route('emergency_numbers.destroy',[$emergency_number->id])}}">
                                     @csrf
                                     @method('delete')
-                                        <button class="btn btn-danger btn-sm dltBtn" data-id={{$meeting->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title={{__('global.delete')}}><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger btn-sm dltBtn" data-id={{$emergency_number->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title={{__('global.delete')}}><i class="fas fa-trash-alt"></i></button>
                                       </form>
                                 @endcan
                             </div>
@@ -76,7 +71,7 @@
         </div>
         @endforeach
     </div>
-    <span class="d-flex flex-row-reverse"> {{$meetings->links("pagination::bootstrap-4")}}</span>
+    <span class="d-flex flex-row-reverse"> {{$emergencyNumbers->links("pagination::bootstrap-4")}}</span>
     </div>
 </div>
 @endsection
