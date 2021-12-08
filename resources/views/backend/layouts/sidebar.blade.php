@@ -58,7 +58,7 @@
     <!-- Nav Item - Pages Collapse Menu -->
     {{-- Meeting --}}
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#meetingCollapse" aria-expanded="true" aria-controls="invitationCollapse">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#meetingCollapse" aria-expanded="true" aria-controls="meetingCollapse">
           <i class="fas fa-table"></i>
           <span>{{__('meeting.meetings')}}</span>
         </a>
@@ -76,8 +76,56 @@
         </div>
     </li>
     @endcan
+    @canany(['read_cleaning_companies','read_cleaning_companies','read_maintenance_companies','read_maintenance_companies'])
+    <hr class="sidebar-divider">
+     <!-- Heading -->
+     <div class="sidebar-heading">
+        {{__('global.services')}}
+    </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        @canany(['read_cleaning_companies','read_cleaning_companies'])
+            {{-- Cleaning companies --}}
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cleaningCompaniesCollapse" aria-expanded="true" aria-controls="cleaningCompaniesCollapse">
+                <i class="fas fa-table"></i>
+                <span>{{__('cleaning_company.cleaning_companies')}}</span>
+                </a>
+                <div id="cleaningCompaniesCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">{{__('cleaning_company.cleaning_company_options')}}:</h6>
+                    @can("read_cleaning_companies")
+                        <a class="collapse-item" href="{{route('cleaning_companies.read')}}">{{__('cleaning_company.all_cleaning_companies')}}</a>
+                    @endcan
+                    @can("create_cleaning_companies")
+                        <a class="collapse-item" href="{{route('cleaning_companies.create')}}">{{__('cleaning_company.add_cleaning_company')}}</a>
+                    @endcan
 
+                </div>
+                </div>
+            </li>
+        @endcan
+        @canany(['read_maintenance_companies','read_maintenance_companies'])
+            {{-- Maintenance companies --}}
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#maintenanceCompaniesCollapse" aria-expanded="true" aria-controls="maintenanceCompaniesCollapse">
+                <i class="fas fa-table"></i>
+                <span>{{__('maintenance_company.maintenance_companies')}}</span>
+                </a>
+                <div id="maintenanceCompaniesCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">{{__('maintenance_company.maintenance_company_options')}}:</h6>
+                    @can("read_maintenance_companies")
+                        <a class="collapse-item" href="{{route('maintenance_companies.read')}}">{{__('maintenance_company.all_maintenance_companies')}}</a>
+                    @endcan
+                    @can("create_maintenance_companies")
+                        <a class="collapse-item" href="{{route('maintenance_companies.create')}}">{{__('maintenance_company.add_maintenance_company')}}</a>
+                    @endcan
 
+                </div>
+                </div>
+            </li>
+        @endcan
+    @endcan
     @can('read_roles')
     <!-- Roles -->
     <hr class="sidebar-divider">

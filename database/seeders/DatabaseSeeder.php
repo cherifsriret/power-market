@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
          $this->call(MeetingPermissionSeeder::class); ///php artisan db:seed --class=MeetingPermissionSeeder
          $this->call(PlacePermissionSeeder::class);///php artisan db:seed --class=PlacePermissionSeeder
 
+         $this->call(CleaningCompaniesSeeder::class); ///php artisan db:seed --class=CleaningCompaniesSeeder
+         $this->call(MaintenanceCompaniesSeeder::class); ///php artisan db:seed --class=MaintenanceCompaniesSeeder
+         $this->call(EmergencyNumberSeeder::class); ///php artisan db:seed --class=EmergencyNumberSeeder
+         $this->call(StaticComplaintSeeder::class); ///php artisan db:seed --class=StaticComplaintSeeder
 
 
     }

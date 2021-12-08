@@ -1,0 +1,31 @@
+<?php
+
+return
+[
+    'cleaning_company'=>'شركة النظافة',
+    'cleaning_companies'=>'شركات النظافة',
+    'name'=>'اسم الشركة',
+    'enter_name'=>' أدخل اسم الشركة',
+    'address'=>'العنوان',
+    'enter_address'=>'أدخل  العنوان',
+    'phone'=>'الهاتف',
+    'enter_phone'=>'أدخل رقم الهاتف',
+    'responsable'=>'المسؤول عن الشركة',
+    'enter_responsable'=>'أدخل اسم المسؤول',
+    'maps'=>'خريطة مكان الشركة',
+    'enter_maps'=>' أدخل خريطة مكان الشركة',
+    'photo'=>'لوجو الشركة',
+    'enter_photo'=>'أدخل لوجو الشركة',
+    'success_added'=>'تمت إضافة شركة النظافة بنجاح',
+    'error_added'=>'حدث خطأ أثناء إضافة شركة النظافة',
+    'add_cleaning_company'=>'أضافة شركة نظافة',
+    'list_cleaning_companies'=>'قائمة شركات النظافة',
+    'all_cleaning_companies'=>'كل شركات النظافة',
+    'cleaning_company_options'=>'خيارات شركات النظافة',
+    'success_delete'=>'تم حذف شركة النظافة بنجاح',
+    'error_delete'=>'حدث خطأ أثناء حذف شركة النظافة',
+    'update_cleaning_company'=>'تحديث شركة النظافة',
+    'success_update'=>'تم تحديث شركة النظافة بنجاح',
+    'error_update'=>'حدث خطأ أثناء تحديث شركة النظافة',
+    'show_cleaning_company'=>'عرض شركة النظافة',
+];

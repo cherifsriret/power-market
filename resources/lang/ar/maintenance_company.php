@@ -1,0 +1,31 @@
+<?php
+
+return
+[
+    'maintenance_company'=>'شركة الصيانة',
+    'maintenance_companies'=>'شركات الصيانة',
+    'name'=>'اسم الشركة',
+    'enter_name'=>' أدخل اسم الشركة',
+    'address'=>'العنوان',
+    'enter_address'=>'أدخل  العنوان',
+    'phone'=>'الهاتف',
+    'enter_phone'=>'أدخل رقم الهاتف',
+    'responsable'=>'المسؤول عن الشركة',
+    'enter_responsable'=>'أدخل اسم المسؤول',
+    'maps'=>'خريطة مكان الشركة',
+    'enter_maps'=>' أدخل خريطة مكان الشركة',
+    'photo'=>'لوجو الشركة',
+    'enter_photo'=>'أدخل لوجو الشركة',
+    'success_added'=>'تمت إضافة شركة الصيانة بنجاح',
+    'error_added'=>'حدث خطأ أثناء إضافة شركة الصيانة',
+    'add_maintenance_company'=>'أضافة شركة صيانة',
+    'list_maintenance_companies'=>'قائمة شركات الصيانة',
+    'all_maintenance_companies'=>'كل شركات الصيانة',
+    'maintenance_company_options'=>'خيارات شركات الصيانة',
+    'success_delete'=>'تم حذف شركة الصيانة بنجاح',
+    'error_delete'=>'حدث خطأ أثناء حذف شركة الصيانة',
+    'update_maintenance_company'=>'تحديث شركة الصيانة',
+    'success_update'=>'تم تحديث شركة الصيانة بنجاح',
+    'error_update'=>'حدث خطأ أثناء تحديث شركة الصيانة',
+    'show_maintenance_company'=>'عرض شركة الصيانة',
+];

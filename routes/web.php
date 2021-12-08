@@ -184,6 +184,45 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
             Route::delete('delete/{meeting}', [App\Http\Controllers\MeetingController::class, 'destroy'])->name('meetings.destroy');
         });
     });
+
+    //Cleaning Companies
+    Route::group(["prefix" => "cleaning_companies"], function () {
+        Route::group(['middleware' => ['permission:read_cleaning_companies']], function () {
+            Route::get('/', [App\Http\Controllers\CleaningCompanyController::class, 'index'])->name('cleaning_companies.read');
+        });
+        Route::group(['middleware' => ['permission:create_cleaning_companies']], function () {
+            Route::get('/create', [App\Http\Controllers\CleaningCompanyController::class, 'create'])->name('cleaning_companies.create');
+            Route::post('/store', [App\Http\Controllers\CleaningCompanyController::class, 'store'])->name('cleaning_companies.store');
+        });
+        Route::group(['middleware' => ['permission:update_cleaning_companies']], function () {
+            Route::get('/{meeting}/edit', [App\Http\Controllers\CleaningCompanyController::class, 'edit'])->name('cleaning_companies.edit');
+            Route::patch('/{meeting}', [App\Http\Controllers\CleaningCompanyController::class, 'update'])->name('cleaning_companies.update');
+        });
+        Route::group(['middleware' => ['permission:delete_cleaning_companies']], function () {
+            Route::delete('delete/{meeting}', [App\Http\Controllers\CleaningCompanyController::class, 'destroy'])->name('cleaning_companies.destroy');
+        });
+    });
+
+
+     //Maintenance Companies
+     Route::group(["prefix" => "maintenance_companies"], function () {
+        Route::group(['middleware' => ['permission:read_maintenance_companies']], function () {
+            Route::get('/', [App\Http\Controllers\MaintenanceCompanyController::class, 'index'])->name('maintenance_companies.read');
+        });
+        Route::group(['middleware' => ['permission:create_maintenance_companies']], function () {
+            Route::get('/create', [App\Http\Controllers\MaintenanceCompanyController::class, 'create'])->name('maintenance_companies.create');
+            Route::post('/store', [App\Http\Controllers\MaintenanceCompanyController::class, 'store'])->name('maintenance_companies.store');
+        });
+        Route::group(['middleware' => ['permission:update_maintenance_companies']], function () {
+            Route::get('/{meeting}/edit', [App\Http\Controllers\MaintenanceCompanyController::class, 'edit'])->name('maintenance_companies.edit');
+            Route::patch('/{meeting}', [App\Http\Controllers\MaintenanceCompanyController::class, 'update'])->name('maintenance_companies.update');
+        });
+        Route::group(['middleware' => ['permission:delete_maintenance_companies']], function () {
+            Route::delete('delete/{meeting}', [App\Http\Controllers\MaintenanceCompanyController::class, 'destroy'])->name('maintenance_companies.destroy');
+        });
+    });
+
+
     //Places
     Route::group(["prefix" => "places"], function () {
         Route::group(['middleware' => ['permission:read_places']], function () {
