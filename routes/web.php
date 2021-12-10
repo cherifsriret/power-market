@@ -275,6 +275,13 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
             Route::delete('delete/{meeting}', [App\Http\Controllers\PlaceController::class, 'destroy'])->name('places.destroy');
         });
     });
+    //Maps
+    Route::group(["prefix" => "maps"], function () {
+        Route::group(['middleware' => ['permission:read_maps']], function () {
+            Route::get('/', [App\Http\Controllers\AdminController::class, 'maps'])->name('maps.read');
+        });
+
+    });
 
 });
 

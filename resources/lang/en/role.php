@@ -50,6 +50,8 @@ return [
         'coupons'=>'coupons',
         'brands'=>'Brands',
         'meetings'=>'Meeting',
+        'maps'=>'Maps',
+        'store'=>'Store',
 
     ]
 ];

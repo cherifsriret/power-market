@@ -49,6 +49,8 @@ return [
         'cleaning_companies'=>'شركات النظافة',
         'emergency_numbers'=>'أرقام الطوارئ',
         'maintenance_companies'=>'شركات الصيانة',
-        'static_complaints'=>'  الشكاوي '
+        'static_complaints'=>'  الشكاوي ',
+        'store'=>' أسواق المدينه',
+        'maps'=>' خريطة المدينه',
     ]
 ];

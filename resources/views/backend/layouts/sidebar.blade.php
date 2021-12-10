@@ -18,30 +18,26 @@
         <span>Dashboard</span></a>
     </li>
 
-    @canany(['our_invitations','read_invitations'])
+    @can('read_roles')
+    <!-- Roles -->
     <hr class="sidebar-divider">
      <!-- Heading -->
      <div class="sidebar-heading">
-        {{__('invitation.invitations')}}
+        {{__('role.roles')}}
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
     {{-- Invitation --}}
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#invitationCollapse" aria-expanded="true" aria-controls="invitationCollapse">
-          <i class="fas fa-table"></i>
-          <span>{{__('invitation.invitations')}}</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roleCollapse" aria-expanded="true" aria-controls="invitationCollapse">
+          <i class="fas fa-fw fa-user-shield"></i>
+          <span>{{__('role.roles')}}</span>
         </a>
-        <div id="invitationCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="roleCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">{{__('invitation.invitation_options')}}:</h6>
-            @can("read_invitations")
-                <a class="collapse-item" href="{{route('invitations.read')}}">{{__('invitation.all_invitations')}}</a>
-            @endcan
-            @can("our_invitations")
-                <a class="collapse-item" href="{{route('invitations.read.our')}}">{{__('invitation.our_invitations')}}</a>
-            @endcan
-            @can("create_invitations")
-                <a class="collapse-item" href="{{route('invitations.create')}}">{{__('invitation.add_invitation')}}</a>
+            <h6 class="collapse-header">{{__('role.title_roles')}}:</h6>
+            <a class="collapse-item" href="{{route('roles.index')}}">{{__('role.list_roles')}}</a>
+            @can("create_roles")
+                <a class="collapse-item" href="{{route('roles.create')}}">{{__('role.create_role')}}</a>
             @endcan
 
           </div>
@@ -49,39 +45,57 @@
     </li>
     @endcan
 
-    @canany(['create_meetings','read_meetings'])
+    @can('read_users')
+    <!-- Users -->
     <hr class="sidebar-divider">
      <!-- Heading -->
      <div class="sidebar-heading">
-        {{__('meeting.meetings')}}
+        {{__('user.users')}}
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
-    {{-- Meeting --}}
+    {{-- Invitation --}}
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#meetingCollapse" aria-expanded="true" aria-controls="meetingCollapse">
-          <i class="fas fa-table"></i>
-          <span>{{__('meeting.meetings')}}</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userCollapse" aria-expanded="true" aria-controls="userCollapse">
+            <i class="fas fa-users"></i>
+          <span>{{__('user.users')}}</span>
         </a>
-        <div id="meetingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="userCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">{{__('meeting.meeting_options')}}:</h6>
-            @can("read_meetings")
-                <a class="collapse-item" href="{{route('meetings.read')}}">{{__('meeting.all_meetings')}}</a>
-            @endcan
-            @can("create_meetings")
-                <a class="collapse-item" href="{{route('meetings.create')}}">{{__('meeting.add_meeting')}}</a>
+            <h6 class="collapse-header">{{__('user.title_users')}}:</h6>
+            <a class="collapse-item" href="{{route('users.index')}}">{{__('user.list_users')}}</a>
+            @can("create_users")
+                <a class="collapse-item" href="{{route('users.create')}}">{{__('user.create_user')}}</a>
             @endcan
 
           </div>
         </div>
     </li>
     @endcan
+
+
+
     @canany(['read_cleaning_companies','read_cleaning_companies','read_maintenance_companies','read_maintenance_companies','read_emergency_numbers','read_emergency_numbers'])
     <hr class="sidebar-divider">
      <!-- Heading -->
      <div class="sidebar-heading">
         {{__('global.services')}}
     </div>
+            {{-- Cleaning companies --}}
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('home')}}" >
+                <i class="fas fa-table"></i>
+                <span>{{__('global.store')}}</span>
+                </a>
+            </li>
+        @can('read_maps')
+            {{-- Cleaning companies --}}
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('maps.read')}}" >
+                <i class="fas fa-table"></i>
+                <span>{{__('global.maps')}}</span>
+                </a>
+            </li>
+        @endcan
         <!-- Nav Item - Pages Collapse Menu -->
         @canany(['read_cleaning_companies','read_cleaning_companies'])
             {{-- Cleaning companies --}}
@@ -168,26 +182,29 @@
         </li>
         @endcan
     @endcan
-    @can('read_roles')
-    <!-- Roles -->
+
+
+    @canany(['create_meetings','read_meetings'])
     <hr class="sidebar-divider">
      <!-- Heading -->
      <div class="sidebar-heading">
-        {{__('role.roles')}}
+        {{__('meeting.meetings')}}
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
-    {{-- Invitation --}}
+    {{-- Meeting --}}
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#roleCollapse" aria-expanded="true" aria-controls="invitationCollapse">
-          <i class="fas fa-fw fa-user-shield"></i>
-          <span>{{__('role.roles')}}</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#meetingCollapse" aria-expanded="true" aria-controls="meetingCollapse">
+          <i class="fas fa-table"></i>
+          <span>{{__('meeting.meetings')}}</span>
         </a>
-        <div id="roleCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="meetingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">{{__('role.title_roles')}}:</h6>
-            <a class="collapse-item" href="{{route('roles.index')}}">{{__('role.list_roles')}}</a>
-            @can("create_roles")
-                <a class="collapse-item" href="{{route('roles.create')}}">{{__('role.create_role')}}</a>
+            <h6 class="collapse-header">{{__('meeting.meeting_options')}}:</h6>
+            @can("read_meetings")
+                <a class="collapse-item" href="{{route('meetings.read')}}">{{__('meeting.all_meetings')}}</a>
+            @endcan
+            @can("create_meetings")
+                <a class="collapse-item" href="{{route('meetings.create')}}">{{__('meeting.add_meeting')}}</a>
             @endcan
 
           </div>
@@ -195,32 +212,37 @@
     </li>
     @endcan
 
-    @can('read_users')
-    <!-- Users -->
+    @canany(['our_invitations','read_invitations'])
     <hr class="sidebar-divider">
      <!-- Heading -->
      <div class="sidebar-heading">
-        {{__('user.users')}}
+        {{__('invitation.invitations')}}
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
     {{-- Invitation --}}
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userCollapse" aria-expanded="true" aria-controls="userCollapse">
-            <i class="fas fa-users"></i>
-          <span>{{__('user.users')}}</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#invitationCollapse" aria-expanded="true" aria-controls="invitationCollapse">
+          <i class="fas fa-table"></i>
+          <span>{{__('invitation.invitations')}}</span>
         </a>
-        <div id="userCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="invitationCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">{{__('user.title_users')}}:</h6>
-            <a class="collapse-item" href="{{route('users.index')}}">{{__('user.list_users')}}</a>
-            @can("create_users")
-                <a class="collapse-item" href="{{route('users.create')}}">{{__('user.create_user')}}</a>
+            <h6 class="collapse-header">{{__('invitation.invitation_options')}}:</h6>
+            @can("read_invitations")
+                <a class="collapse-item" href="{{route('invitations.read')}}">{{__('invitation.all_invitations')}}</a>
+            @endcan
+            @can("our_invitations")
+                <a class="collapse-item" href="{{route('invitations.read.our')}}">{{__('invitation.our_invitations')}}</a>
+            @endcan
+            @can("create_invitations")
+                <a class="collapse-item" href="{{route('invitations.create')}}">{{__('invitation.add_invitation')}}</a>
             @endcan
 
           </div>
         </div>
     </li>
     @endcan
+
 
     @canany(['read_categories','read_products','read_brands','read_shippings','read_orders','read_orders','read_coupons','read_reviews'])
     <!-- Divider -->

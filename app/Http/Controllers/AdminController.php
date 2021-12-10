@@ -120,4 +120,15 @@ class AdminController extends Controller
         # code...
         return view('backend.layouts.file-manager');
     }
+
+
+
+    public function maps()
+    {
+        # code...
+        return view('backend.maps.index');
+    }
+
+
+
 }
