@@ -19,6 +19,12 @@
     @else
     <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
     @endif
+
+    <link href="{{asset('backend/css/style.css')}}" rel="stylesheet">
+
     @stack('styles')
+
+      {{-- <!-- Scripts -->
+      <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
 </head>

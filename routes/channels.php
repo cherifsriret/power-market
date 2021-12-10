@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('message', function () {
     return true;
 });
+
+Broadcast::channel('chat', function () {
+    return \Illuminate\Support\Facades\Auth::check();
+});

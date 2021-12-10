@@ -82,4 +82,13 @@ class User extends Authenticatable
 
         return $display_users;
     }
+
+
+    public function sentMessages() {
+        return $this->hasMany(Message::class,'from_user_id');
+    }
+
+    public function ownMessages() {
+        return $this->hasMany(Message::class,'to_user_id');
+    }
 }
