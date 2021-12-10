@@ -14,5 +14,6 @@ return [
 'enter_status'=>'Select Status',
 'status_active'=>'Active',
 'status_inactive'=>'Inactive',
+'services'=>'Services',
 
 ];

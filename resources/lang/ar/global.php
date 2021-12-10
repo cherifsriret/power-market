@@ -14,5 +14,8 @@ return [
 'enter_status'=>'اختر الحالة',
 'status_active'=>'مفعل',
 'status_inactive'=>'غير مفعل',
-
+'choose'=>'اختر',
+'services'=>'الخدمات',
+'store'=>' أسواق المدينه',
+'maps'=>' خريطة المدينه',
 ];

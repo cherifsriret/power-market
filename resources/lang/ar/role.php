@@ -45,5 +45,10 @@ return [
         'coupons'=>'كوبونات',
         'brands'=>'الشركات',
         'meetings'=>'الاجتماعات',
+        'places'=>'معالم المدينة',
+        'cleaning_companies'=>'شركات النظافة',
+        'emergency_numbers'=>'أرقام الطوارئ',
+        'maintenance_companies'=>'شركات الصيانة',
+        'static_complaints'=>'  الشكاوي '
     ]
 ];

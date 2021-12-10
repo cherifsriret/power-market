@@ -41,12 +41,12 @@ class PlaceController extends Controller
         $validator =Validator::make($request->all(),
         [
             'description'=>'string|required',
-            'place_date' => 'required|date_format:d/m/Y',
-            'place_time' => 'required|date_format:G:i',
+            'address'=>'string|required',
+            'photo'=>'string|required',
         ],[],[
             'description'=> __('place.description'),
-            'place_date' =>  __('place.place_date'),
-            'place_time' =>  __('place.place_time'),
+            'address' =>  __('place.address'),
+            'photo' =>  __('place.photo'),
         ]);
 
         if ($validator->fails()) {
@@ -109,12 +109,12 @@ class PlaceController extends Controller
         $validator =Validator::make($request->all(),
         [
             'description'=>'string|required',
-            'place_date' => 'required|date_format:d/m/Y',
-            'place_time' => 'required|date_format:G:i',
+            'address'=>'string|required',
+            'photo'=>'string|required',
         ],[],[
             'description'=> __('place.description'),
-            'place_date' =>  __('place.place_date'),
-            'place_time' =>  __('place.place_time'),
+            'address' =>  __('place.address'),
+            'photo' =>  __('place.photo'),
         ]);
 
         if ($validator->fails()) {
