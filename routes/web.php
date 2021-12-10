@@ -32,10 +32,17 @@ Route::post('user/register','FrontendController@registerSubmit')->name('register
 Route::get('login/{provider}/', 'Auth\LoginController@redirect')->name('login.redirect');
 Route::get('login/{provider}/callback/', 'Auth\LoginController@Callback')->name('login.callback');
 
-Route::get('/','FrontendController@home')->name('home');
+//main
+Route::get('/','MainController@home')->name('main.home');
 
+
+
+
+
+Route::group(['prefix'=>'/store'],function(){
 // Frontend Routes
-Route::get('/home', 'FrontendController@home');
+Route::get('/','FrontendController@home')->name('home');
+Route::get('/home', 'FrontendController@home')->name('index.home');
 Route::get('/about-us','FrontendController@aboutUs')->name('about-us');
 Route::get('/contact','FrontendController@contact')->name('contact');
 Route::post('/contact/message','MessageController@store')->name('contact.store');
@@ -90,6 +97,12 @@ Route::post('/coupon-store','CouponController@couponStore')->name('coupon-store'
 Route::get('payment', 'PayPalController@payment')->name('payment');
 Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
 Route::get('payment/success', 'PayPalController@success')->name('payment.success');
+
+
+
+
+
+});
 
 
 
