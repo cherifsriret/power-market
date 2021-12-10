@@ -134,7 +134,6 @@
                 <div class="form-group">
                     <label for="role[]" class="col-form-label">{{__('role.role')}}</label>
                     <select name="role[]" id="roles"  multiple="multiple" class="form-control">
-                        <option >{{__('user.select_roles')}}</option>
                         @foreach ($roles as $role)
                             <option value="{{$role->id}}">{{$role->display_name}}</option>
                         @endforeach
@@ -156,13 +155,16 @@
 @endsection
 @push('styles')
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 @endpush
 
 @push('scripts')
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-  <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 <script>
-        var route_prefix = "{{ url('/filemanager') }}";
+    var route_prefix = "{{ url('/filemanager') }}";
     $('#lfm').filemanager('image', {prefix: route_prefix});
+    $('#roles').selectpicker()
 </script>
 @endpush

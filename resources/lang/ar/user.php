@@ -1,9 +1,10 @@
 <?php
 return [
     'users'=>'الأعضاء',
-    'user'=>'User',
+    'user'=>'عضو',
     'create_user'=>'أضافة عضو',
     'list_users'=>'قائمة الأعضاء',
+    'title_users'=>'إدارة الاعضاء',
     'name'=>'الاسم',
     'enter_name'=>'أدخل الاسم',
     'mail'=>'البريد الالكتروني',
@@ -29,4 +30,13 @@ return [
     'owners_association_president'=>'رئيس اتحاد ملاك',
     'password'=>"كلمة المرور",
     'enter_password'=>"أدخل كلمة المرور",
+    'success_added'=>'تمت إضافة العضو بنجاح',
+    'error_added'=>'حدث خطأ أثناء إضافة العضو',
+    'success_delete'=>'تم حذف العضو بنجاح',
+    'error_delete'=>'حدث خطأ أثناء حذف العضو',
+    'update_user'=>'تحديث العضو',
+    'success_update'=>'تم تحديث العضو بنجاح',
+    'error_update'=>'حدث خطأ أثناء تحديث العضو',
+    'show_user'=>'عرض العضو',
+
 ];

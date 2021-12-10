@@ -96,7 +96,7 @@ class UsersController extends Controller
                 try {
                     $role = Role::find($role);
                 } catch (\Exception $e) {
-                    request()->session()->flash('error','Error occurred while adding user- invalid role');
+                    request()->session()->flash('error',__('user.error_added'));
                 }
                 $rolePermissions = $role->getAllPermissions()->pluck('name')->toArray();
                 $lengthPermissions = count(array_diff($rolePermissions, $userPermissions));
@@ -106,10 +106,10 @@ class UsersController extends Controller
                 }
             }
 
-            request()->session()->flash('success','Successfully added user');
+            request()->session()->flash('success',__('user.success_added'));
         }
         else{
-            request()->session()->flash('error','Error occurred while adding user');
+            request()->session()->flash('error',__('user.error_added'));
         }
         return redirect()->route('users.index');
 
@@ -135,8 +135,24 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user=User::findOrFail($id);
-        return view('backend.users.edit')->with('user',$user);
+        $user_edit=User::findOrFail($id);
+        $user_roles = $user_edit->roles->pluck('id')->toArray();
+        $user = Auth::user();
+        $authRoles = $user->roles->pluck("locked")->toArray();
+        $roles = Role::where(function ($query) use ($authRoles) {
+            in_array(1, $authRoles) ? $query :
+                $query->where("locked", 0);
+        })->get();
+        $userPermissions = $user->getAllPermissions()->pluck('name')->toArray();
+        $display_roles = [];
+        foreach ($roles as $role) {
+            $rolePermissions = $role->getAllPermissions()->pluck('name')->toArray();
+            $lengthPermissions = count(array_diff($rolePermissions, $userPermissions));
+            if ($lengthPermissions === 0) {
+                $display_roles[] = $role;
+            }
+        }
+        return view('backend.users.edit')->with('user',$user_edit)->with('roles',$display_roles)->with('user_roles',$user_roles);
     }
 
     /**
@@ -148,22 +164,91 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::findOrFail($id);
+        $userToEdit=User::findOrFail($id);
         $this->validate($request,
         [
             'name'=>'string|required|max:30',
-            'email'=>'string|required',
+            'email'=>'string|required|unique:users,id,'.$userToEdit->id,
+            'password'=>'string|nullable',
+            'governorate'=>'string|required',
+            'city'=>'string|required',
+            'region'=>'string|required',
+            'building'=>'string|required',
+            'stage'=>'string|required',
+            'apartment_number'=>'string|required',
+            'user_type'=>'required|in:tenant,owner,owners_association_president',
+            'role'=>'required',
             'status'=>'required|in:active,inactive',
-            'photo'=>'nullable|string',
+        ],[],[
+            'name'=> __('user.name'),
+            'email'=> __('user.mail'),
+            'password'=> __('user.password'),
+            'governorate'=> __('user.governorate'),
+            'city'=> __('user.city'),
+            'region'=> __('user.region'),
+            'building'=> __('user.building'),
+            'stage'=> __('user.stage'),
+            'apartment_number'=> __('user.apartment_number'),
+            'user_type'=> __('user.user_type'),
+            'status'=> __('global.status'),
         ]);
-        $data['role']='admin';
         $data=$request->all();
-        $status=$user->fill($data)->save();
+        $data['role']='admin';
+        $data['password']=$request->password==""?$userToEdit->password:Hash::make($request->password);
+        $status=$userToEdit->fill($data)->save();
+
         if($status){
-            request()->session()->flash('success','Successfully updated');
+            $authUser = Auth::user();
+            $userPermissions = $authUser->getAllPermissions()->pluck('name')->toArray();
+            $roles = $request->role;
+            $rolesToBeAssinged = array_diff($userToEdit->roles->pluck("id")->toArray(), $authUser->roles->pluck("id")->toArray());
+
+            if (in_array(1, $userToEdit->roles->pluck("locked")->toArray()) && in_array(1, $authUser->roles->pluck("locked")->toArray()) == false) {
+                request()->session()->flash('error',__('user.error_update'));
+            }
+
+            if ($rolesToBeAssinged) {
+                foreach ($rolesToBeAssinged as $role) {
+                    try {
+                        $role = Role::find($role);
+                    } catch (\Exception $e) {
+                        request()->session()->flash('error',__('user.error_update'));
+                    }
+                    $rolePermissions = $role->getAllPermissions()->pluck('name')->toArray();
+                    $lengthPermissions = count(array_diff($rolePermissions, $userPermissions));
+                    if ($lengthPermissions === 0 && in_array($role->id, $roles == true ? $roles : []) === false) {
+                        $rolesToBeAssinged = array_diff($rolesToBeAssinged, [$role->id]);
+                    }
+                }
+            }
+
+            if ($roles) {
+                foreach ($roles as $role) {
+                    try {
+                        $role = Role::find($role);
+                    } catch (\Exception $e) {
+                        request()->session()->flash('error',__('user.error_update'));
+                    }
+                    $rolePermissions = $role->getAllPermissions()->pluck('name')->toArray();
+                    $lengthPermissions = count(array_diff($rolePermissions, $userPermissions));
+
+                    if ($lengthPermissions === 0) {
+                        $rolesToBeAssinged[] = $role->id;
+                    }
+                }
+            }
+            $userToEdit->syncRoles([]);
+            if ($rolesToBeAssinged) {
+                $rolesToBeAssinged = array_unique($rolesToBeAssinged);
+                foreach ($rolesToBeAssinged as $role) {
+                    $role = Role::find($role);
+                    $userToEdit->assignRole($role);
+                }
+            }
+            request()->session()->flash('success',__('user.success_update'));
         }
         else{
-            request()->session()->flash('error','Error occured while updating');
+            request()->session()->flash('error',__('user.error_update'));
         }
         return redirect()->route('users.index');
 
@@ -180,10 +265,10 @@ class UsersController extends Controller
         $delete=User::findorFail($id);
         $status=$delete->delete();
         if($status){
-            request()->session()->flash('success','User Successfully deleted');
+            request()->session()->flash('success',__('user.success_delete'));
         }
         else{
-            request()->session()->flash('error','There is an error while deleting users');
+            request()->session()->flash('error',__('user.error_delete'));
         }
         return redirect()->route('users.index');
     }

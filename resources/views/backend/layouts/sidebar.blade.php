@@ -174,6 +174,32 @@
     </li>
     @endcan
 
+    @can('read_users')
+    <!-- Users -->
+    <hr class="sidebar-divider">
+     <!-- Heading -->
+     <div class="sidebar-heading">
+        {{__('user.users')}}
+    </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    {{-- Invitation --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userCollapse" aria-expanded="true" aria-controls="userCollapse">
+            <i class="fas fa-users"></i>
+          <span>{{__('user.users')}}</span>
+        </a>
+        <div id="userCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">{{__('user.title_users')}}:</h6>
+            <a class="collapse-item" href="{{route('users.index')}}">{{__('user.list_users')}}</a>
+            @can("create_users")
+                <a class="collapse-item" href="{{route('users.create')}}">{{__('user.create_user')}}</a>
+            @endcan
+
+          </div>
+        </div>
+    </li>
+    @endcan
     <!-- Divider -->
     <hr class="sidebar-divider">
         <!-- Heading -->
@@ -383,23 +409,6 @@
     <div class="sidebar-heading">
         General Settings
     </div>
-
-    @can('read_admins')
-    <!-- Admins -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('admins.index')}}">
-            <i class="fas fa-users"></i>
-            <span>Admins</span></a>
-    </li>
-    @endcan
-    @can('read_users')
-     <!-- Users -->
-     <li class="nav-item">
-        <a class="nav-link" href="{{route('users.index')}}">
-            <i class="fas fa-users"></i>
-            <span>Users</span></a>
-    </li>
-    @endcan
     @canany(['create_places','read_places'])
     <hr class="sidebar-divider">
      <!-- Heading -->
