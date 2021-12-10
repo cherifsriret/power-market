@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -20,7 +21,7 @@ class MainController extends Controller
 
         $this->validate($request,
         [
-            'name'=>'string|required|max:30',
+            'name'=>'string|required|max:30|unique:users',
             'email'=>'string|required|unique:users',
             'password'=>'string|required',
             'governorate'=>'string|required',
@@ -46,10 +47,15 @@ class MainController extends Controller
         $data=$request->all();
         $data['password']=Hash::make($request->password);
         $data['role']='admin';
-        $data['status']='inactive';
+        $data['status']='active';
         $status=User::create($data);
         Session::put('user',$data['email']);
         if($status){
+
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                $auth = Auth::user();
+                $request->session()->regenerate();
+            }
             request()->session()->flash('success','تم التسجيل في الموقع بنجاح, في انتظار تفعيل الحساب');
             return redirect()->route('main.home');
         }

@@ -200,6 +200,8 @@
         </div>
     </li>
     @endcan
+
+    @canany(['read_categories','read_products','read_brands','read_shippings','read_orders','read_orders','read_coupons','read_reviews'])
     <!-- Divider -->
     <hr class="sidebar-divider">
         <!-- Heading -->
@@ -326,7 +328,8 @@
     </li>
     @endcan
 
-
+@endcan
+@canany(['read_posts','read_post_categories','read_comments'])
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -402,6 +405,10 @@
         </a>
       </li>
     @endcan
+@endcan
+
+@canany(['create_places','read_places','read_settings'])
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -444,6 +451,7 @@
             <i class="fas fa-cog"></i>
             <span>Settings</span></a>
     </li>
+    @endcan
     @endcan
 
     <!-- Sidebar Toggler (Sidebar) -->
