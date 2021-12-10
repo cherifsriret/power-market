@@ -17,6 +17,6 @@ Broadcast::channel('message', function () {
     return true;
 });
 
-Broadcast::channel('chat', function () {
-    return \Illuminate\Support\Facades\Auth::check();
-});
+// Broadcast::channel('chat', function () {
+//     return \Illuminate\Support\Facades\Auth::check();
+// });
