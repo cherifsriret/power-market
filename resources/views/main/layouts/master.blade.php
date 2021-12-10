@@ -4,7 +4,7 @@
 @include('main.layouts.head')
 
 <body >
-
+         @include('main.layouts.notification')
         <!-- Navbar -->
         @include('main.layouts.navbar')
 

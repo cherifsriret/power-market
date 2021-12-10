@@ -50,11 +50,11 @@ class MainController extends Controller
         $status=User::create($data);
         Session::put('user',$data['email']);
         if($status){
-            request()->session()->flash('success','Successfully registered');
+            request()->session()->flash('success','تم التسجيل في الموقع بنجاح, في انتظار تفعيل الحساب');
             return redirect()->route('main.home');
         }
         else{
-            request()->session()->flash('error','Please try again!');
+            request()->session()->flash('error',' ! حدث خطأ في التسجيل');
             return back();
         }
     }
