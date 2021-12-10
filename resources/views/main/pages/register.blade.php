@@ -6,13 +6,14 @@
     <div class="row">
         <div class="col-md-6">
             <div class="bg-image">
-                <img src="template/images/register/sign-up.jpg" alt="">
+                <img src="{{asset('main/images/register/sign-up.jpg')}}" alt="">
             </div>
         </div>
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" class="members-form">
+                    <form action="{{route('register.submit')}}" method="POST" class="members-form">
+                        {{csrf_field()}}
                             <h2>قم بالتسجيل في موقعنا</h2>
                             <p>
                                 ما هو لوريم ايبسوم لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض
@@ -37,16 +38,18 @@
                                         <!-- Start UserName Field -->
                                         <div class="form-group">
                                             <label for="" class="control-label">اسم المستخدم</label>
-                                            <input type="text" name="username"
+                                            <input type="text" name="name"
                                                 class="form-control name-member"
                                                 placeholder=" أدخل اسم المستخدم"
                                                 required="required"
-                                                value="<?php if(isset($user)){ echo $user; } ?>"
+                                                value="{{old('name')}}"
                                                 oninvalid="this.setCustomValidity('لا يمكن أن يكون اسم المستخدم فارغًا')"
                                                 oninput="this.setCustomValidity('')" />
-                                            <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لا يمكن أن يكون اسم المستخدم فارغًا
-                                            </div>
+                                                @error('name')
+                                                    <div class="alert alert-danger mt-1">
+                                                        <i class="fas fa-info"></i> {{$message}}
+                                                    </div>
+                                                @enderror
                                         </div>
                                         <!-- End UserName Field -->
                                 </div>
@@ -55,17 +58,19 @@
                                     <div class="form-group">
                                         <label for="" class="control-label">كلمة المرور</label>
                                         <input type="password"
-                                            name="passwords"
+                                            name="password"
                                             placeholder="أدخل كلمة المرور"
                                             class="form-control password password-member" required="required"
                                             autocomplete="new-password"
-                                            value="<?php if(isset($hashPass)){ echo $hashPass; } ?>"
+                                            value="{{old('password')}}"
                                             oninvalid="this.setCustomValidity('لا يمكن أن تكون كلمة المرور فارغًا')"
                                             oninput="this.setCustomValidity('')"/>
                                         <i class="show-password fas fa-low-vision"></i>
-                                        <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لا يمكن أن تكون كلمة المرور فارغًا
+                                        @error('password')
+                                        <div class="alert alert-danger mt-1">
+                                            <i class="fas fa-info"></i> {{$message}}
                                         </div>
+                                    @enderror
                                     </div>
                                     <!-- End Password Field -->
                                 </div>
@@ -76,12 +81,14 @@
                                             <input type="email" name="email"
                                                 placeholder="أدخل البريد الالكتروني"
                                                 class="form-control email-member" required="required"
-                                                value="<?php if(isset($email)){ echo $email; } ?>"
+                                                value="{{old('email')}}"
                                                 oninvalid="this.setCustomValidity(' لا يمكن أن يكون البريد الإلكتروني فارغًا')"
                                                 oninput="this.setCustomValidity('')"/>
-                                            <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لا يمكن أن يكون البريد الإلكتروني فارغًا
-                                            </div>
+                                                @error('email')
+                                                <div class="alert alert-danger mt-1">
+                                                    <i class="fas fa-info"></i> {{$message}}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <!-- End Email Field -->
                                 </div>
@@ -92,12 +99,14 @@
                                             <input type="text" name="governorate"
                                                 placeholder="أدخل المحافظة"
                                                 class="form-control gov-member" required="required"
-                                                value="<?php if(isset($governorate)){ echo $governorate; } ?>"
+                                                value="{{old('governorate')}}"
                                                 oninvalid="this.setCustomValidity(' لايمكن ان تكون المحافظة فارغة')"
                                                 oninput="this.setCustomValidity('')"/>
-                                            <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لايمكن ان تكون المحافظة فارغة
-                                            </div>
+                                                @error('governorate')
+                                                <div class="alert alert-danger mt-1">
+                                                    <i class="fas fa-info"></i> {{$message}}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <!-- End Full Name Field -->
                                 </div>
@@ -108,12 +117,14 @@
                                                 <input type="text" name="city"
                                                     placeholder=" أدخل المدينة"
                                                     class="form-control city-member" required="required"
-                                                    value="<?php if(isset($city)){ echo $city; } ?>"
+                                                    value="{{old('city')}}"
                                                     oninvalid="this.setCustomValidity('لا يمكن أن تكون المدينة فارغة')"
                                                     oninput="this.setCustomValidity('')"/>
-                                                <div class="alert alert-danger custom-alert">
-                                                    <i class="fas fa-info"></i> لا يمكن أن تكون المدينة فارغة
-                                                </div>
+                                                    @error('city')
+                                                    <div class="alert alert-danger mt-1">
+                                                        <i class="fas fa-info"></i> {{$message}}
+                                                    </div>
+                                                @enderror
                                             </div>
                                             <!-- End city Field -->
                                 </div>
@@ -123,13 +134,15 @@
                                         <label for="" class="control-label">المنطقة</label>
                                         <input type="text" name="region"
                                             placeholder=" أدخل المنطقة "
-                                            value="<?php if(isset($region)){ echo $region; } ?>"
+                                            value="{{old('region')}}"
                                             class="form-control region-member" required="required"
                                             oninvalid="this.setCustomValidity('لا يمكن أن تكون المنطقة فارغة')"
                                             oninput="this.setCustomValidity('')"/>
-                                        <div class="alert alert-danger custom-alert">
-                                            <i class="fas fa-info"></i> لا يمكن أن تكون المنطقة فارغة
-                                        </div>
+                                            @error('region')
+                                            <div class="alert alert-danger mt-1">
+                                                <i class="fas fa-info"></i> {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <!-- End region Field -->
                                 </div>
@@ -137,16 +150,18 @@
                                         <!-- Start buildingNumber Field -->
                                         <div class="form-group">
                                             <label for="" class="control-label">رقم العمارة</label>
-                                            <input type="text" name="buildingNumber"
+                                            <input type="text" name="building"
                                                 placeholder="أدخل رقم العمارة "
                                                 class="form-control bulid-member"
-                                                value="<?php if(isset($buildingNumber)){ echo $buildingNumber; } ?>"
+                                                value="{{old('building')}}"
                                                 required="required"
                                                 oninvalid="this.setCustomValidity('لا يمكن أن يكون رقم المبنى فارغًا')"
                                                 oninput="this.setCustomValidity('')"/>
-                                            <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لا يمكن أن يكون رقم المبنى فارغًا
-                                            </div>
+                                                @error('building')
+                                                    <div class="alert alert-danger mt-1">
+                                                        <i class="fas fa-info"></i> {{$message}}
+                                                    </div>
+                                                @enderror
                                         </div>
                                         <!-- End buildingNumber Field -->
                                 </div>
@@ -154,16 +169,19 @@
                                         <!-- Start role Field -->
                                         <div class="form-group">
                                             <label for="" class="control-label">الدور</label>
-                                            <input type="text" name="role"
+                                            <input type="text" name="stage"
                                                 placeholder="أدخل رقم الدور "
                                                 class="form-control role-member"
                                                 required="required"
-                                                value="<?php if(isset($role)){ echo $role; } ?>"
+                                                value="{{old('stage')}}"
                                                 oninvalid="this.setCustomValidity('لا يمكن أن يكون الدور فارغًا')"
                                                 oninput="this.setCustomValidity('')"/>
-                                            <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لا يمكن أن يكون الدور فارغًا
-                                            </div>
+                                                @error('stage')
+                                                    <div class="alert alert-danger mt-1">
+                                                        <i class="fas fa-info"></i> {{$message}}
+                                                    </div>
+                                                @enderror
+
                                         </div>
                                         <!-- End role Field -->
                                 </div>
@@ -171,15 +189,17 @@
                                         <!-- Start apartmentNumber Field -->
                                         <div class="form-group">
                                             <label for="" class="control-label">رقم الشقة</label>
-                                            <input type="text" name="apartmentNumber"
+                                            <input type="text" name="apartment_number"
                                                 placeholder="أدخل رقم الشقة  "
                                                 class="form-control apartment-member" required="required"
-                                                value="<?php if(isset($apartmentNumber)){ echo $apartmentNumber; } ?>"
+                                                value="{{old('apartment_number')}}"
                                                 oninvalid="this.setCustomValidity('لا يمكن أن يكون رقم الشقة فارغًا')"
                                                 oninput="this.setCustomValidity('')"/>
-                                            <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لا يمكن أن يكون رقم الشقة فارغًا
-                                            </div>
+                                                @error('apartment_number')
+                                                    <div class="alert alert-danger mt-1">
+                                                        <i class="fas fa-info"></i> {{$message}}
+                                                    </div>
+                                                @enderror
                                         </div>
                                         <!-- End apartmentNumber Field -->
                                 </div>
@@ -187,34 +207,38 @@
                                         <!-- Start phoneNumber Field -->
                                         <div class="form-group">
                                             <label for="" class="control-label">رقم الهاتف</label>
-                                            <input type="text" name="phoneNumber"
+                                            <input type="text" name="phone"
                                                 placeholder="أدخل رقم الهاتف"
                                                 class="form-control phone-member" required="required"
-                                                value="<?php if(isset($phoneNumber)){ echo $phoneNumber; } ?>"
+                                                value="{{old('phone')}}"
                                                 oninvalid="this.setCustomValidity('لا يمكن ان يكون رقم الهاتف فارغا')"
                                                 oninput="this.setCustomValidity('')"/>
-                                            <div class="alert alert-danger custom-alert">
-                                                <i class="fas fa-info"></i> لا يمكن ان يكون رقم الهاتف فارغا
-                                            </div>
+                                                @error('phone')
+                                                    <div class="alert alert-danger mt-1">
+                                                        <i class="fas fa-info"></i> {{$message}}
+                                                    </div>
+                                                @enderror
                                         </div>
                                         <!-- End phoneNumber Field -->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">نوع المسجل</label>
-                                        <select name="GroupId" id="GroupId" class="form-control record-member" required="required ">
+                                        <select name="user_type" id="GroupId" class="form-control record-member" required="required ">
                                             <option value="" hidden>أختر</option>
-                                            <option value="0">مستأجر</option>
-                                            <option value="1">مالك</option>
-                                            <option value="2">رئيس اتحاد ملاك</option>
+                                            <option value="tenant">مستأجر</option>
+                                            <option value="owner">مالك</option>
+                                            <option value="owners_association_president">رئيس اتحاد ملاك</option>
                                         </select>
-                                        <div class="alert alert-danger custom-alert">
-                                            <i class="fas fa-info"></i> لا يمكن ان يكون نوع التسجيل فارغا
-                                        </div>
+                                        @error('user_type')
+                                            <div class="alert alert-danger mt-1">
+                                                <i class="fas fa-info"></i> {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <h4>اذا كنت تمتلك حساب فقم <a href="signIn.php">بتسجيل الدخول</a></h3>
+                                    <h4>اذا كنت تمتلك حساب فقم <a href="{{route("login")}}">بتسجيل الدخول</a></h3>
                                 </div>
                             </div>
                             <!-- Start Submit  Field -->

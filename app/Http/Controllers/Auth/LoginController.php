@@ -50,7 +50,7 @@ class LoginController extends Controller
         // dd($provider);
      return Socialite::driver($provider)->redirect();
     }
- 
+
     public function Callback($provider)
     {
         $userSocial =   Socialite::driver($provider)->stateless()->user();
@@ -67,7 +67,7 @@ class LoginController extends Controller
                 'provider_id'   => $userSocial->getId(),
                 'provider'      => $provider,
             ]);
-         return redirect()->route('home');
+         return redirect()->route('main.home');
         }
     }
 }

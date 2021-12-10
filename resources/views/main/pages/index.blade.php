@@ -14,7 +14,7 @@
                                     لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه
                                     وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
                                 </p>
-                                <a href="signUp.php" class="default-btn btn-bg-one">سجل معنا الان</a>
+                                <a  href="{{route("register")}}" class="default-btn btn-bg-one">سجل معنا الان</a>
                                 <a href="{{route("admin")}}" class="default-btn btn-bg-two">اللوحة الادارية</a>
                                 <a href="http://www.me-me-eg.com/InterCome" class="default-btn btn-bg-one">الوجهة</a>
                             </div>
@@ -28,7 +28,7 @@
                                     لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه
                                     وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
                                 </p>
-                                <a href="signUp.php" class="default-btn btn-bg-one">سجل معنا الان</a>
+                                <a  href="{{route("register")}}" class="default-btn btn-bg-one">سجل معنا الان</a>
                                 <a href="http://www.me-me-eg.com/InterCome/sys/index.php" class="default-btn btn-bg-two">اللوحة الادارية</a>
                                 <a href="http://www.me-me-eg.com/InterCome" class="default-btn btn-bg-one">الوجهة</a>
                             </div>
@@ -42,7 +42,7 @@
                                     لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه
                                     وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
                                 </p>
-                                <a href="signUp.php" class="default-btn btn-bg-one">سجل معنا الان</a>
+                                <a  href="{{route("register")}}" class="default-btn btn-bg-one">سجل معنا الان</a>
                                 <a href="{{route("admin")}}" class="default-btn btn-bg-two">اللوحة الادارية</a>
                                 <a href="http://www.me-me-eg.com/InterCome" class="default-btn btn-bg-one">الوجهة</a>
                             </div>

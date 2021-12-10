@@ -66,7 +66,7 @@
                 <div class="searsh-box">
                     <i class="fas fa-search"></i>
                 </div>
-                <a href="signUp.php" class="sign default-btn btn-bg-two">سجل معنا</a>
+                <a href="{{route("register")}}" class="sign default-btn btn-bg-two">سجل معنا</a>
                 <a href="{{route("admin")}}" class="sign default-btn btn-bg-one">اللوحة الادارية</a>
             </div>
         </div>
