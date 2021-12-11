@@ -282,6 +282,28 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         });
 
     });
+    Route::get('auth-user', 'AuthUserController@show');
+
+    Route::group(["prefix" => "social"], function () {
+        Route::group(['middleware' => ['permission:read_places']], function () {
+            Route::get('/', [App\Http\Controllers\Social\HomeController::class, 'index'])->name('social.read');
+            Route::apiResources([
+                '/posts' => Social\PostController::class,
+                '/posts/{post}/like' =>Social\PostLikeController::class,
+                '/posts/{post}/comment' => Social\PostCommentController::class,
+                '/users' =>Social\UserController::class,
+                '/users/{user}/posts' => Social\UserPostController::class,
+                '/friend-request' => Social\FriendRequestController::class,
+                '/friend-request-response' =>Social\FriendRequestResponseController::class,
+                '/user-images' =>Social\UserImageController::class,
+
+                ]);
+
+        });
+
+    });
+
+
 
 });
 

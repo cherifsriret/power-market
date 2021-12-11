@@ -21,15 +21,9 @@ try {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
@@ -37,27 +31,23 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-window.axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-};
 
-import Echo from 'laravel-echo';
-import Larasocket from 'larasocket-js';
 
-window.Pusher = require('pusher-js');
+
+
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
+
+// import Echo from 'laravel-echo';
+
+// window.Pusher = require('pusher-js');
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true,
-//     authEndpoint : baseURL+'/broadcasting/auth',
-//     encrypted: true
+//     forceTLS: true
 // });
-
-
-window.Echo = new Echo({
-    broadcaster: Larasocket,
-    token: process.env.MIX_LARASOCKET_TOKEN,
-});

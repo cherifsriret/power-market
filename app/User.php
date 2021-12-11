@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Models\ChatPost;
+use App\Models\UserImage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasRoles;
+    use Notifiable,HasRoles, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -90,5 +93,46 @@ class User extends Authenticatable
 
     public function ownMessages() {
         return $this->hasMany(Message::class,'to_user_id');
+    }
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id');
+    }
+
+    public function likedPosts()
+    {
+        return $this->belongsToMany(ChatPost::class, 'likes', 'user_id', 'post_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(ChatPost::class);
+    }
+
+
+
+    public function images()
+    {
+        return $this->hasMany(UserImage::class);
+    }
+
+    public function coverImage()
+    {
+        return $this->hasOne(UserImage::class)
+            ->orderByDesc('id')
+            ->where('location', 'cover')
+            ->withDefault(function ($userImage) {
+                $userImage->path = '/user-images/cover-default-image.png';
+            });
+    }
+
+    public function profileImage()
+    {
+        return $this->hasOne(UserImage::class)
+            ->orderByDesc('id')
+            ->where('location', 'profile')
+            ->withDefault(function ($userImage) {
+                $userImage->path = '/user-images/profile-default-image.jpeg';
+            });
     }
 }

@@ -439,7 +439,7 @@
         </div>
     </li>
     @endcan
-    @can('read_comments')
+    {{-- @can('read_comments')
       <!-- Comments -->
       <li class="nav-item">
         <a class="nav-link" href="{{route('comment.index')}}">
@@ -447,7 +447,7 @@
             <span>Comments</span>
         </a>
       </li>
-    @endcan
+    @endcan --}}
 @endcan
 
 @canany(['create_places','read_places','read_settings'])

@@ -21,8 +21,8 @@ class UsersTableSeeder extends Seeder
         $user->email =  'admin@gmail.com';
         $user->status =  'active';
         $user->password =  \Illuminate\Support\Facades\Hash::make('Admin123*');
-         $user->role =  'admin';
-         $user->assignRole('super_admin');
+        $user->role =  'admin';
+        $user->assignRole('super_admin');
         $user->save();
 
          //super admin
