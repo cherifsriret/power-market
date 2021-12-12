@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\ChatMessage;
 use App\Models\ChatPost;
 use App\Models\UserImage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -87,12 +88,12 @@ class User extends Authenticatable
     }
 
 
-    public function sentMessages() {
-        return $this->hasMany(Message::class,'from_user_id');
+    public function messages() {
+        return $this->hasMany(ChatMessage::class,'from_user_id');
     }
 
     public function ownMessages() {
-        return $this->hasMany(Message::class,'to_user_id');
+        return $this->hasMany(ChatMessage::class,'to_user_id');
     }
     public function friends()
     {

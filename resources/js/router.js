@@ -10,11 +10,11 @@ export default new VueRouter({
 
     routes: [
         {
-            path: '/admin/social/', name: 'home', component: NewsFeed,
+            path: '/InterCome/power-market/admin/social/', name: 'home', component: NewsFeed,
             meta: { title: 'social Media' }
           },
         {
-            path: '/admin/my-profil/users/:userId', name: 'user.show', component: UserShow,
+            path: '/InterCome/power-market/admin/my-profil/users/:userId', name: 'user.show', component: UserShow,
             meta: {title: 'Profile'}
         },
      ]

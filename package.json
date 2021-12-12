@@ -27,6 +27,9 @@
         "vuex": "^3.5.1"
     },
     "dependencies": {
-        "dropzone": "^5.7.2"
+        "dropzone": "^5.7.2",
+        "laravel-echo": "^1.11.3",
+        "pusher-js": "^7.0.3",
+        "vue-chat-scroll": "^1.4.0"
     }
 }

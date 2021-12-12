@@ -4,6 +4,7 @@
 /public/css/app.css
 /storage/*.key
 /vendor
+.env
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
@@ -16,14 +17,12 @@ yarn-error.log
 # ignore mix generated files
 /public/assets
 /public/assets/*
-/public/css
-/public/css/*
-/public/js
-/public/js/*
+!/public/css/app.css
 /public/plugins
 /public/plugins/*
 /public/mix-manifest.json
 !/public/js/custom.js
+!/public/js/app.js
 # END of ignore mix generated files
 .DS_Store
 /resources/.DS_Store

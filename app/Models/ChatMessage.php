@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ class ChatMessage extends Model
         'message'
     ];
 
-    public function fromUser() {
+    public function user() {
         return $this->belongsTo(User::class,'from_user_id');
     }
 

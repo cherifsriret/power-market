@@ -27,6 +27,9 @@
             <!-- Begin Page Content -->
             @yield('main-content')
             <!-- /.container-fluid -->
+            <div class="container">
+                <chat-component :user="{{ auth()->user() }}"></chat-component>
+            </div>
         </div>
 
       </div>

@@ -37,7 +37,7 @@ const actions = {
     fetchUser({commit, dispatch}, userId) {
         commit('setUserStatus', 'loading');
 
-        axios.get('/admin/social/users/' + userId)
+        axios.get('/InterCome/power-market/admin/social/users/' + userId)
             .then(res => {
                 commit('setUser', res.data);
                 commit('setUserStatus', 'success');
@@ -51,7 +51,7 @@ const actions = {
             return;
         }
 
-        axios.post('/admin/social/friend-request', { 'friend_id': friendId })
+        axios.post('/InterCome/power-market/admin/social/friend-request', { 'friend_id': friendId })
             .then(res => {
                 commit('setUserFriendship', res.data);
             })
@@ -59,7 +59,7 @@ const actions = {
             });
     },
     acceptFriendRequest({commit, state}, userId) {
-        axios.post('/admin/social/friend-request-response', { 'user_id': userId, 'status': 1 })
+        axios.post('/InterCome/power-market/admin/social/friend-request-response', { 'user_id': userId, 'status': 1 })
             .then(res => {
                 commit('setUserFriendship', res.data);
             })
@@ -67,7 +67,7 @@ const actions = {
             });
     },
     ignoreFriendRequest({commit, state}, userId) {
-        axios.delete('/admin/social/friend-request-response/delete', { data: { 'user_id': userId }})
+        axios.delete('/InterCome/power-market/admin/social/friend-request-response/delete', { data: { 'user_id': userId }})
             .then(res => {
                 commit('setUserFriendship', null);
             })
