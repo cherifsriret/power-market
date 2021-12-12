@@ -291,7 +291,7 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
                 '/posts' => Social\PostController::class,
                 '/posts/{post}/like' =>Social\PostLikeController::class,
                 '/posts/{post}/comment' => Social\PostCommentController::class,
-                '/users' =>Social\UserController::class,
+                // '/users' =>Social\UserController::class,
                 '/users/{user}/posts' => Social\UserPostController::class,
                 '/friend-request' => Social\FriendRequestController::class,
                 '/friend-request-response' =>Social\FriendRequestResponseController::class,
