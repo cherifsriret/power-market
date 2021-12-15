@@ -23,4 +23,5 @@ return [
 'operation_canceled'=>'تم الغاء العملية.',
 'activate'=>'تفعيل',
 'disactivate'=>'الغاء التفعيل',
+'social_media'=>'منتدى المدينة',
 ];

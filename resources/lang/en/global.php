@@ -17,5 +17,6 @@ return [
 'services'=>'Services',
 'your_account_is_not_yet_activated'=>'Your account is not activated yet, please wait until it is activated to use all the services of the platform.',
 'dashboard'=>'Dashboard',
+'social_media'=>'city ​​forum',
 
 ];

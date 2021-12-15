@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('social.read')}}">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
       </div>
@@ -17,6 +17,12 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>{{__('global.dashboard')}}</span></a>
     </li>
+     <!-- Nav Item - Dashboard -->
+     <li class="nav-item active">
+        <a class="nav-link" href="{{route('social.read')}}">
+            <i class="fas fa-comments"></i>
+          <span>{{__('global.social_media')}}</span></a>
+      </li>
 
     @can('read_roles')
     <!-- Roles -->
