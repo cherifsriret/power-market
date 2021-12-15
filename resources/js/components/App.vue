@@ -1,6 +1,6 @@
 <template>
-    <div class="ي-flex" v-if="authUser">
-        <div class="ي-flex overflow-y-hidden flex-1">
+    <div class="d-flex" v-if="authUser">
+        <div class="d-flex overflow-y-hidden flex-1">
 
             <div class="overflow-x-hidden w-100">
                 <router-view :key="$route.fullPath"></router-view>

@@ -66566,8 +66566,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.authUser
-    ? _c("div", { staticClass: "ي-flex" }, [
-        _c("div", { staticClass: "ي-flex overflow-y-hidden flex-1" }, [
+    ? _c("div", { staticClass: "d-flex" }, [
+        _c("div", { staticClass: "d-flex overflow-y-hidden flex-1" }, [
           _c(
             "div",
             { staticClass: "overflow-x-hidden w-100" },
