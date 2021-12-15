@@ -34,6 +34,7 @@
 
       </div>
       <!-- End of Main Content -->
+      @include('backend.layouts.chat-room')
       @include('backend.layouts.footer')
 
 

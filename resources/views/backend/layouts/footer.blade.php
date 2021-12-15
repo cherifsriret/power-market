@@ -41,45 +41,22 @@
   </div>
 
   {{-- Begin Chat Componenet --}}
-  <a class="chat-btn-principal rounded" href="javascript:void(0)" onclick="$('.chat-box-principal').toggle()">
-    <i class="fas fa-angle-up"></i>
+  <a class="chat-btn-principal " href="javascript:void(0)" onclick="$('.chat-box-principal').toggle()">
+    <i class="fas fas fa-comment"></i>
   </a>
 
   <div class="chat-box-principal">
-  <div class="row">
 
-    <div class="col-8">
-        <div class="card card-default">
-            <div class="card-header">Messages</div>
-            <div class="card-body p-0">
-                <ul class="list-unstyled" id="chat-list-msg" style="height:300px; overflow-y:scroll" >
-                </ul>
-            </div>
-
-            <input
-                id="chat_sent_msg_input"
-                type="text"
-                name="message"
-                placeholder="Enter your message..."
-                class="form-control">
-                <button type="button" onclick="sendChatMessage()">Send</button>
+    <div class="main">
+        <div class="px-2 scroll" id="chat-list-msg">
         </div>
+        <nav class="navbar bg-white navbar-expand-sm d-flex justify-content-between"> <input type="text" name="text" class="form-control msg-text"  id="chat_sent_msg_input" placeholder="Enter your message...">
+            <button type="button" class="icondiv btn d-flex justify-content-end align-content-center text-center ml-2" onclick="sendChatMessage()">  <i class="fa fa-arrow-circle-left icon2"></i> </button>
+        </nav>
     </div>
 
-     <div class="col-4">
-         <div class="card card-default">
-             <div class="card-header">Active Users</div>
-             <div class="card-body">
-                 <ul>
-                     <li class="py-2">
-                        user.name
-                     </li>
-                 </ul>
-             </div>
-         </div>
-     </div>
 
-</div>
+
 </div>
 
 {{-- End Chat Componenet --}}
@@ -115,7 +92,7 @@ fetchMessages();
   // Enable pusher logging - don't include this in production
   Pusher.logToConsole = true;
 
-  var pusher = new Pusher("{{env('PUSHER_APP_KEY')}}", {
+  var pusher = new Pusher("58f7bda569b69aa6e050", {
     cluster: 'eu'
   });
 
@@ -161,19 +138,36 @@ function fetchMessages() {
             },
         })
             .done(function(resp) {
-                //reload messages
-                console.log(resp);
                 $('#chat-list-msg').html('');
 
                 let msg = ``;
 
                 resp.map((e,i)=>{
-                    msg +=
-                    `<li class="p-2" >
-                           <strong>${e.user.name}</strong>
-                           ${e.message}
-                       </li>`
+                    console.log(e.user.id == "{{Auth::user()->id}}");
+                    if(e.user.id == "{{Auth::user()->id}}")
+                    {
+                        msg +=
+                    ` <div class="d-flex align-items-center">
+                        <div class="text-left pr-1"><img src="{{asset('user-images/profile-default-image.jpeg')}}" width="30" class="img1" /></div>
+                        <div class="pr-2 pl-1"> <span class="name">${e.user.name}</span>
+                            <p class="msg">${e.message}</p>
+                        </div>
+                    </div>`
+                    }
+                    else
+                    {
+                        msg +=  `<div class="d-flex align-items-center text-right justify-content-end ">
+                                        <div class="pr-2"> <span class="name">${e.user.name}</span>
+                                            <p class="msg">${e.message}</p>
+                                        </div>
+                                        <div><img src="{{asset('user-images/profile-default-image.jpeg')}}" width="30" class="img1" /></div>
+                                    </div>`
+                    }
+
                 });
+
+
+
 
                 $('#chat-list-msg').html(msg);
                 var element = document.getElementById('chat-list-msg');

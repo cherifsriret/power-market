@@ -11223,13 +11223,13 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .chat-box-principal{
-        width: 700px;
+        width: 500px;
         background-color: #fff;
         text-align: center;
         border-radius: 5px;
         position: fixed;
-        bottom: 1rem;
-        right: 3rem;
+        bottom: 2.6rem;
+        right: 4rem;
         margin: 20px auto;
         z-index: 10001;
         display: none;
@@ -11242,7 +11242,22 @@ body.sidebar-toggled footer.sticky-footer {
         width: 2.75rem;
         height: 2.75rem;
         text-align: center;
-        color: #fff;
-        background: rgba(90, 92, 105, 0.5);
+        background: rgb(7 11 59);
         line-height: 46px;
+        border-radius: 50px;
     }
+
+    @media (max-width: 576px) {
+        .chat-box-principal{
+            width: 350px;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 2.6rem;
+            right: 4rem;
+            margin: 20px auto;
+            z-index: 10001;
+            display: none;
+        }
+      }

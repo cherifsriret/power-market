@@ -22,7 +22,7 @@ class ChatController extends Controller
             return $q->whereHas('user',function($user) use($building_id) {
                 return $user->where('building_id',$building_id);
             });
-        })->with('user')->get();
+        })->with('user')->orderBy('created_at')->get();
     }
 
     public function sendMessage(Request $request)
@@ -30,8 +30,7 @@ class ChatController extends Controller
     	$chat = auth()->user()->messages()->create([
             'message' => $request->message
         ]);
-
-    	broadcast(new EventsChatMessage("test"))->toOthers();
+    	broadcast(new EventsChatMessage("test"));
 
     	return ['status' => 'success'];
     }
