@@ -2028,7 +2028,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchMessages: function fetchMessages() {
       var _this = this;
 
-      axios.get("http://localhost:8000" + '/admin/social/messages').then(function (response) {
+      axios.get('/InterCome/power-market/admin/social/messages').then(function (response) {
         _this.messages = response.data;
       });
     },
@@ -2037,7 +2037,7 @@ __webpack_require__.r(__webpack_exports__);
         user: this.user,
         message: this.newMessage
       });
-      axios.post("http://localhost:8000" + '/admin/social/messages', {
+      axios.post('/InterCome/power-market/admin/social/messages', {
         message: this.newMessage
       });
       this.newMessage = '';
@@ -2142,7 +2142,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return {
         paramName: 'image',
-        url: "http://localhost:8000" + '/admin/social/posts',
+        url: '/InterCome/power-market/admin/social/posts',
         acceptedFiles: 'image/*',
         clickable: '.dz-clickable',
         autoProcessQueue: false,
@@ -84625,7 +84625,7 @@ var actions = {
     var commit = _ref.commit,
         state = _ref.state;
     commit('setPostsStatus', 'loading');
-    axios.get("http://localhost:8000" + '/admin/social/posts').then(function (res) {
+    axios.get('/InterCome/power-market/admin/social/posts').then(function (res) {
       commit('setPosts', res.data);
       commit('setPostsStatus', 'success');
     })["catch"](function (error) {
@@ -84647,7 +84647,7 @@ var actions = {
     var commit = _ref3.commit,
         state = _ref3.state;
     commit('setPostsStatus', 'loading');
-    axios.post("http://localhost:8000" + '/admin/social/posts', {
+    axios.post('/InterCome/power-market/admin/social/posts', {
       body: state.postMessage
     }).then(function (res) {
       commit('pushPost', res.data);
@@ -84658,7 +84658,7 @@ var actions = {
   likePost: function likePost(_ref4, data) {
     var commit = _ref4.commit,
         state = _ref4.state;
-    axios.post("http://localhost:8000" + '/admin/social/posts/' + data.postId + '/like').then(function (res) {
+    axios.post('/InterCome/power-market/admin/social/posts/' + data.postId + '/like').then(function (res) {
       commit('pushLikes', {
         likes: res.data,
         postKey: data.postKey
@@ -84668,7 +84668,7 @@ var actions = {
   commentPost: function commentPost(_ref5, data) {
     var commit = _ref5.commit,
         state = _ref5.state;
-    axios.post("http://localhost:8000" + '/admin/social/posts/' + data.postId + '/comment', {
+    axios.post('/InterCome/power-market/admin/social/posts/' + data.postId + '/comment', {
       body: data.body
     }).then(function (res) {
       commit('pushComments', {
@@ -84752,7 +84752,7 @@ var actions = {
     var commit = _ref.commit,
         dispatch = _ref.dispatch;
     commit('setUserStatus', 'loading');
-    axios.get("http://localhost:8000" + '/admin/social/users/' + userId).then(function (res) {
+    axios.get('/InterCome/power-market/admin/social/users/' + userId).then(function (res) {
       commit('setUser', res.data);
       commit('setUserStatus', 'success');
     })["catch"](function (error) {
@@ -84767,7 +84767,7 @@ var actions = {
       return;
     }
 
-    axios.post("http://localhost:8000" + '/admin/social/friend-request', {
+    axios.post('/InterCome/power-market/admin/social/friend-request', {
       'friend_id': friendId
     }).then(function (res) {
       commit('setUserFriendship', res.data);
@@ -84776,7 +84776,7 @@ var actions = {
   acceptFriendRequest: function acceptFriendRequest(_ref3, userId) {
     var commit = _ref3.commit,
         state = _ref3.state;
-    axios.post("http://localhost:8000" + '/admin/social/friend-request-response', {
+    axios.post('/InterCome/power-market/admin/social/friend-request-response', {
       'user_id': userId,
       'status': 1
     }).then(function (res) {
@@ -84786,7 +84786,7 @@ var actions = {
   ignoreFriendRequest: function ignoreFriendRequest(_ref4, userId) {
     var commit = _ref4.commit,
         state = _ref4.state;
-    axios["delete"]("http://localhost:8000" + '/admin/social/friend-request-response/delete', {
+    axios["delete"]('/InterCome/power-market/admin/social/friend-request-response/delete', {
       data: {
         'user_id': userId
       }
@@ -84876,7 +84876,7 @@ var actions = {
   fetchAuthUser: function fetchAuthUser(_ref) {
     var commit = _ref.commit,
         state = _ref.state;
-    axios.get("http://localhost:8000" + '/admin/auth-user').then(function (res) {
+    axios.get('/InterCome/power-market/admin/auth-user').then(function (res) {
       commit('setAuthUser', res.data);
     })["catch"](function (error) {
       console.log('Unable to fetch auth user');

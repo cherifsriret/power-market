@@ -79,7 +79,7 @@
             settings() {
                 return {
                     paramName: 'image',
-                    url: process.env.MIX_APP_URL+'/admin/social/posts',
+                    url: '/InterCome/power-market/admin/social/posts',
                     acceptedFiles: 'image/*',
                     clickable: '.dz-clickable',
                     autoProcessQueue: false,

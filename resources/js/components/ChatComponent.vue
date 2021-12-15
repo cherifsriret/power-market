@@ -69,7 +69,7 @@ let self=this;
         },
         methods: {
             fetchMessages() {
-                axios.get(process.env.MIX_APP_URL+'/admin/social/messages').then(response => {
+                axios.get('/InterCome/power-market/admin/social/messages').then(response => {
                     this.messages = response.data;
                 })
             },
@@ -78,7 +78,7 @@ let self=this;
                     user: this.user,
                     message: this.newMessage
                 });
-                axios.post(process.env.MIX_APP_URL+'/admin/social/messages', {message: this.newMessage});
+                axios.post('/InterCome/power-market/admin/social/messages', {message: this.newMessage});
                 this.newMessage = '';
             },
         }

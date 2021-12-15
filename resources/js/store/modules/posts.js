@@ -22,7 +22,7 @@ const actions = {
     fetchNewsPosts({commit, state}) {
         commit('setPostsStatus', 'loading');
 
-        axios.get(process.env.MIX_APP_URL+'/admin/social/posts')
+        axios.get('/InterCome/power-market/admin/social/posts')
             .then(res => {
                 commit('setPosts', res.data);
                 commit('setPostsStatus', 'success');
@@ -46,7 +46,7 @@ const actions = {
     postMessage({commit, state}) {
         commit('setPostsStatus', 'loading');
 
-        axios.post(process.env.MIX_APP_URL+'/admin/social/posts', { body: state.postMessage })
+        axios.post('/InterCome/power-market/admin/social/posts', { body: state.postMessage })
             .then(res => {
                 commit('pushPost', res.data);
                 commit('setPostsStatus', 'success');
@@ -56,7 +56,7 @@ const actions = {
             });
     },
     likePost({commit, state}, data) {
-        axios.post(process.env.MIX_APP_URL+'/admin/social/posts/' + data.postId + '/like')
+        axios.post('/InterCome/power-market/admin/social/posts/' + data.postId + '/like')
             .then(res => {
                 commit('pushLikes', { likes: res.data, postKey: data.postKey });
             })
@@ -64,7 +64,7 @@ const actions = {
             });
     },
     commentPost({commit, state}, data) {
-        axios.post(process.env.MIX_APP_URL+'/admin/social/posts/' + data.postId + '/comment', { body: data.body })
+        axios.post('/InterCome/power-market/admin/social/posts/' + data.postId + '/comment', { body: data.body })
             .then(res => {
                 commit('pushComments', { comments: res.data, postKey: data.postKey });
             })
