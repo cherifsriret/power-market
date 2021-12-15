@@ -38,5 +38,13 @@ return [
     'success_update'=>'تم تحديث العضو بنجاح',
     'error_update'=>'حدث خطأ أثناء تحديث العضو',
     'show_user'=>'عرض العضو',
-
+    'all_user'=>'كل الأعضاء',
+    'activated_user'=>'الأعضاء المفعلين',
+    'desactivated_user'=>'الأعضاء الغير مفعلين',
+    'msg_confirm_activate'=>'انت على وشك تفعيل العضو. هل ترغب في المتابعة؟',
+    'msg_confirm_disactivate'=>'انت على وشك الغاء تفعيل العضو. هل ترغب في المتابعة؟',
+    'success_activate'=>'تم تفعيل العضو بنجاح',
+    'error_activate'=>'حدث خطأ أثناء تفعيل العضو',
+    'success_disactivate'=>'تم الغاء تفعيل العضو بنجاح',
+    'error_disactivate'=>'حدث خطأ أثناء الغاء تفعيل العضو',
 ];

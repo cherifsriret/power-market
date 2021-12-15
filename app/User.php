@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role','governorate','city','region','building','stage','phone','apartment_number','user_type','photo','status','provider','provider_id',
+        'name', 'email', 'password','role','governorate','city','region','building','stage','phone','apartment_number','user_type','photo','status','provider','provider_id','building_id',
     ];
 
     /**
@@ -135,5 +135,9 @@ class User extends Authenticatable
             ->withDefault(function ($userImage) {
                 $userImage->path = '/user-images/profile-default-image.jpeg';
             });
+    }
+
+    public function building(){
+        return $this->hasOne('App\Models\Building','id','building_id');
     }
 }

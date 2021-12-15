@@ -16,6 +16,9 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         $super_admin = Role::create(['name' => 'super_admin', 'display_name' => 'Super Admin', 'locked' => 1]);
+        $tenant = Role::create(['name' => 'tenant', 'display_name' => 'مستأجر', 'locked' => 1]);
+        $owner = Role::create(['name' => 'owner', 'display_name' => 'مالك', 'locked' => 1]);
+        $owners_association_president = Role::create(['name' => 'owners_association_president', 'display_name' => 'رئيس اتحاد ملاك', 'locked' => 1]);
 
 
         //Settings
@@ -35,29 +38,7 @@ class RolePermissionSeeder extends Seeder
         $super_admin->givePermissionTo($permission_delete);
 
 
-        //Admins
-        $permission_all = Permission::create(['name' => '*_admins', 'display_name' => 'Admins']);
-        $permission_read = Permission::create(['name' => 'read_admins', 'display_name' => 'List admins']);
-        $permission_create = Permission::create(['name' => 'create_admins', 'display_name' => 'New admin']);
-        $permission_update = Permission::create(['name' => 'update_admins', 'display_name' => 'Edit user']);
-        $permission_delete = Permission::create(['name' => 'delete_admins', 'display_name' => 'Delete user']);
-        $super_admin->givePermissionTo($permission_all);
-        $super_admin->givePermissionTo($permission_read);
-        $super_admin->givePermissionTo($permission_create);
-        $super_admin->givePermissionTo($permission_update);
-        $super_admin->givePermissionTo($permission_delete);
 
-        //Users
-        $permission_all = Permission::create(['name' => '*_users', 'display_name' => 'Users']);
-        $permission_read = Permission::create(['name' => 'read_users', 'display_name' => 'List users']);
-        $permission_create = Permission::create(['name' => 'create_users', 'display_name' => 'New user']);
-        $permission_update = Permission::create(['name' => 'update_users', 'display_name' => 'Edit user']);
-        $permission_delete = Permission::create(['name' => 'delete_users', 'display_name' => 'Delete user']);
-        $super_admin->givePermissionTo($permission_all);
-        $super_admin->givePermissionTo($permission_read);
-        $super_admin->givePermissionTo($permission_create);
-        $super_admin->givePermissionTo($permission_update);
-        $super_admin->givePermissionTo($permission_delete);
 
 
         //Coupons
@@ -201,6 +182,7 @@ class RolePermissionSeeder extends Seeder
         $super_admin->givePermissionTo($permission_update);
         $super_admin->givePermissionTo($permission_delete);
 
+
         //Comments
         $permission_all = Permission::create(['name' => '*_comments', 'display_name' => 'Comments']);
         $permission_read = Permission::create(['name' => 'read_comments', 'display_name' => 'List comments']);
@@ -214,6 +196,35 @@ class RolePermissionSeeder extends Seeder
         $super_admin->givePermissionTo($permission_create);
         $super_admin->givePermissionTo($permission_update);
         $super_admin->givePermissionTo($permission_delete);
+
+       ///////
+
+       //Users
+        $permission_all = Permission::create(['name' => '*_users', 'display_name' => 'Users']);
+        $permission_read = Permission::create(['name' => 'read_users', 'display_name' => 'List users']);
+        $permission_our = Permission::create(['name' => 'our_users', 'display_name' => 'Our Users']);
+        $permission_create = Permission::create(['name' => 'create_users', 'display_name' => 'New user']);
+        $permission_update = Permission::create(['name' => 'update_users', 'display_name' => 'Edit user']);
+        $permission_delete = Permission::create(['name' => 'delete_users', 'display_name' => 'Delete user']);
+        $permission_activate = Permission::create(['name' => 'activate_users', 'display_name' => 'Activate user']);
+        $permission_disactivate = Permission::create(['name' => 'disactivate_users', 'display_name' => 'Disactivate user']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_our);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+        $super_admin->givePermissionTo($permission_activate);
+        $super_admin->givePermissionTo($permission_disactivate);
+
+        $owners_association_president->givePermissionTo($permission_our);
+        $owners_association_president->givePermissionTo($permission_create);
+        $owners_association_president->givePermissionTo($permission_update);
+        $owners_association_president->givePermissionTo($permission_delete);
+        $owners_association_president->givePermissionTo($permission_activate);
+        $owners_association_president->givePermissionTo($permission_disactivate);
+
+
 
         //Invitations
         $permission_all = Permission::create(['name' => '*_invitations', 'display_name' => 'Invitations']);
@@ -229,8 +240,159 @@ class RolePermissionSeeder extends Seeder
         $super_admin->givePermissionTo($permission_update);
         $super_admin->givePermissionTo($permission_delete);
 
+        $owners_association_president->givePermissionTo($permission_our);
+        $owners_association_president->givePermissionTo($permission_create);
+        $owners_association_president->givePermissionTo($permission_update);
+        $owners_association_president->givePermissionTo($permission_delete);
+
+        $tenant->givePermissionTo($permission_our);
+        $tenant->givePermissionTo($permission_create);
+        $tenant->givePermissionTo($permission_update);
+        $tenant->givePermissionTo($permission_delete);
+
+        $owner->givePermissionTo($permission_our);
+        $owner->givePermissionTo($permission_create);
+        $owner->givePermissionTo($permission_update);
+        $owner->givePermissionTo($permission_delete);
+
+        //Emergency Numbers
+        $permission_all = Permission::create(['name' => '*_emergency_numbers', 'display_name' => 'Emergency Numbers']);
+        $permission_read = Permission::create(['name' => 'read_emergency_numbers', 'display_name' => 'All emergency numbers']);
+        $permission_create = Permission::create(['name' => 'create_emergency_numbers', 'display_name' => 'New emergency number']);
+        $permission_update = Permission::create(['name' => 'update_emergency_numbers', 'display_name' => 'Edit emergency number']);
+        $permission_delete = Permission::create(['name' => 'delete_emergency_numbers', 'display_name' => 'Delete emergency number']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+
+        $owners_association_president->givePermissionTo($permission_read);
+        $tenant->givePermissionTo($permission_read);
+        $owner->givePermissionTo($permission_read);
 
 
+        //Cleaning companies
+        $permission_all = Permission::create(['name' => '*_cleaning_companies', 'display_name' => 'Cleaning companies']);
+        $permission_read = Permission::create(['name' => 'read_cleaning_companies', 'display_name' => 'All cleaning companies']);
+        $permission_create = Permission::create(['name' => 'create_cleaning_companies', 'display_name' => 'New cleaning company']);
+        $permission_update = Permission::create(['name' => 'update_cleaning_companies', 'display_name' => 'Edit cleaning company']);
+        $permission_delete = Permission::create(['name' => 'delete_cleaning_companies', 'display_name' => 'Delete cleaning company']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+
+        $owners_association_president->givePermissionTo($permission_read);
+        $tenant->givePermissionTo($permission_read);
+        $owner->givePermissionTo($permission_read);
+
+
+        //Maintenance companies
+        $permission_all = Permission::create(['name' => '*_maintenance_companies', 'display_name' => 'Maintenance companies']);
+        $permission_read = Permission::create(['name' => 'read_maintenance_companies', 'display_name' => 'All maintenance companies']);
+        $permission_create = Permission::create(['name' => 'create_maintenance_companies', 'display_name' => 'New maintenance company']);
+        $permission_update = Permission::create(['name' => 'update_maintenance_companies', 'display_name' => 'Edit maintenance company']);
+        $permission_delete = Permission::create(['name' => 'delete_maintenance_companies', 'display_name' => 'Delete maintenance company']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+
+        $owners_association_president->givePermissionTo($permission_read);
+        $tenant->givePermissionTo($permission_read);
+        $owner->givePermissionTo($permission_read);
+
+        //Maps
+        $permission_all = Permission::create(['name' => '*_maps', 'display_name' => 'Maps']);
+        $permission_read = Permission::create(['name' => 'read_maps', 'display_name' => 'Maps']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+
+
+        $owners_association_president->givePermissionTo($permission_read);
+        $tenant->givePermissionTo($permission_read);
+        $owner->givePermissionTo($permission_read);
+        //Static Complaints
+        $permission_all = Permission::create(['name' => '*_static_complaints', 'display_name' => 'Static Complaints']);
+        $permission_read = Permission::create(['name' => 'read_static_complaints', 'display_name' => 'All static complaints']);
+        $permission_our = Permission::create(['name' => 'our_static_complaints', 'display_name' => 'Our static complaints']);
+        $permission_customers = Permission::create(['name' => 'customers_static_complaints', 'display_name' => 'Customers static complaints']);
+        $permission_create = Permission::create(['name' => 'create_static_complaints', 'display_name' => 'New static complaint']);
+        $permission_update = Permission::create(['name' => 'update_static_complaints', 'display_name' => 'Edit static complaint']);
+        $permission_delete = Permission::create(['name' => 'delete_static_complaints', 'display_name' => 'Delete static complaint']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_customers);
+        $super_admin->givePermissionTo($permission_our);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+
+        $owners_association_president->givePermissionTo($permission_our);
+        $owners_association_president->givePermissionTo($permission_create);
+        $owners_association_president->givePermissionTo($permission_update);
+        $owners_association_president->givePermissionTo($permission_delete);
+
+        $tenant->givePermissionTo($permission_our);
+        $tenant->givePermissionTo($permission_create);
+        $tenant->givePermissionTo($permission_update);
+        $tenant->givePermissionTo($permission_delete);
+
+        $owner->givePermissionTo($permission_our);
+        $owner->givePermissionTo($permission_create);
+        $owner->givePermissionTo($permission_update);
+        $owner->givePermissionTo($permission_delete);
+
+
+        //Places
+        $permission_all = Permission::create(['name' => '*_places', 'display_name' => 'Places']);
+        $permission_read = Permission::create(['name' => 'read_places', 'display_name' => 'All Places']);
+        $permission_create = Permission::create(['name' => 'create_places', 'display_name' => 'New Place']);
+        $permission_update = Permission::create(['name' => 'update_places', 'display_name' => 'Edit Place']);
+        $permission_delete = Permission::create(['name' => 'delete_places', 'display_name' => 'Delete Place']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+
+        $owners_association_president->givePermissionTo($permission_read);
+        $tenant->givePermissionTo($permission_read);
+        $owner->givePermissionTo($permission_read);
+
+
+        //Meetings
+        $permission_all = Permission::create(['name' => '*_meetings', 'display_name' => 'Meetings']);
+        $permission_our = Permission::create(['name' => 'our_meetings', 'display_name' => 'Our Meetings']);
+        $permission_read = Permission::create(['name' => 'read_meetings', 'display_name' => 'All Meetings']);
+        $permission_create = Permission::create(['name' => 'create_meetings', 'display_name' => 'New Meeting']);
+        $permission_update = Permission::create(['name' => 'update_meetings', 'display_name' => 'Edit Meeting']);
+        $permission_delete = Permission::create(['name' => 'delete_meetings', 'display_name' => 'Delete Meeting']);
+        $super_admin->givePermissionTo($permission_all);
+        $super_admin->givePermissionTo($permission_read);
+        $super_admin->givePermissionTo($permission_our);
+        $super_admin->givePermissionTo($permission_create);
+        $super_admin->givePermissionTo($permission_update);
+        $super_admin->givePermissionTo($permission_delete);
+
+
+        $owners_association_president->givePermissionTo($permission_our);
+        $owners_association_president->givePermissionTo($permission_create);
+        $owners_association_president->givePermissionTo($permission_update);
+        $owners_association_president->givePermissionTo($permission_delete);
+
+        $tenant->givePermissionTo($permission_our);
+        $tenant->givePermissionTo($permission_create);
+        $tenant->givePermissionTo($permission_update);
+        $tenant->givePermissionTo($permission_delete);
+
+        $owner->givePermissionTo($permission_our);
+        $owner->givePermissionTo($permission_create);
+        $owner->givePermissionTo($permission_update);
+        $owner->givePermissionTo($permission_delete);
 
     }
 }

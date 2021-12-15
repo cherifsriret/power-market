@@ -113,10 +113,34 @@ Route::get('payment/success', 'PayPalController@success')->name('payment.success
 Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('/','AdminController@index')->name('admin');
     Route::get('/file-manager','AdminController@fileManager')->name('file-manager');
-    // user route
-    Route::resource('users','UsersController');
-    // admin route
-    Route::resource('admins','AdminsController');
+    //Users
+    Route::group(["prefix" => "users"], function () {
+    Route::group(['middleware' => ['permission:read_users|our_users']], function () {
+        Route::get('/', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index');
+    });
+
+    Route::group(['middleware' => ['permission:activate_users','is_active']], function () {
+        Route::get('/desactivated', [App\Http\Controllers\UsersController::class, 'desactivated'])->name('users.desactivated');
+        Route::delete('activate/{user}', [App\Http\Controllers\UsersController::class, 'activate'])->name('users.activate');
+    });
+    Route::group(['middleware' => ['permission:disactivate_users','is_active']], function () {
+        Route::get('/activated', [App\Http\Controllers\UsersController::class, 'activated'])->name('users.activated');
+        Route::delete('disactivate/{user}', [App\Http\Controllers\UsersController::class, 'disactivate'])->name('users.disactivate');
+    });
+
+    Route::group(['middleware' => ['permission:create_users','is_active']], function () {
+        Route::get('/create', [App\Http\Controllers\UsersController::class, 'create'])->name('users.create');
+        Route::post('/store', [App\Http\Controllers\UsersController::class, 'store'])->name('users.store');
+    });
+    Route::group(['middleware' => ['permission:update_users','is_active']], function () {
+        Route::get('/{user}/edit', [App\Http\Controllers\UsersController::class, 'edit'])->name('users.edit');
+        Route::patch('/{user}', [App\Http\Controllers\UsersController::class, 'update'])->name('users.update');
+    });
+    Route::group(['middleware' => ['permission:delete_users','is_active']], function () {
+        Route::delete('delete/{user}', [App\Http\Controllers\UsersController::class, 'destroy'])->name('users.destroy');
+    });
+});
+
     // role route
     Route::resource('roles','RoleController');
     // Banner
@@ -162,41 +186,41 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
 
     //invitations
     Route::group(["prefix" => "invitations"], function () {
-        Route::group(['middleware' => ['permission:read_invitations']], function () {
+        Route::group(['middleware' => ['permission:read_invitations','is_active']], function () {
             Route::get('/', [App\Http\Controllers\InvitationController::class, 'index'])->name('invitations.read');
 
         });
-        Route::group(['middleware' => ['permission:our_invitations']], function () {
+        Route::group(['middleware' => ['permission:our_invitations','is_active']], function () {
             Route::get('/our_invitations', [App\Http\Controllers\InvitationController::class, 'our_invitation'])->name('invitations.read.our');
             Route::get('/{invitation}/show', [App\Http\Controllers\InvitationController::class, 'show'])->name('invitations.show');
         });
-        Route::group(['middleware' => ['permission:create_invitations']], function () {
+        Route::group(['middleware' => ['permission:create_invitations','is_active']], function () {
             Route::get('/create', [App\Http\Controllers\InvitationController::class, 'create'])->name('invitations.create');
             Route::post('/store', [App\Http\Controllers\InvitationController::class, 'store'])->name('invitations.store');
         });
-        Route::group(['middleware' => ['permission:update_invitations']], function () {
+        Route::group(['middleware' => ['permission:update_invitations','is_active']], function () {
             Route::get('/{invitation}/edit', [App\Http\Controllers\InvitationController::class, 'edit'])->name('invitations.edit');
             Route::patch('/{invitation}', [App\Http\Controllers\InvitationController::class, 'update'])->name('invitations.update');
         });
-        Route::group(['middleware' => ['permission:delete_invitations']], function () {
+        Route::group(['middleware' => ['permission:delete_invitations','is_active']], function () {
             Route::delete('delete/{invitation}', [App\Http\Controllers\InvitationController::class, 'destroy'])->name('invitations.destroy');
         });
     });
 
     //Meetings
     Route::group(["prefix" => "meetings"], function () {
-        Route::group(['middleware' => ['permission:read_meetings']], function () {
+        Route::group(['middleware' => ['permission:read_meetings|our_meetings','is_active']], function () {
             Route::get('/', [App\Http\Controllers\MeetingController::class, 'index'])->name('meetings.read');
         });
-        Route::group(['middleware' => ['permission:create_meetings']], function () {
+        Route::group(['middleware' => ['permission:create_meetings','is_active']], function () {
             Route::get('/create', [App\Http\Controllers\MeetingController::class, 'create'])->name('meetings.create');
             Route::post('/store', [App\Http\Controllers\MeetingController::class, 'store'])->name('meetings.store');
         });
-        Route::group(['middleware' => ['permission:update_meetings']], function () {
+        Route::group(['middleware' => ['permission:update_meetings','is_active']], function () {
             Route::get('/{meeting}/edit', [App\Http\Controllers\MeetingController::class, 'edit'])->name('meetings.edit');
             Route::patch('/{meeting}', [App\Http\Controllers\MeetingController::class, 'update'])->name('meetings.update');
         });
-        Route::group(['middleware' => ['permission:delete_meetings']], function () {
+        Route::group(['middleware' => ['permission:delete_meetings','is_active']], function () {
             Route::delete('delete/{meeting}', [App\Http\Controllers\MeetingController::class, 'destroy'])->name('meetings.destroy');
         });
     });
@@ -206,15 +230,15 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         Route::group(['middleware' => ['permission:read_cleaning_companies']], function () {
             Route::get('/', [App\Http\Controllers\CleaningCompanyController::class, 'index'])->name('cleaning_companies.read');
         });
-        Route::group(['middleware' => ['permission:create_cleaning_companies']], function () {
+        Route::group(['middleware' => ['permission:create_cleaning_companies','is_active']], function () {
             Route::get('/create', [App\Http\Controllers\CleaningCompanyController::class, 'create'])->name('cleaning_companies.create');
             Route::post('/store', [App\Http\Controllers\CleaningCompanyController::class, 'store'])->name('cleaning_companies.store');
         });
-        Route::group(['middleware' => ['permission:update_cleaning_companies']], function () {
+        Route::group(['middleware' => ['permission:update_cleaning_companies','is_active']], function () {
             Route::get('/{meeting}/edit', [App\Http\Controllers\CleaningCompanyController::class, 'edit'])->name('cleaning_companies.edit');
             Route::patch('/{meeting}', [App\Http\Controllers\CleaningCompanyController::class, 'update'])->name('cleaning_companies.update');
         });
-        Route::group(['middleware' => ['permission:delete_cleaning_companies']], function () {
+        Route::group(['middleware' => ['permission:delete_cleaning_companies','is_active']], function () {
             Route::delete('delete/{meeting}', [App\Http\Controllers\CleaningCompanyController::class, 'destroy'])->name('cleaning_companies.destroy');
         });
     });
@@ -225,15 +249,15 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         Route::group(['middleware' => ['permission:read_maintenance_companies']], function () {
             Route::get('/', [App\Http\Controllers\MaintenanceCompanyController::class, 'index'])->name('maintenance_companies.read');
         });
-        Route::group(['middleware' => ['permission:create_maintenance_companies']], function () {
+        Route::group(['middleware' => ['permission:create_maintenance_companies','is_active']], function () {
             Route::get('/create', [App\Http\Controllers\MaintenanceCompanyController::class, 'create'])->name('maintenance_companies.create');
             Route::post('/store', [App\Http\Controllers\MaintenanceCompanyController::class, 'store'])->name('maintenance_companies.store');
         });
-        Route::group(['middleware' => ['permission:update_maintenance_companies']], function () {
+        Route::group(['middleware' => ['permission:update_maintenance_companies','is_active']], function () {
             Route::get('/{meeting}/edit', [App\Http\Controllers\MaintenanceCompanyController::class, 'edit'])->name('maintenance_companies.edit');
             Route::patch('/{meeting}', [App\Http\Controllers\MaintenanceCompanyController::class, 'update'])->name('maintenance_companies.update');
         });
-        Route::group(['middleware' => ['permission:delete_maintenance_companies']], function () {
+        Route::group(['middleware' => ['permission:delete_maintenance_companies','is_active']], function () {
             Route::delete('delete/{meeting}', [App\Http\Controllers\MaintenanceCompanyController::class, 'destroy'])->name('maintenance_companies.destroy');
         });
     });
@@ -244,15 +268,15 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         Route::group(['middleware' => ['permission:read_emergency_numbers']], function () {
             Route::get('/', [App\Http\Controllers\EmergencyNumberController::class, 'index'])->name('emergency_numbers.read');
         });
-        Route::group(['middleware' => ['permission:create_emergency_numbers']], function () {
+        Route::group(['middleware' => ['permission:create_emergency_numbers','is_active']], function () {
             Route::get('/create', [App\Http\Controllers\EmergencyNumberController::class, 'create'])->name('emergency_numbers.create');
             Route::post('/store', [App\Http\Controllers\EmergencyNumberController::class, 'store'])->name('emergency_numbers.store');
         });
-        Route::group(['middleware' => ['permission:update_emergency_numbers']], function () {
+        Route::group(['middleware' => ['permission:update_emergency_numbers','is_active']], function () {
             Route::get('/{emergency_number}/edit', [App\Http\Controllers\EmergencyNumberController::class, 'edit'])->name('emergency_numbers.edit');
             Route::patch('/{emergency_number}', [App\Http\Controllers\EmergencyNumberController::class, 'update'])->name('emergency_numbers.update');
         });
-        Route::group(['middleware' => ['permission:delete_emergency_numbers']], function () {
+        Route::group(['middleware' => ['permission:delete_emergency_numbers','is_active']], function () {
             Route::delete('delete/{emergency_number}', [App\Http\Controllers\EmergencyNumberController::class, 'destroy'])->name('emergency_numbers.destroy');
         });
     });
@@ -263,15 +287,15 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         Route::group(['middleware' => ['permission:read_places']], function () {
             Route::get('/', [App\Http\Controllers\PlaceController::class, 'index'])->name('places.read');
         });
-        Route::group(['middleware' => ['permission:create_places']], function () {
+        Route::group(['middleware' => ['permission:create_places','is_active']], function () {
             Route::get('/create', [App\Http\Controllers\PlaceController::class, 'create'])->name('places.create');
             Route::post('/store', [App\Http\Controllers\PlaceController::class, 'store'])->name('places.store');
         });
-        Route::group(['middleware' => ['permission:update_places']], function () {
+        Route::group(['middleware' => ['permission:update_places','is_active']], function () {
             Route::get('/{meeting}/edit', [App\Http\Controllers\PlaceController::class, 'edit'])->name('places.edit');
             Route::patch('/{meeting}', [App\Http\Controllers\PlaceController::class, 'update'])->name('places.update');
         });
-        Route::group(['middleware' => ['permission:delete_places']], function () {
+        Route::group(['middleware' => ['permission:delete_places','is_active']], function () {
             Route::delete('delete/{meeting}', [App\Http\Controllers\PlaceController::class, 'destroy'])->name('places.destroy');
         });
     });
@@ -285,7 +309,7 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('auth-user', 'AuthUserController@show');
 
     Route::group(["prefix" => "social"], function () {
-        Route::group([], function () {
+        Route::group(['middleware' => ['is_active']], function () {
             Route::get('/', [App\Http\Controllers\Social\HomeController::class, 'index'])->name('social.read');
             Route::apiResources([
                 '/posts' => Social\PostController::class,
@@ -296,14 +320,13 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
                 '/friend-request' => Social\FriendRequestController::class,
                 '/friend-request-response' =>Social\FriendRequestResponseController::class,
                 '/user-images' =>Social\UserImageController::class,
-
                 ]);
-
+                Route::get('/chats', [App\Http\Controllers\Social\ChatController::class, 'index'] );
+                Route::get('/messages',  [App\Http\Controllers\Social\ChatController::class, 'fetchAllMessages'])->name('social.chat.fetch');
+                Route::post('/messages',  [App\Http\Controllers\Social\ChatController::class, 'sendMessage'])->name('social.chat.send');
         });
 
-        Route::get('/chats', [App\Http\Controllers\Social\ChatController::class, 'index'] );
-        Route::get('/messages',  [App\Http\Controllers\Social\ChatController::class, 'fetchAllMessages']);
-        Route::post('/messages',  [App\Http\Controllers\Social\ChatController::class, 'sendMessage']);
+
 
     });
 
@@ -350,6 +373,6 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
 
 // });
 
-// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-//     \UniSharp\LaravelFilemanager\Lfm::routes();
-// });
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});

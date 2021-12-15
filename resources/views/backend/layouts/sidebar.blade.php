@@ -15,7 +15,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{{route('admin')}}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+        <span>{{__('global.dashboard')}}</span></a>
     </li>
 
     @can('read_roles')
@@ -45,7 +45,7 @@
     </li>
     @endcan
 
-    @can('read_users')
+    @canany(['read_users','our_users'])
     <!-- Users -->
     <hr class="sidebar-divider">
      <!-- Heading -->
@@ -63,6 +63,12 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">{{__('user.title_users')}}:</h6>
             <a class="collapse-item" href="{{route('users.index')}}">{{__('user.list_users')}}</a>
+            @can("activate_users")
+                <a class="collapse-item" href="{{route('users.activated')}}">{{__('user.activated_user')}}</a>
+            @endcan
+            @can("disactivate_users")
+                <a class="collapse-item" href="{{route('users.desactivated')}}">{{__('user.desactivated_user')}}</a>
+            @endcan
             @can("create_users")
                 <a class="collapse-item" href="{{route('users.create')}}">{{__('user.create_user')}}</a>
             @endcan
@@ -200,7 +206,7 @@
         <div id="meetingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">{{__('meeting.meeting_options')}}:</h6>
-            @can("read_meetings")
+            @canany(["read_meetings","our_meetings"])
                 <a class="collapse-item" href="{{route('meetings.read')}}">{{__('meeting.all_meetings')}}</a>
             @endcan
             @can("create_meetings")
@@ -450,44 +456,16 @@
     @endcan --}}
 @endcan
 
-@canany(['create_places','read_places','read_settings'])
+@canany(['read_settings'])
 
-
+@can('read_settings')
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
      <!-- Heading -->
     <div class="sidebar-heading">
         General Settings
     </div>
-    @canany(['create_places','read_places'])
-    <hr class="sidebar-divider">
-     <!-- Heading -->
-     <div class="sidebar-heading">
-        {{__('place.places')}}
-    </div>
-    <!-- Nav Item - Pages Collapse Menu -->
-    {{-- Place --}}
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#placeCollapse" aria-expanded="true" aria-controls="invitationCollapse">
-          <i class="fas fa-table"></i>
-          <span>{{__('place.places')}}</span>
-        </a>
-        <div id="placeCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">{{__('place.place_options')}}:</h6>
-            @can("read_places")
-                <a class="collapse-item" href="{{route('places.read')}}">{{__('place.all_places')}}</a>
-            @endcan
-            @can("create_places")
-                <a class="collapse-item" href="{{route('places.create')}}">{{__('place.add_place')}}</a>
-            @endcan
 
-          </div>
-        </div>
-    </li>
-    @endcan
-
-    @can('read_settings')
      <!-- General settings -->
      <li class="nav-item">
         <a class="nav-link" href="{{route('settings')}}">

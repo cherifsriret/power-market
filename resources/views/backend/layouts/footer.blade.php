@@ -40,6 +40,50 @@
     </div>
   </div>
 
+  {{-- Begin Chat Componenet --}}
+  <a class="chat-btn-principal rounded" href="javascript:void(0)" onclick="$('.chat-box-principal').toggle()">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <div class="chat-box-principal">
+  <div class="row">
+
+    <div class="col-8">
+        <div class="card card-default">
+            <div class="card-header">Messages</div>
+            <div class="card-body p-0">
+                <ul class="list-unstyled" id="chat-list-msg" style="height:300px; overflow-y:scroll" >
+                </ul>
+            </div>
+
+            <input
+                id="chat_sent_msg_input"
+                type="text"
+                name="message"
+                placeholder="Enter your message..."
+                class="form-control">
+                <button type="button" onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+
+     <div class="col-4">
+         <div class="card card-default">
+             <div class="card-header">Active Users</div>
+             <div class="card-body">
+                 <ul>
+                     <li class="py-2">
+                        user.name
+                     </li>
+                 </ul>
+             </div>
+         </div>
+     </div>
+
+</div>
+</div>
+
+{{-- End Chat Componenet --}}
+
   <!-- Bootstrap core JavaScript-->
   <script src="{{asset('backend/vendor/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -64,3 +108,79 @@
       $('.alert').slideUp();
     },4000);
   </script>
+
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script>
+fetchMessages();
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher("{{env('PUSHER_APP_KEY')}}", {
+    cluster: 'eu'
+  });
+
+  var channel = pusher.subscribe('chat');
+  channel.bind('my-event', function(data) {
+    fetchMessages();
+  });
+
+function sendChatMessage() {
+
+    $.ajax({
+            method: 'post',
+            url:  "{{route('social.chat.send')}}",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            },
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader(
+                    "Content-Language",
+                    $("html").attr("lang")
+                );
+            },
+            data: {'message': $('#chat_sent_msg_input').val()}
+        })
+            .done(function(resp) {
+                //reload messages
+            })
+            $('#chat_sent_msg_input').val("")
+}
+
+function fetchMessages() {
+    $.ajax({
+            method: 'get',
+            url:  "{{route('social.chat.fetch')}}",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            },
+            beforeSend: function beforeSend(request) {
+                request.setRequestHeader(
+                    "Content-Language",
+                    $("html").attr("lang")
+                );
+            },
+        })
+            .done(function(resp) {
+                //reload messages
+                console.log(resp);
+                $('#chat-list-msg').html('');
+
+                let msg = ``;
+
+                resp.map((e,i)=>{
+                    msg +=
+                    `<li class="p-2" >
+                           <strong>${e.user.name}</strong>
+                           ${e.message}
+                       </li>`
+                });
+
+                $('#chat-list-msg').html(msg);
+                var element = document.getElementById('chat-list-msg');
+                element.scrollTop = element.scrollHeight;
+            })
+            .fail(function(resp) {
+                console.log(resp);
+            });
+        }
+</script>

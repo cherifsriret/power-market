@@ -110,7 +110,9 @@
                         <option >{{__('user.enter_user_type')}}</option>
                         <option value="tenant" >{{__('user.tenant')}}</option>
                         <option value="owner">{{__('user.owner')}}</option>
+                        @can('read_users')
                         <option value="owners_association_president">{{__('user.owners_association_president')}}</option>
+                        @endcan
                     </select>
                   @error('user_type')
                   <span class="text-danger">{{$message}}</span>
@@ -126,19 +128,6 @@
                         <option value="inactive">{{__('global.status_inactive') }}</option>
                     </select>
                   @error('status')
-                  <span class="text-danger">{{$message}}</span>
-                  @enderror
-                  </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                    <label for="role[]" class="col-form-label">{{__('role.role')}}</label>
-                    <select name="role[]" id="roles"  multiple="multiple" class="form-control">
-                        @foreach ($roles as $role)
-                            <option value="{{$role->id}}">{{$role->display_name}}</option>
-                        @endforeach
-                    </select>
-                  @error('role[]')
                   <span class="text-danger">{{$message}}</span>
                   @enderror
                   </div>

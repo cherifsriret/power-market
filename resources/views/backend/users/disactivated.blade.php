@@ -8,12 +8,9 @@
             @include('backend.layouts.notification')
          </div>
      </div>
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">{{__('user.list_users')}}</h6>
-      @can("create_users")
-        <a href="{{route('users.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="{{__('user.create_user')}}"><i class="fas fa-plus"></i> {{__('user.create_user')}}</a>
-      @endcan
-    </div>
+     <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary float-left">{{__('user.desactivated_user')}}</h6>
+      </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="user-dataTable" width="100%" cellspacing="0">
@@ -84,17 +81,14 @@
                     </td>
                     <td>
                         @if(auth()->user()->id != $user->id)
-                            @can("update_users")
-                            <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm float-left m-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                            @endcan
-                            @can("delete_users")
-                            <form method="POST" action="{{route('users.destroy',[$user->id])}}">
-                                @csrf
-                                @method('delete')
-                                    <button class="btn btn-danger btn-sm dltBtn" data-id={{$user->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title={{__('global.delete')}}><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                            @endcan
-                        @endif
+                        @can("activate_users")
+                        <form method="POST" action="{{route('users.activate',[$user->id])}}">
+                            @csrf
+                            @method('delete')
+                                <button class="btn btn-success btn-sm dltBtn" data-id={{$user->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title={{__('global.activate')}}><i class="fas fa-check-circle"></i></button>
+                              </form>
+                        @endcan
+                              @endif
                     </td>
 
                 </tr>
@@ -332,12 +326,6 @@
 }
                 @endif
         } );
-
-        // Sweet alert
-
-        function deleteData(id){
-
-        }
   </script>
   <script>
       $(document).ready(function(){
@@ -353,16 +341,16 @@
               e.preventDefault();
               swal({
                     title: "{{__('global.are_you_sure')}}",
-                    text: "{{__('global.msg_confirm_delete')}}",
+                    text: "{{__('user.msg_confirm_activate')}}",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
-                .then((willDelete) => {
-                    if (willDelete) {
+                .then((willActivate) => {
+                    if (willActivate) {
                        form.submit();
                     } else {
-                        swal("{{__('global.your_data_safe')}}");
+                        swal("{{__('global.operation_canceled')}}");
                     }
                 });
           })

@@ -32,6 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('stage')->nullable();
             $table->string('apartment_number')->nullable();
             $table->enum('user_type',['tenant','owner','owners_association_president'])->default('tenant');
+            $table->unsignedBigInteger('building_id')->nullable();
+            $table->foreign('building_id')->references('id')->on('buildings')->onDelete('SET NULL');
             $table->rememberToken()->nullable();
             $table->timestamps();
         });

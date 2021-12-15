@@ -15,14 +15,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $friends = Friend::friendships();
-        if ($friends->isEmpty()) {
-            return new PostCollection(request()->user()->posts);
-        }
 
         return new PostCollection(
-            ChatPost::whereIn('user_id',$friends->pluck('user_id'))->orWhereIn('user_id',$friends->pluck('friend_id'))
-            ->get()
+            ChatPost::get()
             );
 
 

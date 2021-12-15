@@ -15,7 +15,7 @@
         @method('PATCH')
         <div class="form-group">
           <label for="inputTitle" class="col-form-label">{{ __('role.role_name') }}</label>
-        <input id="inputTitle" type="text" name="name" placeholder="{{ __('role.enter_role_name') }}"   value="{{$role->name}}" class="form-control">
+        <input id="inputTitle" type="text" name="display_name" placeholder="{{ __('role.enter_role_name') }}"   value="{{$role->display_name}}" class="form-control">
         @error('name')
         <span class="text-danger">{{$message}}</span>
         @enderror

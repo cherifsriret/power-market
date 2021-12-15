@@ -143,7 +143,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        if ($role->locked) {
+        if (Auth::user()->hasRole($role)) {
             abort(403);
         }
         try {
@@ -190,7 +190,7 @@ class RoleController extends Controller
 
         $validator =Validator::make($request->all(),
         [
-            'name'=>'string|required',
+            'display_name'=>'string|required',
         ],[],[
             'visitor_name'=> __('role.role_name'),
         ]);
@@ -207,13 +207,14 @@ class RoleController extends Controller
                 $user = Auth::user();
                 $roleSlug = Str::slug($request->name, '_');
                 $role = Role::find($id);
-                if ($role->locked) {
+                if (Auth::user()->hasRole($role)) {
                     request()->session()->flash('error',__('role.locked_role'));
                     return redirect()->route('roles.index');
                 }
+
                 $rolePermissions = $role->getAllPermissions()->pluck("name")->toArray();
                 $userPermissions = $user->getPermissionsViaRoles()->pluck("name")->toArray();
-                $role->update(["name" => $roleSlug, "display_name" => $request->name]);
+                $role->update(["name" => $role->name, "display_name" => $request->display_name]);
                 $arrayPermissions = array_diff_key($request->all(), array_flip((array) ["_method", "_token", "name", "oldUid"]));
                 $role->syncPermissions(array_intersect($userPermissions , array_keys($arrayPermissions)));
                 request()->session()->flash('success',__('role.update_success'));

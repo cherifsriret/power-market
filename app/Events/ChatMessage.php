@@ -17,7 +17,7 @@ class ChatMessage implements ShouldBroadcast
 
     public $chat;
 
-    public function __construct(ModelsChatMessage $chat)
+    public function __construct( $chat)
     {
         $this->chat = $chat;
     }

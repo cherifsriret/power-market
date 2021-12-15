@@ -137,7 +137,7 @@
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 
 <script>
-    var route_prefix = "{{ url('/filemanager') }}";
+    var route_prefix = "{{ url('/laravel-filemanager') }}";
     $('#lfm').filemanager('image', {prefix: route_prefix});
 
     $('#cv').summernote({

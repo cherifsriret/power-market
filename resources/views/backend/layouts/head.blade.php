@@ -14,18 +14,11 @@
 
     <!-- Custom styles for this template-->
 
-    @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
-    <link href="{{asset('backend/css/sb-admin-2.rtl.css')}}" rel="stylesheet">
-    @else
-    <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
-    @endif
+
 
     <link href="{{asset('backend/css/style.css')}}" rel="stylesheet">
 
     @stack('styles')
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -33,5 +26,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @if(str_replace('_', '-',  app()->getLocale()) === "ar" )
+    <link href="{{asset('backend/css/sb-admin-2.rtl.css')}}" rel="stylesheet">
+    @else
+    <link href="{{asset('backend/css/sb-admin-2.css')}}" rel="stylesheet">
+    @endif
+    <style>
 
+
+    </style>
 </head>

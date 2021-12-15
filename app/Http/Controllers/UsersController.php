@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Building;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -18,8 +19,31 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users=User::orderBy('id','ASC')->paginate(10);
+        $user =Auth::user();
+        $users = $user->can('read_users')?User::orderBy('id','ASC')->paginate(10) : User::where('building_id',$user->building_id)->orderBy('id','ASC')->paginate(10);
         return view('backend.users.index')->with('users',$users);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activated()
+    {
+        $user =Auth::user();
+        $users = $user->can('read_users')?User::where('status','active')->orderBy('id','ASC')->paginate(10) : User::where('status','active')->where('building_id',$user->building_id)->orderBy('id','ASC')->paginate(10);
+        return view('backend.users.activated')->with('users',$users);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function desactivated()
+    {
+        $user =Auth::user();
+        $users = $user->can('read_users')?User::where('status','inactive')->orderBy('id','ASC')->paginate(10) : User::where('status','inactive')->where('building_id',$user->building_id)->orderBy('id','ASC')->paginate(10);
+        return view('backend.users.disactivated')->with('users',$users);
     }
 
     /**
@@ -45,6 +69,7 @@ class UsersController extends Controller
                 $display_roles[] = $role;
             }
         }
+
         return view('backend.users.create')->with('roles',$display_roles);
     }
 
@@ -68,7 +93,6 @@ class UsersController extends Controller
             'stage'=>'string|required',
             'apartment_number'=>'string|required',
             'user_type'=>'required|in:tenant,owner,owners_association_president',
-            'role'=>'required',
             'status'=>'required|in:active,inactive',
         ],[],[
             'name'=> __('user.name'),
@@ -83,29 +107,38 @@ class UsersController extends Controller
             'user_type'=> __('user.user_type'),
             'status'=> __('global.status'),
         ]);
+        // traitement des building
+        $user = Auth::user();
+        $building_nbr =$user->can('read_users')?   trim($request->building) : $user->building;
+        $building = Building::where('name',$building_nbr)->first();
+        //check if owners_association_president && building exist
+        if($request->user_type == 'owners_association_president' && $building != null)
+        {
+            request()->session()->flash('error',' ! المبنى مسجل سابقا. اما ان تسجل كمالك أو مستأجر في هذا المبنى أو تغير رقم العمارة');
+            return back()->withInput($request->all());
+        }
+        //check if tenant owner,owners &&  building not exist
+        if( ($request->user_type == 'tenant' || $request->user_type == 'owner' ) && $building == null)
+        {
+            request()->session()->flash('error',' ! المبنى غير مسجل سابقا. اما ان تسجل كرئيس اتحاد ملاك في هذا المبنى أو تغير رقم العمارة');
+            return back()->withInput($request->all());
+        }
+        if($building == null)
+        {
+            $building=new  Building();
+            $building->name=$building_nbr;
+            $building->save();
+        }
         $data=$request->all();
         $data['password']=Hash::make($request->password);
         $data['role']='admin';
+        $data['building_id']=$building->id;
+        $data['building']=$building_nbr;
         $status=User::create($data);
         if($status){
-            $user = Auth::user();
-            $userPermissions = $user->getAllPermissions()->pluck('name')->toArray();
-            $roles = $request->role;
 
-           foreach ($roles as $role) {
-                try {
-                    $role = Role::find($role);
-                } catch (\Exception $e) {
-                    request()->session()->flash('error',__('user.error_added'));
-                }
-                $rolePermissions = $role->getAllPermissions()->pluck('name')->toArray();
-                $lengthPermissions = count(array_diff($rolePermissions, $userPermissions));
-                if ($lengthPermissions === 0) {
-
-                    $status->assignRole($role);
-                }
-            }
-
+            //associer le role
+            $status->assignRole($request->user_type);
             request()->session()->flash('success',__('user.success_added'));
         }
         else{
@@ -272,4 +305,48 @@ class UsersController extends Controller
         }
         return redirect()->route('users.index');
     }
+
+
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activate($id)
+    {
+        $user=User::findorFail($id);
+        $user->status = "active";
+        if($user->save()){
+            request()->session()->flash('success',__('user.success_activate'));
+        }
+        else{
+            request()->session()->flash('error',__('user.error__activate'));
+        }
+        return redirect()->route('users.desactivated');
+    }
+
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function disactivate($id)
+    {
+        $user=User::findorFail($id);
+        $user->status = "inactive";
+        if($user->save()){
+            request()->session()->flash('success',__('user.success_disactivate'));
+        }
+        else{
+            request()->session()->flash('error',__('user.error_disactivate'));
+        }
+        return redirect()->route('users.activated');
+    }
+
+
+
 }
