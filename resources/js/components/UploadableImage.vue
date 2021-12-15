@@ -42,7 +42,7 @@
             settings() {
                 return {
                     paramName: 'image',
-                    url: '/admin/social/user-images',
+                    url: process.env.MIX_APP_URL+'/admin/social/user-images',
                     acceptedFiles: 'image/*',
                     params: {
                         'width': this.imageWidth,

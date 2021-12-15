@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex" v-if="authUser">
+    <div  v-if="authUser">
         <div class="d-flex overflow-y-hidden flex-1">
 
             <div class="overflow-x-hidden w-100">

@@ -10,7 +10,7 @@ export default new VueRouter({
 
     routes: [
         {
-            path: '/admin/social/', name: 'home', component: NewsFeed,
+            path: process.env.MIX_APP_URL+'/admin/social/', name: 'home', component: NewsFeed,
             meta: { title: 'social Media' }
           },
      ]

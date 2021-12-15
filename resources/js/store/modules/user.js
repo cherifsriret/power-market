@@ -11,7 +11,7 @@ const getters = {
 
 const actions = {
     fetchAuthUser({commit, state}) {
-        axios.get('/InterCome/power-market/admin/auth-user')
+        axios.get(process.env.MIX_APP_URL+'/admin/auth-user')
             .then(res => {
                 commit('setAuthUser', res.data);
             })
