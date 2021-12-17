@@ -36,6 +36,10 @@ Route::get('login/{provider}/callback/', 'Auth\LoginController@Callback')->name(
 Route::get('/','MainController@home')->name('main.home');
 Route::get('/signUp','MainController@register')->name('register');
 Route::post('/signUp/store','MainController@registerSubmit')->name('register.submit');
+Route::get('/customerComplaintsAdd','MainController@customerComplaintsAdd')->name('customerComplaintsAdd');
+Route::post('/customerComplaintsAdd/store','MainController@customerComplaintsAddSubmit')->name('customerComplaintsAdd.submit');
+
+
 
 
 

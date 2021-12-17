@@ -11,7 +11,7 @@
                         <a href="{{$share_link_home['facebook']}}"><i class="fab fa-facebook-f"></i></a>
                         <a href="{{$share_link_home['twitter']}}"><i class="fab fa-twitter"></i></a>
                         <a href="{{$share_link_home['linkedin']}}"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="{{$share_link_home['whatsapp']}}"><i class="fab fa-instagram"></i></a>
+                        <a href="{{$share_link_home['whatsapp']}}"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="col-md-6 col-6">
@@ -60,7 +60,7 @@
                 <a class="nav-link" href="#">   شركاءنا</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="customerComplaintsAdd.php"> تقديم شكوي </a>
+                <a class="nav-link" href="{{route('customerComplaintsAdd')}}"> تقديم شكوي </a>
                 <!-- data-toggle="modal" data-target="#complaintModal" -->
             </li>
             </ul>

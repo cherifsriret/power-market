@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Building;
+use App\Models\StaticComplaint;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,47 @@ class MainController extends Controller
         return view('main.pages.index');
     }
 
+    public function customerComplaintsAdd(){
+        return view('main.pages.customerComplaintsAdd');
+    }
+
     public function register(){
         return view('main.pages.register');
     }
+
+
+    public function customerComplaintsAddSubmit (Request $request)
+    {
+        $this->validate($request,
+        [
+            'name'=>'string|required|max:50',
+            'national_id'=>'string|required|max:50',
+            'phone'=>'string|required|max:50',
+            'email'=>'string|required',
+            'address'=>'string|required',
+            'description'=>'string|required',
+        ],[],[
+            'name'=> __('user.name'),
+            'national_id'=> __('user.mail'),
+            'phone'=> __('user.password'),
+            'email'=> __('user.governorate'),
+            'address'=> __('user.city'),
+            'description'=> __('user.region'),
+        ]);
+
+        $data=$request->all();
+        $status=StaticComplaint::create($data);
+        if($status){
+            request()->session()->flash('success',' تم التسجيل بنجاح سوف يتم الرد علي الشكوي الخاص بك عبر البريد الالكتروني الذي قمت بأدخاله !');
+            return redirect()->route('main.home');
+        }
+        else{
+            request()->session()->flash('error',' ! حدث خطأ في حفظ الشكوى');
+            return back()->withInput($request->all());
+        }
+
+    }
+
     public function registerSubmit(Request $request){
 
         $this->validate($request,
