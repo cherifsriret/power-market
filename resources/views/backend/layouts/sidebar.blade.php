@@ -24,6 +24,26 @@
           <span>{{__('global.social_media')}}</span></a>
       </li>
 
+      @php
+      $share_link_register = Share::page(route('register'))->facebook()->linkedin()->twitter()->whatsapp()->getRawLinks();
+  @endphp
+
+
+  <li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#shareCollapse" aria-expanded="true" aria-controls="shareCollapse">
+    <i class="fas fa-comments"></i>
+      <span>{{__('global.share_register')}}</span>
+  </a>
+  <div id="shareCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{{$share_link_register['facebook']}}">{{__('global.facebook')}}</a>
+          <a class="collapse-item" href="{{$share_link_register['twitter']}}">{{__('global.twitter')}}</a>
+          <a class="collapse-item" href="{{$share_link_register['linkedin']}}">{{__('global.linkedin')}}</a>
+          <a class="collapse-item" href="{{$share_link_register['whatsapp']}}">{{__('global.whatsapp')}}</a>
+      </div>
+  </div>
+  </li>
+
     @can('read_roles')
     <!-- Roles -->
     <hr class="sidebar-divider">
@@ -200,8 +220,6 @@
         @endcan
     @endcan
 
-
-
     @canany(['read_maintenance_statements','our_maintenance_statements','create_maintenance_statements'])
     <hr class="sidebar-divider">
      <!-- Heading -->
@@ -227,11 +245,6 @@
         </div>
     </li>
     @endcan
-
-
-
-
-
 
 
 
@@ -300,6 +313,8 @@
         </div>
     </li>
     @endcan
+
+
 
 
     @canany(['read_categories','read_products','read_brands','read_shippings','read_orders','read_orders','read_coupons','read_reviews'])

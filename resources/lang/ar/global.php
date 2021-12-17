@@ -24,4 +24,10 @@ return [
 'activate'=>'تفعيل',
 'disactivate'=>'الغاء التفعيل',
 'social_media'=>'منتدى المدينة',
+'facebook'=>'الفايسبوك',
+'twitter'=>'تويتر',
+'linkedin'=>'لينكدين',
+'whatsapp'=>'واتساب',
+'share_register'=>'مشاركة رابط التسجيل',
+
 ];
