@@ -1,14 +1,17 @@
 <!-- Navigation -->
 <!-- <div class="navbar"> -->
+    @php
+    $share_link_home = Share::page(route('home'))->facebook()->linkedin()->twitter()->whatsapp()->getRawLinks();
+@endphp
     <div class="top-nav">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-6">
                     <div class="socail">
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href="{{$share_link_home['facebook']}}"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{$share_link_home['twitter']}}"><i class="fab fa-twitter"></i></a>
+                        <a href="{{$share_link_home['linkedin']}}"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{$share_link_home['whatsapp']}}"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-md-6 col-6">
@@ -67,7 +70,12 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <a href="{{route("register")}}" class="sign default-btn btn-bg-two">سجل معنا</a>
-                <a href="{{route("admin")}}" class="sign default-btn btn-bg-one">اللوحة الادارية</a>
+                @auth()
+                    <a href="{{route("admin")}}" class="sign default-btn btn-bg-one">اللوحة الادارية</a>
+                @endauth
+                @guest
+                <a href="{{route("login")}}" class="sign default-btn btn-bg-one">تسجيل الدخول</a>
+                @endguest
             </div>
         </div>
     </nav>
