@@ -225,6 +225,25 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         });
     });
 
+     //Maintenance Statements
+     Route::group(["prefix" => "maintenance_statements"], function () {
+        Route::group(['middleware' => ['permission:read_maintenance_statements|our_maintenance_statements','is_active']], function () {
+            Route::get('/', [App\Http\Controllers\MaintenanceStatementController::class, 'index'])->name('maintenance_statements.read');
+            Route::get('/{maintenance_statement}/show', [App\Http\Controllers\MaintenanceStatementController::class, 'show'])->name('maintenance_statements.show');
+        });
+        Route::group(['middleware' => ['permission:create_maintenance_statements','is_active']], function () {
+            Route::get('/create', [App\Http\Controllers\MaintenanceStatementController::class, 'create'])->name('maintenance_statements.create');
+            Route::post('/store', [App\Http\Controllers\MaintenanceStatementController::class, 'store'])->name('maintenance_statements.store');
+        });
+        Route::group(['middleware' => ['permission:update_maintenance_statements','is_active']], function () {
+            Route::get('/{maintenance_statement}/edit', [App\Http\Controllers\MaintenanceStatementController::class, 'edit'])->name('maintenance_statements.edit');
+            Route::patch('/{maintenance_statement}', [App\Http\Controllers\MaintenanceStatementController::class, 'update'])->name('maintenance_statements.update');
+        });
+        Route::group(['middleware' => ['permission:delete_maintenance_statements','is_active']], function () {
+            Route::delete('delete/{maintenance_statement}', [App\Http\Controllers\MaintenanceStatementController::class, 'destroy'])->name('maintenance_statements.destroy');
+        });
+    });
+
     //Cleaning Companies
     Route::group(["prefix" => "cleaning_companies"], function () {
         Route::group(['middleware' => ['permission:read_cleaning_companies']], function () {
