@@ -84,6 +84,8 @@ class InvitationController extends Controller
             $status=Invitation::create($data);
             if($status){
                 request()->session()->flash('success',__('invitation.success_added'));
+                return redirect()->route('invitations.show', $status->id);
+
             }
             else{
                 request()->session()->flash('error',__('invitation.error_added'));
