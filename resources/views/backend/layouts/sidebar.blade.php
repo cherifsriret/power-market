@@ -206,7 +206,7 @@
     <hr class="sidebar-divider">
      <!-- Heading -->
      <div class="sidebar-heading">
-        {{__('meeting.meetings')}}
+        {{__('maintenance_statement.maintenance_statements')}}
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
     {{-- Maintenance Statement --}}
