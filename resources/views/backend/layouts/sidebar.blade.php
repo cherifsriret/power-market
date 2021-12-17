@@ -172,7 +172,12 @@
             </div>
         </li>
         @endcan
-        @canany(['read_places','read_places'])
+
+
+
+
+
+        @canany(['read_places','create_places'])
         {{-- Cleaning companies --}}
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#PlacesCollapse" aria-expanded="true" aria-controls="PlacesCollapse">
@@ -194,6 +199,47 @@
         </li>
         @endcan
     @endcan
+
+
+
+    @canany(['read_maintenance_statements','our_maintenance_statements','create_maintenance_statements'])
+    <hr class="sidebar-divider">
+     <!-- Heading -->
+     <div class="sidebar-heading">
+        {{__('meeting.meetings')}}
+    </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    {{-- Maintenance Statement --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#maintenanceStatementCollapse" aria-expanded="true" aria-controls="maintenanceStatementCollapse">
+          <i class="fas fa-table"></i>
+          <span>{{__('maintenance_statement.maintenance_statements')}}</span>
+        </a>
+        <div id="maintenanceStatementCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            @canany(['read_maintenance_statements','our_maintenance_statements'])
+                <a class="collapse-item" href="{{route('maintenance_statements.read')}}">{{__('maintenance_statement.list_maintenance_statements')}}</a>
+            @endcan
+            @can("create_maintenance_statements")
+                <a class="collapse-item" href="{{route('maintenance_statements.create')}}">{{__('maintenance_statement.add_maintenance_statements')}}</a>
+            @endcan
+          </div>
+        </div>
+    </li>
+    @endcan
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @canany(['create_meetings','read_meetings'])

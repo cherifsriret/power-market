@@ -121,7 +121,7 @@
         </div>
 
         <div class="form-group mb-3 text-center">
-          <button type="reset" class="btn btn-warning">{{__('global.reset')}}</button>
+            <a class="btn btn-warning " href="{{route('maintenance_statements.read')}}" >{{__('maintenance_statement.list_maintenance_statements')}}</a>
            <button class="btn btn-success" type="submit">{{__('global.submit')}}</button>
         </div>
       </form>
