@@ -5,16 +5,26 @@
 <div class="card m-2">
     <h5 class="card-header">{{__('invitation.show_invitation')}}</h5>
     <div class="card-body" id="receipt-invitation">
+
         <h3 class="text-center mb-5">{{__('invitation.invitation')}}</h3>
         <div class="row">
             <div class="col-12 text-center">
-                <div class="symbol symbol-50 symbol-lg-120">
+                <div class="symbol symbol-50 symbol-lg-120" id="">
                     {!!QrCode::color(0, 0, 0)->size(120)->generate($invitation->code)!!}
                 </div>
                 <div class="m-3">
                     <b>{{ $invitation->code }}</b>
                 </div>
+                <div id="social-links">
+                    <ul class="d-inline-flex">
+                        <li class="list-unstyled px-2"><a href="{{$share_links['facebook']}}" class="social-button" id=""><i class="fab fa-facebook-square fa-3x"></i></a></li>
+                        <li class="list-unstyled px-2"><a href="{{$share_links['twitter']}}" class="social-button" id=""><i class="fab fa-twitter-square fa-3x"></i></a></li>
+                        <li class="list-unstyled px-2"><a href="{{$share_links['linkedin']}}" class="social-button" id=""><i class="fab fa-linkedin fa-3x"></i></a></li>
+                        <li class="list-unstyled px-2"><a href="{{$share_links['whatsapp']}}" class="social-button" id=""><i class="fab fa-whatsapp-square fa-3x"></i></a></li>
+                    </ul>
+                </div>
             </div>
+
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-6">
@@ -133,6 +143,7 @@
 @endsection
 
 @push('scripts')
+<script src="{{ asset('js/share.js') }}"></script>
 <script>
 function printDiv()
 {

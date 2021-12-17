@@ -392,6 +392,8 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
 
 // });
 
+Route::get('/{invitation}/showQr', [App\Http\Controllers\InvitationController::class, 'showQr'])->name('invitations.show.qr');
+
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

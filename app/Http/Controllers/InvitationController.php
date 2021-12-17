@@ -6,6 +6,7 @@ use App\Models\Invitation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Share;
 
 class InvitationController extends Controller
 {
@@ -108,10 +109,22 @@ class InvitationController extends Controller
     public function show($id)
     {
         $invitation=Invitation::findOrFail($id);
-        return view('backend.invitations.show')->with('invitation',$invitation);
+        $url=route('invitations.show.qr',$id);
+        $share_links=Share::page($url, __('invitation.invitation'))->facebook()->linkedin()->twitter()->whatsapp()->getRawLinks();
+       return view('backend.invitations.show')->with('invitation',$invitation)->with('share_links',$share_links);
     }
 
-
+ /**
+     * Show the form for showing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showQr($id)
+    {
+        $invitation=Invitation::findOrFail($id);
+        return view('backend.invitations.show_qr')->with('invitation',$invitation);
+    }
     /**
      * Show the form for editing the specified resource.
      *

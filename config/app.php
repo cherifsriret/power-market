@@ -185,6 +185,8 @@ return [
 
         App\Providers\BroadcastServiceProvider::class,
 
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
+
     ],
 
     /*
@@ -242,6 +244,7 @@ return [
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
+        'Share' => Jorenvh\Share\ShareFacade::class,
     ],
 
 ];
