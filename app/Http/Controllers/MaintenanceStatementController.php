@@ -83,8 +83,9 @@ class MaintenanceStatementController extends Controller
      */
     public function show($id)
     {
+        $buildings =Building::get(['id','name']);
         $maintenance_statement=MaintenanceStatement::findOrFail($id);
-        return view('backend.maintenance_statements.show')->with('maintenance_statement',$maintenance_statement);
+        return view('backend.maintenance_statements.show')->with('maintenance_statement',$maintenance_statement)->with('buildings',$buildings);
     }
 
      /**
@@ -95,8 +96,9 @@ class MaintenanceStatementController extends Controller
      */
     public function edit($id)
     {
+        $buildings =Building::get(['id','name']);
         $maintenance_statement=MaintenanceStatement::findOrFail($id);
-        return view('backend.maintenance_statements.edit')->with('maintenance_statement',$maintenance_statement);
+        return view('backend.maintenance_statements.edit')->with('maintenance_statement',$maintenance_statement)->with('buildings',$buildings);
     }
 
 

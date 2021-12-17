@@ -43,7 +43,7 @@
                     <div class="input-group mb-2 date">
                         <input type="number" class="form-control" name="price" id="price" placeholder="{{__('maintenance_statement.enter_price')}}">
                         <div class="input-group-append">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                            <div class="input-group-text"><i class="fas fa-money-bill"></i></div>
                           </div>
                       </div>
                     @error('price')
