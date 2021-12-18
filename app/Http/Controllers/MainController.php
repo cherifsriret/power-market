@@ -36,13 +36,14 @@ class MainController extends Controller
             'address'=>'string|required',
             'description'=>'string|required',
         ],[],[
-            'name'=> __('user.name'),
-            'national_id'=> __('user.mail'),
-            'phone'=> __('user.password'),
-            'email'=> __('user.governorate'),
-            'address'=> __('user.city'),
-            'description'=> __('user.region'),
+            'name'=> __('static_complaint.name'),
+            'national_id'=> __('static_complaint.national_id'),
+            'phone'=> __('static_complaint.phone'),
+            'email'=> __('static_complaint.email'),
+            'address'=> __('static_complaint.address'),
+            'description'=> __('static_complaint.description'),
         ]);
+
 
         $data=$request->all();
         $status=StaticComplaint::create($data);

@@ -329,6 +329,31 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
         });
 
     });
+
+
+    //static complaints
+    Route::group(["prefix" => "static_complaints"], function () {
+        Route::group(['middleware' => ['permission:read_static_complaints|our_static_complaints','is_active']], function () {
+            Route::get('/', [App\Http\Controllers\StaticComplaintController::class, 'index'])->name('static_complaints.read');
+            Route::get('/{static_complaint}/show', [App\Http\Controllers\StaticComplaintController::class, 'show'])->name('static_complaints.show');
+        });
+        Route::group(['middleware' => ['permission:customers_static_complaints','is_active']], function () {
+            Route::get('/customers', [App\Http\Controllers\StaticComplaintController::class, 'indexCustomers'])->name('static_complaints.read.customers');
+          });
+        Route::group(['middleware' => ['permission:create_static_complaints','is_active']], function () {
+            Route::get('/create', [App\Http\Controllers\StaticComplaintController::class, 'create'])->name('static_complaints.create');
+            Route::post('/store', [App\Http\Controllers\StaticComplaintController::class, 'store'])->name('static_complaints.store');
+        });
+        Route::group(['middleware' => ['permission:update_static_complaints','is_active']], function () {
+            Route::get('/{static_complaint}/edit', [App\Http\Controllers\StaticComplaintController::class, 'edit'])->name('static_complaints.edit');
+            Route::patch('/{static_complaint}', [App\Http\Controllers\StaticComplaintController::class, 'update'])->name('static_complaints.update');
+        });
+        Route::group(['middleware' => ['permission:delete_static_complaints','is_active']], function () {
+            Route::delete('delete/{static_complaint}', [App\Http\Controllers\StaticComplaintController::class, 'destroy'])->name('static_complaints.destroy');
+        });
+    });
+
+
     Route::get('auth-user', 'AuthUserController@show');
 
     Route::group(["prefix" => "social"], function () {

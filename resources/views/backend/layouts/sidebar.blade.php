@@ -315,6 +315,34 @@
     @endcan
 
 
+    @canany(['our_static_complaints','read_static_complaints'])
+    <hr class="sidebar-divider">
+     <!-- Heading -->
+     <div class="sidebar-heading">
+        {{__('static_complaint.static_complaints')}}
+    </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#staticComplaintCollapse" aria-expanded="true" aria-controls="staticComplaintCollapse">
+          <i class="fas fa-table"></i>
+          <span>{{__('static_complaint.static_complaints')}}</span>
+        </a>
+        <div id="staticComplaintCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            @can("read_static_complaints")
+                <a class="collapse-item" href="{{route('static_complaints.read')}}">{{__('static_complaint.list_static_complaints')}}</a>
+            @endcan
+            @can("our_static_complaints")
+                <a class="collapse-item" href="{{route('static_complaints.read.customers')}}">{{__('static_complaint.list_static_complaints_customers')}}</a>
+            @endcan
+            @can("create_static_complaints")
+                <a class="collapse-item" href="{{route('static_complaints.create')}}">{{__('static_complaint.add_static_complaint')}}</a>
+            @endcan
+          </div>
+        </div>
+    </li>
+    @endcan
+
 
 
     @canany(['read_categories','read_products','read_brands','read_shippings','read_orders','read_orders','read_coupons','read_reviews'])

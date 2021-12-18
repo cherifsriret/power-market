@@ -1,0 +1,27 @@
+<?php
+
+    return [
+        "name"=>"الاسم",
+        "enter_name"=>"ادخل الاسم  ......",
+        "national_id"=>"الرقم القومي",
+        "enter_national_id"=>" ادخل الرقم القومي المكون من 14 رقم ",
+        "phone"=>"رقم الهاتف",
+        "enter_phone"=>" ادخل رقم هاتف  ",
+        "email"=>"البريد الالكتروني",
+        "enter_email"=>" ادخل البريد الالكتروني  ",
+        "address"=>"العنوان",
+        "enter_address"=>" ادخل العنوان  ",
+        "description"=>"الشكوي",
+        "enter_description"=>" ادخل الشكوي الخاص بك .......  ",
+        "list_static_complaints"=>"قائمة شكاوي السكان",
+        "list_static_complaints_customers"=>"قائمة شكاوي العملاء",
+        "add_static_complaint"=>"تقديم شكوى !",
+        "static_complaints"=>"الشكاوي",
+        'success_added'=>'تمت إضافة الشكوى بنجاح',
+        'error_added'=>'حدث خطأ أثناء إضافة الشكوى',
+        'success_delete'=>'تم حذف الشكوى بنجاح',
+        'error_delete'=>'حدث خطأ أثناء حذف الشكوى',
+        'update_static_complaint'=>'تحديث الشكوى',
+        'success_update'=>'تم تحديث الشكوى بنجاح',
+        'error_update'=>'حدث خطأ أثناء تحديث الشكوى',
+    ];

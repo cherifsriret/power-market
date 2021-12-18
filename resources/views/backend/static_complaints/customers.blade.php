@@ -1,5 +1,3 @@
-
-
 @extends('backend.layouts.master')
 
 @section('main-content')
@@ -11,38 +9,35 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">{{__('static_complaint.list_static_complaints')}}</h6>
-      @can("create_static_complaints")
-        <a href="{{route('static_complaints.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i>{{__('static_complaint.add_static_complaint')}}</a>
-      @endcan
+      <h6 class="m-0 font-weight-bold text-primary float-left">{{__('static_complaint.list_static_complaints_customers')}}</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered" id="user-dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered" id="static_complaint-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-                <th>{{__('global.s_n')}}</th>
-                <th>{{__('static_complaint.name')}}</th>
-                <th>{{__('static_complaint.national_id')}}</th>
-                <th>{{__('static_complaint.email')}}</th>
-                <th>{{__('static_complaint.phone')}}</th>
-                <th>{{__('static_complaint.address')}}</th>
-                <th>{{__('static_complaint.description')}}</th>
-                <th>{{__('global.created_at')}}</th>
-                <th>{{__('global.actions')}}</th>
+              <th>{{__('global.s_n')}}</th>
+              <th>{{__('static_complaint.name')}}</th>
+              <th>{{__('static_complaint.national_id')}}</th>
+              <th>{{__('static_complaint.email')}}</th>
+              <th>{{__('static_complaint.phone')}}</th>
+              <th>{{__('static_complaint.address')}}</th>
+              <th>{{__('static_complaint.description')}}</th>
+              <th>{{__('global.created_at')}}</th>
+              <th>{{__('global.actions')}}</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
                 <th>{{__('global.s_n')}}</th>
-                <th>{{__('static_complaint.name')}}</th>
-                <th>{{__('static_complaint.national_id')}}</th>
-                <th>{{__('static_complaint.email')}}</th>
-                <th>{{__('static_complaint.phone')}}</th>
-                <th>{{__('static_complaint.address')}}</th>
-                <th>{{__('static_complaint.description')}}</th>
-                <th>{{__('global.created_at')}}</th>
-                <th>{{__('global.actions')}}</th>
+              <th>{{__('static_complaint.name')}}</th>
+              <th>{{__('static_complaint.national_id')}}</th>
+              <th>{{__('static_complaint.email')}}</th>
+              <th>{{__('static_complaint.phone')}}</th>
+              <th>{{__('static_complaint.address')}}</th>
+              <th>{{__('static_complaint.description')}}</th>
+              <th>{{__('global.created_at')}}</th>
+              <th>{{__('global.actions')}}</th>
               </tr>
           </tfoot>
           <tbody>
@@ -57,9 +52,6 @@
                     <td>{{$static_complaint->description}}</td>
                     <td>{{(($static_complaint->created_at)? $static_complaint->created_at->diffForHumans() : '')}}</td>
                     <td>
-                        @can('update_static_complaints')
-                        <a href="{{route('static_complaints.edit',$static_complaint->id)}}" class="btn btn-warning btn-sm float-left mx-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                         @endcan
                         @can("delete_static_complaints")
                         <form method="POST" action="{{route('static_complaints.destroy',[$static_complaint->id])}}">
                             @csrf
@@ -68,6 +60,7 @@
                               </form>
                         @endcan
                     </td>
+
                 </tr>
             @endforeach
           </tbody>
@@ -113,7 +106,7 @@
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
 
-      $('#user-dataTable').DataTable( {
+      $('#static_complaint-dataTable').DataTable( {
             "columnDefs":[
                 {
                     "orderable":false,

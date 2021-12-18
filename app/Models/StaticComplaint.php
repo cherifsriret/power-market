@@ -13,5 +13,5 @@ class StaticComplaint extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'name','national_id', 'address', 'phone', 'email', 'description'];
+    protected $fillable = [ 'name','national_id', 'address', 'phone', 'email', 'description','user_id','building_id'];
 }
