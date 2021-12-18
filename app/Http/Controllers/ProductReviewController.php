@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Notification;
 use App\Notifications\StatusNotification;
-use App\User;
+use App\Models\User;
 use App\Models\ProductReview;
 class ProductReviewController extends Controller
 {
@@ -18,7 +18,7 @@ class ProductReviewController extends Controller
     public function index()
     {
         $reviews=ProductReview::getAllReview();
-        
+
         return view('backend.review.index')->with('reviews',$reviews);
     }
 
@@ -29,7 +29,7 @@ class ProductReviewController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**

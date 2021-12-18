@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostTag;
-use App\User;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -164,9 +164,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post=Post::findOrFail($id);
-       
+
         $status=$post->delete();
-        
+
         if($status){
             request()->session()->flash('success','Post successfully deleted');
         }

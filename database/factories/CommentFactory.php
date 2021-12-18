@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Comment;
 use App\Models\ChatPost;
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

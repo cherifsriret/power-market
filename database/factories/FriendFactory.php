@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Friend;
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FriendFactory extends Factory

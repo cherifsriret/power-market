@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Social;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostCollection;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserPostController extends Controller
