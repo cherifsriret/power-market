@@ -332,7 +332,7 @@
             @can("read_static_complaints")
                 <a class="collapse-item" href="{{route('static_complaints.read')}}">{{__('static_complaint.list_static_complaints')}}</a>
             @endcan
-            @can("our_static_complaints")
+            @can("customers_static_complaints")
                 <a class="collapse-item" href="{{route('static_complaints.read.customers')}}">{{__('static_complaint.list_static_complaints_customers')}}</a>
             @endcan
             @can("create_static_complaints")
